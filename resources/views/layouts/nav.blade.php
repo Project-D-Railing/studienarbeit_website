@@ -1,7 +1,7 @@
 {{-- top bar  --}}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <a class="navbar-brand" href="#">{{ config('app.name', 'Laravel') }} {{ app()->version() }}</a>
+    <a class="navbar-brand" href="#">Project-D-Railing</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -25,8 +25,7 @@
                             Logout
                         </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                              style="display: none;">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
                             {{ csrf_field() }}
                         </form>
                     </div>

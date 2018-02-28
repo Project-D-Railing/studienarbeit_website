@@ -2,7 +2,7 @@
     <div class="footer-middle">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-4 col-sm-6">
                     <!--Column1-->
                     <div class="footer-pad">
                         <h4>Address</h4>
@@ -17,7 +17,7 @@
                         </address>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-4 col-sm-6">
                     <!--Column1-->
                     <div class="footer-pad">
                         <h4>Popular Services</h4>
@@ -30,7 +30,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-4 col-sm-6">
                     <!--Column1-->
                     <div class="footer-pad">
                         <h4>Website Information</h4>
@@ -41,22 +41,6 @@
                             <li><a href="#">Privacy Policy</a></li>
                             <li><a href="#">FAQs</a></li>
                             <li><a href="#">Webmaster</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6">
-                    <!--Column1-->
-                    <div class="footer-pad">
-                        <h4>Popular Departments</h4>
-                        <ul class="list-unstyled">
-                            <li><a href="#">Parks and Recreation</a></li>
-                            <li><a href="#">Public Works</a></li>
-                            <li><a href="#">Police Department</a></li>
-                            <li><a href="#">Fire</a></li>
-                            <li><a href="#">Mayor and City Council</a></li>
-                            <li>
-                                <a href="#"></a>
-                            </li>
                         </ul>
                     </div>
                 </div>

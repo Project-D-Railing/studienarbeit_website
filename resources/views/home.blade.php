@@ -2,14 +2,17 @@
 
 @section('content')
 
-    <div class="jumbotron">
-        <div class="container p-5">
-            <h1 class="display-1">Dashboard</h1>
+    <div class="container maincontent">
+        <div class="row">
+            <div class="col-6">
+                <h1>Dashboard</h1>
 
-            <p class="lead ml-2 text-success">
-                You are logged in!
-            </p>
+                <p class="lead ml-2 text-success">
+                    You are logged in!
+                </p>
+            </div>
         </div>
+
     </div>
 
 @endsection

@@ -26,6 +26,7 @@
         </button>
         <ul class="navbar-nav">
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="{{ route('toplist') }}" class="nav-link">Toplist</a></li>
         </ul>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">

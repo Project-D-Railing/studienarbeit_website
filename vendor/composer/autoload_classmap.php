@@ -3079,6 +3079,7 @@ return array(
     'Symfony\\Component\\Routing\\Loader\\Configurator\\Traits\\RouteTrait' => $vendorDir . '/symfony/routing/Loader/Configurator/Traits/RouteTrait.php',
     'Symfony\\Component\\Routing\\Loader\\DependencyInjection\\ServiceRouterLoader' => $vendorDir . '/symfony/routing/Loader/DependencyInjection/ServiceRouterLoader.php',
     'Symfony\\Component\\Routing\\Loader\\DirectoryLoader' => $vendorDir . '/symfony/routing/Loader/DirectoryLoader.php',
+    'Symfony\\Component\\Routing\\Loader\\GlobFileLoader' => $vendorDir . '/symfony/routing/Loader/GlobFileLoader.php',
     'Symfony\\Component\\Routing\\Loader\\ObjectRouteLoader' => $vendorDir . '/symfony/routing/Loader/ObjectRouteLoader.php',
     'Symfony\\Component\\Routing\\Loader\\PhpFileLoader' => $vendorDir . '/symfony/routing/Loader/PhpFileLoader.php',
     'Symfony\\Component\\Routing\\Loader\\ProtectedPhpFileLoader' => $vendorDir . '/symfony/routing/Loader/PhpFileLoader.php',

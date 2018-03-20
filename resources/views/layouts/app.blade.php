@@ -28,6 +28,7 @@
         <ul class="navbar-nav">
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="{{ route('toplist') }}" class="nav-link">Toplist</a></li>
+            <li class="nav-item"><a href="{{ route('toplist') }}" class="nav-link">Map</a></li>
         </ul>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -64,17 +65,9 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/leaflet.js') }}"></script>
-<script>
-
-var map = L.map('leafletmap').setView([51.505, -0.09], 13);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-L.marker([51.5, -0.09]).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    .openPopup();
+<script type="text/javascript">
+        @yield ('scripts')
 </script>
+
 </body>
 </html>

@@ -20,3 +20,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/toplist', 'ToplistController@index')->name('toplist');
 
+Route::get('/map', function () {
+    return view('map');
+});

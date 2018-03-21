@@ -20,7 +20,7 @@
                             <th scope="row">{{$loop->iteration}} </th>
                             <td> {{$user->id}} </td>
                             <td> {{$user->name}} </td>
-                            <td> {{$user->email}} </td>
+                            <td> sorry no mail </td>
                         </tr>
                     @endforeach
                   </tbody>

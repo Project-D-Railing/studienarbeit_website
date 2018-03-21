@@ -26,9 +26,13 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <ul class="navbar-nav">
+            @if (Auth::guest())
+            <li class="nav-item"><a href="{{ route('welcome') }}" class="nav-link">Back to start</a></li>
+            @else
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="{{ route('toplist') }}" class="nav-link">Toplist</a></li>
-            <li class="nav-item"><a href="{{ route('toplist') }}" class="nav-link">Map</a></li>
+            <li class="nav-item"><a href="{{ route('map') }}" class="nav-link">Map</a></li>    
+            @endif
         </ul>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">

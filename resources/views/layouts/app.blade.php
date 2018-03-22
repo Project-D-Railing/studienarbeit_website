@@ -69,6 +69,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/leaflet.js') }}"></script>
+<script src="{{ asset('js/leaflet.ajax.min.js') }}"></script>
 <script type="text/javascript">
         @yield ('scripts')
 </script>

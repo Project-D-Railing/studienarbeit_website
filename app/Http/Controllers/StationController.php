@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
-class MapController extends Controller
+class StationController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -25,9 +25,16 @@ class MapController extends Controller
      */
     public function index()
     {
-        $haltestellen = DB::select("select *,REPLACE(BREITE, ',', '.') AS BREITEDOT,REPLACE(LAENGE, ',', '.') AS LAENGEDOT from haltestellen2");
+       
+        return view('stationindex');
 
-        return view('map', ['haltestellen' => $haltestellen]);
+    }
+    
+    
+    public function show($id)
+    {
+        $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
+        return view('stationdetail', ['station' => $station]);
 
     }
 }

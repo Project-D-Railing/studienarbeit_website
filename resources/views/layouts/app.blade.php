@@ -13,6 +13,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/leaflet.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/MarkerCluster.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/MarkerCluster.Default.css') }}" rel="stylesheet">
+
 </head>
 <body>
 <div id="app">
@@ -31,7 +34,8 @@
             @else
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="{{ route('toplist') }}" class="nav-link">Toplist</a></li>
-            <li class="nav-item"><a href="{{ route('map') }}" class="nav-link">Map</a></li>    
+            <li class="nav-item"><a href="{{ route('map') }}" class="nav-link">Map</a></li>
+            <li class="nav-item"><a href="{{ route('station.index') }}" class="nav-link">Station</a></li>               
             @endif
         </ul>
 
@@ -70,6 +74,9 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/leaflet.js') }}"></script>
 <script src="{{ asset('js/leaflet.ajax.min.js') }}"></script>
+<script src="{{ asset('js/leaflet.markercluster.js') }}"></script>
+<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+
 <script type="text/javascript">
         @yield ('scripts')
 </script>

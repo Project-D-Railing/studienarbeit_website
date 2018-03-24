@@ -18,10 +18,7 @@
                 @endforelse
                     
                 <input type="date" id="selecteddate" value="2018-02-09">
-                <button onclick="fetchDate()">Try it</button>
-
-                < id="demo"></p>               
-
+                <button onclick="myFunction()">Try it</button>
             </div>
         </div>
         <div id="result">
@@ -30,7 +27,9 @@
 @endsection
 
 @section('scripts')
-function fetchDate() {
+
+function myFunction() {
+    
     $.get(
         "station/{{ $stationdetail->EVA_NR }}/"+document.getElementById("selecteddate").value,
         function (data) {
@@ -38,4 +37,5 @@ function fetchDate() {
         }
     );
 }
+
 @stop

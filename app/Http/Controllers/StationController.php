@@ -39,4 +39,13 @@ class StationController extends Controller
 
     }
 
+    public function showdate($id, $date)
+    {
+        $stationdate = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr", ['evanr' => $id, 'datum' => $date]);
+        //return view('stationdetail', ['stationdate' => $stationdate]);
+
+        return View::make("stationdetaildate")->with("zuege", $stationdate)->render();
+
+    }
+
 }

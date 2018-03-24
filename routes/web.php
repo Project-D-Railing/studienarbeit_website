@@ -25,3 +25,5 @@ Route::get('/map', 'MapController@index')->name('map');
 Route::get('/station', 'StationController@index')->name('station.index');
 
 Route::get('/station/{id}', 'StationController@show')->name('station.detail');
+
+Route::get('/station/{id}/{date}', 'StationController@showdate')->name('station.detaildate');

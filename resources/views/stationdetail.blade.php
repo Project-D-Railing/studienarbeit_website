@@ -16,7 +16,11 @@
                 
                     <h1>Keine Station gefunden.</h1>
                 @endforelse
-                
+                    
+                <input type="date" id="myDate" value="2018-02-09">
+                <button onclick="fetchDate()">Try it</button>
+
+                <p id="demo"></p>               
 
             </div>
         </div>
@@ -25,5 +29,8 @@
 @endsection
 
 @section('scripts')
-
+function fetchDate() {
+    var x = document.getElementById("myDate").value;
+    document.getElementById("demo").innerHTML = x;
+}
 @stop

@@ -8,39 +8,10 @@
                 <h1>Search Station:</h1>
                 <form class="typeahead" role="search">
                   <div class="form-group">
-                    <input type="search" name="q" class="form-control search-input" placeholder="Search" autocomplete="off">
+                    <input type="search" name="q" class="form-control search-input" placeholder="Search stationname" autocomplete="off">
                   </div>
                 </form>
-                Insert a search here...
-                Insert ref link to line and overall statistics...
-                                                        
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Stationsname</th>
-                          <th scope="col">Ankunftszeit (SOLL)</th>
-                          <th scope="col">Ankunftszeit (IST)</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @forelse($route as $station)
-                            <tr>
-                                <th scope="row">{{$station->zugid}} </th>
-                                <td> {{$station->NAME}} </td>
-                                <td> {{$station->arzeitsoll}} </td>
-                                <td> {{$station->arzeitist}}  </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <th scope="row"> - </th>
-                                <td> Keine Verbindung gefunden </td>
-                                <td> - </td>
-                                <td> - </td>
-                            </tr>
-                        @endforelse
-                      </tbody>
-                    </table>
+                <p>There will be all time stats somewhere later on.</p>
             </div>
         </div>
     </div>

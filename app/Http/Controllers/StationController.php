@@ -25,8 +25,9 @@ class StationController extends Controller
      */
     public function index()
     {
-       
-        return view('stationindex');
+        $query = DB::connection('mysql2')->select('SELECT zuege.*,haltestellen.NAME FROM zuege,haltestellen WHERE zuege.evanr=haltestellen.EVA_NR AND zuege.zugid like "-6843069272511463904-1712011109-%" ORDER BY arzeitsoll asc LIMIT 5000');
+
+        return view('stationindex', ['route' => $query]);
 
     }
     
@@ -37,4 +38,5 @@ class StationController extends Controller
         return view('stationdetail', ['station' => $station]);
 
     }
+
 }

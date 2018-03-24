@@ -63,7 +63,7 @@ jQuery(document).ready(function($) {
             $(".search-input").typeahead({
                 hint: true,
                 highlight: true,
-                minLength: 1
+                minLength: 2
             }, {
                 source: engine.ttAdapter(),
 
@@ -79,7 +79,7 @@ jQuery(document).ready(function($) {
                         '<div class="list-group search-results-dropdown">'
                     ],
                     suggestion: function (data) {
-                        return '<a href="' + data.profile.username + '" class="list-group-item">' + data.name + ' - @' + data.profile.username + '</a>'
+                        return '<a href="' + data.EVA_NR + '" class="list-group-item">' + data.NAME + ' - @' + data.EVA_NR + '</a>'
               }
                 }
             });

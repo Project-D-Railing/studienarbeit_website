@@ -32,7 +32,6 @@
 @endsection
 
 @section('scripts')
-console.log('hallo details');
 
 var date_input = document.getElementById('myDate');
 date_input.valueAsDate = new Date();

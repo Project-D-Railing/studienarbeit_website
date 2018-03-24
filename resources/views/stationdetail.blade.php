@@ -15,7 +15,6 @@
 
                     <p>Click the button to get the date of the date field.</p>
 
-                    <button >Try it</button>
                 @empty
                 
                     <h1>Keine Station gefunden.</h1>
@@ -28,5 +27,5 @@
 @endsection
 
 @section('scripts')
-
+console.log('hallo details');
 @stop

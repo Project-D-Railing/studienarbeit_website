@@ -3,15 +3,25 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col">Zugnummer</th>
               <th scope="col">Arzeitsoll</th>
+              <th scope="col">Arzeitist</th>
+              <th scope="col">Dpzeitsoll</th>
+              <th scope="col">Dpzeitist</th>
+              <th scope="col">Gleissoll</th>
+              <th scope="col">Gleisist</th>
             </tr>
           </thead>
           <tbody>
             @forelse($zuege as $zug)
                 <tr>
-                    <th scope="row">{{ $zug->zugid }} </th>
+                    <th scope="row">{{ $zug->zugnummerfull }} </th>
                     <td> {{ $zug->arzeitsoll }} </td>
+                    <td> {{ $zug->arzeitist }} </td>
+                    <td> {{ $zug->dpzeitsoll }} </td>
+                    <td> {{ $zug->dpzeitsoll }} </td>
+                    <td> {{ $zug->gleissoll }} </td>
+                    <td> {{ $zug->gleisist }} </td>
                 </tr>
             @empty
                 <tr>

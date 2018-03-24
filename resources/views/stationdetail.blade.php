@@ -21,6 +21,12 @@
                 @endforelse
                     
             </div>
+            
+        </div>
+        <div class="row">
+            <div id="result">
+            
+            </div>
         </div>
     </div>
 
@@ -33,6 +39,12 @@ var date_input = document.getElementById('myDate');
 date_input.valueAsDate = new Date();
 
 date_input.onchange = function(){
+    $.get(
+    "station",
+    function (data) {
+        $("#result").html(data);
+    }
+    );
    console.log(this.value);
 }
 @stop

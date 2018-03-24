@@ -18,7 +18,7 @@
                 @endforelse
                     
                 <input type="date" id="selecteddate" value="2018-02-09">
-                <button onclick="myFunction()">Try it</button>
+                <button id="buttondate">Try it</button>
             </div>
         </div>
         <div id="result">
@@ -30,7 +30,7 @@
 
 @section('scripts')
 
-function myFunction() {
+$( "#buttondate" ).click(function() {
     
     $.get(
         "station/{{ $stationdetail->EVA_NR }}/"+document.getElementById("selecteddate").value,
@@ -38,6 +38,7 @@ function myFunction() {
             $("#result").html(data);
         }
     );
-}
+
+});
 
 @stop

@@ -28,14 +28,5 @@
 
 @section('scripts')
 
-function myFunction() {
-    
-    $.get(
-        "station/{{ $stationdetail->EVA_NR }}/"+document.getElementById("selecteddate").value,
-        function (data) {
-            $("#result").html(data);
-        }
-    );
-}
 
 @stop

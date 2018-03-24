@@ -23,10 +23,9 @@
             </div>
             
         </div>
-        <div class="row">
-            <div id="result">
-            
-            </div>
+        
+        <div id="result">
+        
         </div>
     </div>
 

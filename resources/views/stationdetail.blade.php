@@ -28,4 +28,11 @@
 
 @section('scripts')
 console.log('hallo details');
+
+var date_input = document.getElementById('myDate');
+date_input.valueAsDate = new Date();
+
+date_input.onchange = function(){
+   console.log(this.value);
+}
 @stop

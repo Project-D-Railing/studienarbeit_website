@@ -9,8 +9,7 @@
                 <p>Some useless strings</p>
                 Insert a search here...
                 Insert ref link to line and overall statistics...
-                    @forelse($route as $station)
-                                    
+                                                        
                     <table class="table">
                       <thead>
                         <tr>
@@ -21,21 +20,23 @@
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($users as $user)
+                        @forelse($route as $station)
                             <tr>
                                 <th scope="row">{{$station->zugid}} </th>
                                 <td> {{$station->NAME}} </td>
                                 <td> {{$station->arzeitsoll}} </td>
                                 <td> {{$station->arzeitist}}  </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <th scope="row"> - </th>
+                                <td> Keine Verbindung gefunden </td>
+                                <td> - </td>
+                                <td> - </td>
+                            </tr>
+                        @endforelse
                       </tbody>
                     </table>
-                    
-                    @empty
-                
-                    <h1>Keine Station gefunden.</h1>
-                    @endforelse
             </div>
         </div>
     </div>

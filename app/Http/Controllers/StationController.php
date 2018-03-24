@@ -31,8 +31,9 @@ class StationController extends Controller
 
     }
     
-    public function find($q)
+    public function find(Request $request)
     {
+        $q = $request->get('q');
         $stationen = DB::select("select * from haltestellen2 where NAME like :name", ['name' => '%'.$q.'%']);
         return Response::json($stationen);
 

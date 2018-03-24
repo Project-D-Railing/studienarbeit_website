@@ -17,11 +17,8 @@
                     <h1>Keine Station gefunden.</h1>
                 @endforelse
                     
-                <input type="date" id="selecteddate" value="2018-02-09">
-                <button id="buttondate">Try it</button>
             </div>
         </div>
-        <div id="result">
     </div>
 
 @endsection

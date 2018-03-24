@@ -40,7 +40,7 @@ date_input.valueAsDate = new Date();
 
 date_input.onchange = function(){
     $.get(
-    "station/{{$stationdetail->EVA_NR}}/"+this.value,
+    "{{$stationdetail->EVA_NR}}/"+this.value,
     function (data) {
         $("#result").html(data);
     }

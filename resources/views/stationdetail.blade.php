@@ -11,7 +11,11 @@
                     <h1>{{ $stationdetail->NAME }}</h1>
                     <p>{{ $stationdetail->EVA_NR }}</p>
                     Insert some statistics here....
-                    
+                    <input type="date" id="myDate" value="2014-02-09">
+
+                    <p>Click the button to get the date of the date field.</p>
+
+                    <button >Try it</button>
                 @empty
                 
                     <h1>Keine Station gefunden.</h1>

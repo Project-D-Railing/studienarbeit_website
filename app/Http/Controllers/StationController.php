@@ -44,7 +44,7 @@ class StationController extends Controller
         $stationdate = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr", ['evanr' => $id, 'datum' => $date]);
         //return view('stationdetail', ['stationdate' => $stationdate]);
 
-        return view("stationdetaildate", ['zuege' => $stationdate]);
+        return view("stationdetaildate", ['zuege' => $stationdate])->render();
 
     }
 

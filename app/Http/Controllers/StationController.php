@@ -31,7 +31,13 @@ class StationController extends Controller
 
     }
     
-    
+    public function find($q)
+    {
+        $stationen = DB::select("select * from haltestellen2 where NAME like :name", ['name' => '%'.$q.'%']);
+        return Response::json($stationen);
+
+    }
+
     public function show($id)
     {
         $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);

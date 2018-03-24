@@ -76,6 +76,7 @@
 <script src="{{ asset('js/leaflet.ajax.min.js') }}"></script>
 <script src="{{ asset('js/leaflet.markercluster.js') }}"></script>
 <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('js/typeahead.bundle.min.js') }}"></script>
 
 <script type="text/javascript">
         @yield ('scripts')

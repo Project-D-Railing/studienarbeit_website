@@ -14,7 +14,11 @@
           </thead>
           <tbody>
             @forelse($zuege as $zug)
-                <tr>
+                @if ($zug->zugstatus === 'c')
+                    <tr class="table-danger"> 
+                @else
+                    <tr>
+                @endif
                     <th scope="row">{{ $zug->zugnummerfull }} </th>
                     <td> {{ $zug->arzeitsoll }} </td>
                     <td> {{ $zug->arzeitist }} </td>
@@ -33,3 +37,4 @@
         </table>
     </div>
 </div>
+

@@ -11,7 +11,26 @@
                 Insert ref link to line and overall statistics...
                     @forelse($route as $station)
                                     
-                    <p>{{ $station->NAME }}</p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Stationsname</th>
+                          <th scope="col">Ankunftszeit (SOLL)</th>
+                          <th scope="col">Ankunftszeit (IST)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @foreach($users as $user)
+                            <tr>
+                                <th scope="row">{{$station->zugid}} </th>
+                                <td> {{$station->NAME}} </td>
+                                <td> {{$station->arzeitsoll}} </td>
+                                <td> {{$station->arzeitist}}  </td>
+                            </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
                     
                     @empty
                 

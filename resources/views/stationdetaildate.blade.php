@@ -1,13 +1,25 @@
 <div class="row">
     <div class="col">
-        
-        @forelse($zuege as $zug)
-                            
-            <h1>{{ $zug->zugid }}</h1>
-            <p>{{ $zug->arzeitsoll }}</p>            
-        @empty
-        
-            <h1>Keine Züge gefunden.</h1>
-        @endforelse
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Arzeitsoll</th>
+            </tr>
+          </thead>
+          <tbody>
+            @forelse($zuege as $zug)
+                <tr>
+                    <th scope="row">{{ $zug->zugid }} </th>
+                    <td> {{ $zug->arzeitsoll }} </td>
+                </tr>
+            @empty
+                <tr>
+                    <th scope="row"> - </th>
+                    <td> Keine Züge gefunden </td>
+                </tr>
+            @endforelse
+          </tbody>
+        </table>
     </div>
 </div>

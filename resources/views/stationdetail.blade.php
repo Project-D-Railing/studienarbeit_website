@@ -17,20 +17,25 @@
                     <h1>Keine Station gefunden.</h1>
                 @endforelse
                     
-                <input type="date" id="myDate" value="2018-02-09">
+                <input type="date" id="selecteddate" value="2018-02-09">
                 <button onclick="fetchDate()">Try it</button>
 
-                <p id="demo"></p>               
+                < id="demo"></p>               
 
             </div>
         </div>
+        <div id="result">
     </div>
 
 @endsection
 
 @section('scripts')
 function fetchDate() {
-    var x = document.getElementById("myDate").value;
-    document.getElementById("demo").innerHTML = x;
+    $.get(
+        "station/{{ $stationdetail->EVA_NR }}/"+document.getElementById("selecteddate").value,
+        function (data) {
+            $("#result").html(data);
+        }
+    );
 }
 @stop

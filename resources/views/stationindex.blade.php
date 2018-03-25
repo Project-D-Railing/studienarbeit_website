@@ -55,6 +55,9 @@ jQuery(document).ready(function($) {
                     }
                 }
             });
+            $('.typeahead').on('typeahead:selected', function (e, datum) {
+                window.location.href = "station/" +datum.EVA_NR
+            });
         });
 
 

@@ -36,6 +36,7 @@ jQuery(document).ready(function($) {
                 highlight: true,
                 minLength: 2
             }, {
+                displayKey: 'NAME',
                 source: engine.ttAdapter(),
 
                 // This will be appended to "tt-dataset-" to form the class name of the suggestion menu.

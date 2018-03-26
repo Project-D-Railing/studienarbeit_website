@@ -51,7 +51,7 @@ jQuery(document).ready(function($) {
                         '<div class="list-group search-results-dropdown">'
                     ],
                     suggestion: function (data) {
-                        return '<a href="/station/' + data.EVA_NR + '" class="list-group-item">' + data.NAME + '</a>'
+                        return '<a href="station/' + data.EVA_NR + '" class="list-group-item">' + data.NAME + '</a>'
                     }
                 }
             });

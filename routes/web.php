@@ -22,7 +22,7 @@ Route::get('/toplist', 'ToplistController@index')->name('toplist');
 
 Route::get('/map', 'MapController@index')->name('map');
 
-Route::get('/station/find', 'StationController@find');
+Route::get('/station/find', 'StationController@find')->name('station.find');
 
 Route::get('/station', 'StationController@index')->name('station.index');
 

@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
             // Set the Options for "Bloodhound" suggestion engine
             var engine = new Bloodhound({
                 remote: {
-                    url: '/station/find?q=%QUERY%',
+                    url: '{{ route('station.find') }}?q=%QUERY%',
                     wildcard: '%QUERY%'
                 },
                 datumTokenizer: Bloodhound.tokenizers.whitespace('q'),

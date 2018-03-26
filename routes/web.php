@@ -19,6 +19,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/toplist', 'ToplistController@index')->name('toplist');
 
+Route::get('/impressum', function()
+{
+    return Redirect::to('https://9d6.de/impressum.html');
+})->name('impressum');
 
 Route::get('/map', 'MapController@index')->name('map');
 

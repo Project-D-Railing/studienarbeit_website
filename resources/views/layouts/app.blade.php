@@ -37,6 +37,7 @@
             <li class="nav-item"><a href="{{ route('map') }}" class="nav-link">Map</a></li>
             <li class="nav-item"><a href="{{ route('station.index') }}" class="nav-link">Station</a></li>               
             @endif
+            <li class="nav-item"><a href="{{ route('impressum') }}" class="nav-link">Impressum</a></li>
         </ul>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -61,6 +62,7 @@
                         </div>
                     </li>
                 @endif
+                    
             </ul>
         </div>
 

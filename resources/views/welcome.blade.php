@@ -107,7 +107,8 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://github.com/Project-D-Railing/">Visit us on GitHub</a>
+                    <a href="https://github.com/Project-D-Railing/">>>> Visit us on GitHub <<< </a><br><br>
+                    <a href="{{ route('impressum') }}" class="nav-link">Impressum</a>
                 </div>
 
             </div>

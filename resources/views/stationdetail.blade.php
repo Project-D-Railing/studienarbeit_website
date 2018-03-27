@@ -7,13 +7,22 @@
             <div class="col">
                 
                 @forelse($station as $stationdetail)
-                                    
-                    <h1>{{ $stationdetail->NAME }}</h1>
-                    <p>{{ $stationdetail->EVA_NR }}</p>
-                    Insert some statistics here....
+                    <div class="page-header">
+                      <h1>{{ $stationdetail->NAME }} <small>{{ $stationdetail->EVA_NR }}</small></h1>
+                    </div>   
+                        
+                    
+                    <p>Hier Reite einfügen</p>
+                    <div class="radio">
+                      <label><input type="radio" name="optradio" value="1" checked="checked"> </label>
+                    </div>
+                    <div class="radio">
+                      <label><input type="radio" name="optradio" value="2"> Option 2</label>
+                    </div>
+                    <p>Please select a date:</p>
                     <input type="date" id="myDate" value="2018-02-09">
+                    
 
-                    <p>Click the button to get the date of the date field.</p>
 
                 @empty
                 

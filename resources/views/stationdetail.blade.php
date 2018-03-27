@@ -12,9 +12,9 @@
                     </div>   
                         
                     
-                    <p>Hier Reite einfügen</p>
+                    <p>Hier Reite einfügen siehe Bootstrap nav-tabs</p>
                     <div class="radio">
-                      <label><input type="radio" name="optradio" value="1" checked="checked"> </label>
+                      <label><input type="radio" name="optradio" value="1" checked="checked"> Option 1</label>
                     </div>
                     <div class="radio">
                       <label><input type="radio" name="optradio" value="2"> Option 2</label>

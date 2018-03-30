@@ -32,7 +32,7 @@
             </div>
             
         </div>
-        
+        <div id="chart"></div>
         <div id="result">
         
         </div>
@@ -56,6 +56,7 @@ date_input.onchange = function(){
 }
 
 var chart = c3.generate({
+    bindto: '#chart',
     data: {
         xs: {
             setosa: 'setosa_x',

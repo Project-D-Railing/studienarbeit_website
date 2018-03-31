@@ -55,24 +55,6 @@
 
 @section('scripts')
 
-
-
-$('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-  var url = $(this).attr("href"); // the remote url for content
-  var target = $(this).data("target"); // the target pane
-  var tab = $(this); // this tab
-  
-  // ajax load from data-url
-  $(target).load(url,function(result){      
-    tab.tab('show');
-  });
-});
-
-// initially activate the first tab..
-$('#tab1').tab('show');
-
-
-
 var date_input = document.getElementById('myDate');
 date_input.valueAsDate = new Date();
 

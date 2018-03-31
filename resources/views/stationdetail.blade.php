@@ -1,6 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+    <div role="tabpanel">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Tab 1</a></li>
+        <li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Tab 2</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="tab1">...</div>
+        <div role="tabpanel" class="tab-pane" id="tab2">...</div>
+    </div>
+</div>
 
     <div class="container">
         <div class="row">

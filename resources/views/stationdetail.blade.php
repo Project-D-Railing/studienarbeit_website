@@ -6,52 +6,49 @@
             <div class="col">
                 <nav>
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" href="/station/8007858/2018-03-06" data-target="#test_1" id="tab1" aria-controls="test_1" role="tab" data-toggle="tab">Tab 1</a>
-                        <a class="nav-item nav-link" href="/station/8007858/2018-01-06" data-target="#test_2" id="tab2" aria-controls="test_2" role="tab" data-toggle="tab">Tab 1</a>
-                        <a class="nav-item nav-link" href="/station/8007858/2018-02-05" data-target="#test_3" id="tab3" aria-controls="test_3" role="tab" data-toggle="tab">Tab 1</a>
+						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+						<a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a>
 					</div>
 				</nav>
-        </ul>
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane" id="test_1"></div>
-            <div role="tabpanel" class="tab-pane" id="test_2"></div>
-            <div role="tabpanel" class="tab-pane" id="test_3"></div> 
-        </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                
-                @forelse($station as $stationdetail)
-                    <div class="page-header">
-                      <h1>{{ $stationdetail->NAME }} <small>{{ $stationdetail->EVA_NR }}</small></h1>
-                    </div>   
-                        
+				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+						    @forelse($station as $stationdetail)
+                                <div class="page-header">
+                                  <h1>{{ $stationdetail->NAME }} <small>{{ $stationdetail->EVA_NR }}</small></h1>
+                                </div>   
+                                <p>Hier Reite einfügen siehe Bootstrap nav-tabs</p>
+                                <div class="radio">
+                                  <label><input type="radio" name="optradio" value="1" checked="checked"> Option 1</label>
+                                </div>
+                                <div class="radio">
+                                  <label><input type="radio" name="optradio" value="2"> Option 2</label>
+                                </div>
+                                <p>Please select a date:</p>
+                                <input type="date" id="myDate" value="2018-02-09">
+                            @empty
                     
-                    <p>Hier Reite einfügen siehe Bootstrap nav-tabs</p>
-                    <div class="radio">
-                      <label><input type="radio" name="optradio" value="1" checked="checked"> Option 1</label>
-                    </div>
-                    <div class="radio">
-                      <label><input type="radio" name="optradio" value="2"> Option 2</label>
-                    </div>
-                    <p>Please select a date:</p>
-                    <input type="date" id="myDate" value="2018-02-09">
-                    
-
-
-                @empty
-                
-                    <h1>Keine Station gefunden.</h1>
-                @endforelse
-                    
-            </div>
-            
-        </div>
-        <div id="chart"></div>
-        <div id="result">
+                                <h1>Keine Station gefunden.</h1>
+                            @endforelse
+                            <div id="result">
         
+                            </div>
+					</div>
+					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div id="chart"></div>
+					</div>
+					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+
+                    </div>
+					<div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+
+                    </div>
+				</div>
+
+            </div>
         </div>
+        
     </div>
 
 @endsection

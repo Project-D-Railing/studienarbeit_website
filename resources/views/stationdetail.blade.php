@@ -6,26 +6,17 @@
             <div class="col">
                 <nav>
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
-						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
-						<a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">About</a>
+                        <a class="nav-item nav-link active" href="/station/8007858/2018-03-06" data-target="#test_1" id="tab1" aria-controls="test_1" role="tab" data-toggle="tab">Tab 1</a>
+                        <a class="nav-item nav-link" href="/station/8007858/2018-01-06" data-target="#test_2" id="tab2" aria-controls="test_2" role="tab" data-toggle="tab">Tab 1</a>
+                        <a class="nav-item nav-link" href="/station/8007858/2018-02-05" data-target="#test_3" id="tab3" aria-controls="test_3" role="tab" data-toggle="tab">Tab 1</a>
 					</div>
 				</nav>
-				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-						Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
-					</div>
-					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-						Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
-					</div>
-					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-						Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
-					</div>
-					<div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-						Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
-					</div>
-				</div>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane" id="test_1"></div>
+            <div role="tabpanel" class="tab-pane" id="test_2"></div>
+            <div role="tabpanel" class="tab-pane" id="test_3"></div> 
+        </div>
             </div>
         </div>
         <div class="row">
@@ -66,6 +57,24 @@
 @endsection
 
 @section('scripts')
+
+
+
+$('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+  var url = $(this).attr("href"); // the remote url for content
+  var target = $(this).data("target"); // the target pane
+  var tab = $(this); // this tab
+  
+  // ajax load from data-url
+  $(target).load(url,function(result){      
+    tab.tab('show');
+  });
+});
+
+// initially activate the first tab..
+$('#tab1').tab('show');
+
+
 
 var date_input = document.getElementById('myDate');
 date_input.valueAsDate = new Date();

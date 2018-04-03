@@ -33,3 +33,5 @@ Route::get('/station', 'StationController@index')->name('station.index');
 Route::get('/station/{id}', 'StationController@show')->name('station.detail');
 
 Route::get('/station/{id}/{date}', 'StationController@showdate')->name('station.detaildate');
+
+Route::get('/station/graph/{id}', 'GraphController@somedata')->name('graph.somedata');

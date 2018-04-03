@@ -34,7 +34,7 @@ class GraphController extends Controller
     {
         $station = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr", ['evanr' => $evanr]);
 
-        return Response::json($station->to_array());
+        return Response::json($station);
     }
 
 

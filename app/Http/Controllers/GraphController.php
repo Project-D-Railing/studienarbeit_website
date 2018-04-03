@@ -32,7 +32,7 @@ class GraphController extends Controller
     
     public function somedata($evanr)
     {
-        $station = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr", ['evanr' => $evanr]);
+        $station = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr ORDER by zuege.id desc LIMIT 10000", ['evanr' => $evanr]);
 
         return Response::json($station);
     }

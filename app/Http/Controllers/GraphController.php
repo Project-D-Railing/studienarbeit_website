@@ -36,10 +36,10 @@ class GraphController extends Controller
             
         $trainformatted = array();
         foreach ($trains as $train) {
-            trainformatted['dataset1'][] = $train['arzeitsoll'];
-            trainformatted['dataset2'][] = $train['arzeitist'];
-            trainformatted['dataset3'][] = $train['dpzeitsoll'];
-            trainformatted['dataset4'][] = $train['dpzeitist'];
+            $trainformatted['dataset1'][] = $train['arzeitsoll'];
+            $trainformatted['dataset2'][] = $train['arzeitist'];
+            $trainformatted['dataset3'][] = $train['dpzeitsoll'];
+            $trainformatted['dataset4'][] = $train['dpzeitist'];
             
         }
 

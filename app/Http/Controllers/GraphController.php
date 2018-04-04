@@ -32,9 +32,19 @@ class GraphController extends Controller
     
     public function somedata($evanr)
     {
-        $station = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr ORDER by zuege.id desc LIMIT 10000", ['evanr' => $evanr]);
+        $trains = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr ORDER by zuege.id desc LIMIT 10000", ['evanr' => $evanr]);
+            
+        $trainformatted = array();
+        foreach ($trains as $train) {
+            trainformatted['dataset1'][] = $train['arzeitsoll'];
+            trainformatted['dataset2'][] = $train['arzeitist'];
+            trainformatted['dataset3'][] = $train['dpzeitsoll'];
+            trainformatted['dataset4'][] = $train['dpzeitist'];
+            
+        }
 
-        return Response::json($station);
+        
+        return Response::json($trainformatted);
     }
 
 

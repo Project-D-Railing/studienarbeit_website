@@ -30,7 +30,7 @@ class GraphController extends Controller
 
     } 
 
-    /* Return diff in hh:mm:ss format between two times*/
+    /* Return diff in integer format (in minutes) between two times*/
     private function calc_diff($time1, $time2)
     {
         
@@ -55,6 +55,7 @@ class GraphController extends Controller
         return round($diff / 60);
     }
     
+        
     public function somedata($evanr)
     {
         $trains = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr ORDER by zuege.id desc LIMIT 1000", ['evanr' => $evanr]);

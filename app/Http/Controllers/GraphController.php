@@ -33,21 +33,25 @@ class GraphController extends Controller
     /* Return diff in hh:mm:ss format between two times*/
     private function calc_diff($time1, $time2)
     {
+        
         $time1 = strtotime($time1);
         $time2 = strtotime($time2);
         $midnight = strtotime("00:00");
         $diff = 0;
+        // lookup if times are on possible different days
         if($time2 - $midnight < $time1 - $midnight) {
-            
+            // look if diff is negative by over 5 hours. This is an identicator of a dayshift
             $diff = $time2 - $time1;
             if($diff < -20000) {
+                // add a day to prevent dayshift event
                 $diff = $diff + 86400;
             }
         } else {
             
             $diff = $time2 - $time1;
         }  
-        
+        // return the value rounded so instead of 60 (for seconds) we get 1 (for minutes) because our data is only accurate by minutes
+        // here shouldnt be any data loss by throwing away the seconds which are always zero
         return round($diff / 60);
     }
     

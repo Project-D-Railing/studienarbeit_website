@@ -28,7 +28,28 @@ class GraphController extends Controller
     {
         return FALSE;
 
-    }    
+    } 
+
+    /* Return diff in hh:mm:ss format between two times*/
+    private function calc_diff($time1, $time2)
+    {
+        $time1 = strtotime($time1);
+        $time2 = strtotime($time2);
+        $midnight = strtotime("00:00");
+        $diff = 0;
+        if($time2 - $midnight < $time1 - $midnight) {
+            
+            $diff = $time2 - $time1;
+            if($diff < -20000) {
+                $diff = $diff + 86400;
+            }
+        } else {
+            
+            $diff = $time2 - $time1;
+        }  
+        
+        return round($diff / 60);
+    }
     
     public function somedata($evanr)
     {
@@ -36,8 +57,9 @@ class GraphController extends Controller
             
         $trainformatted = array();
         foreach ($trains as $train) {
-            $trainformatted['delay1'][] = $train->arzeitist - $train->arzeitsoll;
-            $trainformatted['delay2'][] = $train->dpzeitist - $train->dpzeitsoll;
+                        
+            $trainformatted['delay1'][] = $this->calc_diff($train->arzeitsoll, $train->arzeitist);
+            $trainformatted['delay2'][] = $this->calc_diff($train->dpzeitsoll, $train->dpzeitist);
             //$trainformatted['dataset1'][] = $train->arzeitsoll;
             //$trainformatted['dataset2'][] = $train->arzeitist;
             //$trainformatted['dataset3'][] = $train->dpzeitsoll;

@@ -75,7 +75,10 @@ var chart = c3.generate({
     data: {   
             url: '{{ route('graph.somedata', ['id' => $stationdetail->EVA_NR]) }}',
             mimeType: 'json'
-        }
+        },
+        line: {
+  connectNull: true
+}
     
 });
 

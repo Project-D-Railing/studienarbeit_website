@@ -33,7 +33,6 @@ class GraphController extends Controller
     /* Return diff in integer format (in minutes) between two times*/
     private function calc_diff($time1, $time2)
     {
-        
         $time1 = strtotime($time1);
         $time2 = strtotime($time2);
         $midnight = strtotime("00:00");
@@ -55,23 +54,29 @@ class GraphController extends Controller
         return round($diff / 60);
     }
     
+    private function generate_delay_statistic($evanr) 
+    {
+        $trains = DB::connection('mysql2')->select("SELECT * FROM k42174_bahnapi.zuege where evanr= :evanr and zugklasse='ICE' and zugnummer=374 LIMIT 250", ['evanr' => $evanr]);
+        $trainformatted = array();
+        foreach ($trains as $train) {
+            if($train->zugstatus == 'n') {
+                $trainformatted['delay1'][] = $this->calc_diff($train->arzeitsoll, $train->arzeitist);
+                $trainformatted['delay2'][] = $this->calc_diff($train->dpzeitsoll, $train->dpzeitist);
+            } else {
+                $trainformatted['delay1'][] = NULL;
+                $trainformatted['delay2'][] = NULL;
+            }
+            
+        }
+        
+        return $trainformatted;
+    }
         
     public function somedata($evanr)
     {
-        $trains = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr ORDER by zuege.id desc LIMIT 1000", ['evanr' => $evanr]);
+        //$trains = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr ORDER by zuege.id desc LIMIT 1000", ['evanr' => $evanr]);
             
-        $trainformatted = array();
-        foreach ($trains as $train) {
-                        
-            $trainformatted['delay1'][] = $this->calc_diff($train->arzeitsoll, $train->arzeitist);
-            $trainformatted['delay2'][] = $this->calc_diff($train->dpzeitsoll, $train->dpzeitist);
-            //$trainformatted['dataset1'][] = $train->arzeitsoll;
-            //$trainformatted['dataset2'][] = $train->arzeitist;
-            //$trainformatted['dataset3'][] = $train->dpzeitsoll;
-            //$trainformatted['dataset4'][] = $train->dpzeitist;
-            
-        }
-
+        $trainformatted = $this->generate_delay_statistic($evanr);
         
         return Response::json($trainformatted);
     }

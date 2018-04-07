@@ -83,9 +83,9 @@ var chart = c3.generate({
 });
 
 @forelse($zugklassen as $zugklasse)
-console.log({{ $zugklasse->name }});
+    console.log('{{ $zugklasse->name }}');
 @empty
-console.log('Keine Zugklassen gefunden');
+    console.log('Keine Zugklassen gefunden');
 @endforelse
 var chart2 = c3.generate({
         bindto: '#chart2',

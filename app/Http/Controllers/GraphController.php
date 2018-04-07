@@ -80,13 +80,16 @@ class GraphController extends Controller
     {
         $statsraw = DB::connection('mysql2')->select("SELECT Count(id) as anzahl, gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by gleisist, zugklasse limit 10000", ['evanr' => $evanr]);
         $stats = array();
+        $savelastgleis = "";
+        $savelastzugklasse = "";
         foreach ($statsraw as $zuginfo)
         {
             
                 $stats[] = array("name"=>$zuginfo->gleisist,$zuginfo->zugklasse=>$zuginfo->anzahl);
-            
+                $savelastgleis = $zuginfo->gleisist;
+                $savelastzugklasse = $zuginfo->zugklasse;
         }
-         $stats[] = array("name"=>1,"müll"=>0);
+         $stats[] = array("name"=>$savelastgleis,$savelastzugklasse=>0);
         return Response::json($stats);
     }
 

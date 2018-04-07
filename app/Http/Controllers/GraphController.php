@@ -78,8 +78,29 @@ class GraphController extends Controller
         
     public function getTrainclassPerPlatformStatistic($evanr) 
     {
-        $statsraw = DB::connection('mysql2')->select("SELECT Count(id), gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by gleisist, zugklasse limit 10000", ['evanr' => $evanr]);
-        return Response::json($statsraw);
+        $statsraw = DB::connection('mysql2')->select("SELECT Count(id) as anzahl, gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by gleisist, zugklasse limit 10000", ['evanr' => $evanr]);
+        $stats = array();
+        $zugklassenarray = array();
+        $gleisarray = array();
+        foreach ($statsraw as $zuginfo)  {
+            if (!in_array($zuginfo->zugklasse, $zugklassenarray))
+            {
+                $zugklassenarray[] = $zuginfo->zugklasse; 
+            }
+            if (!in_array($zuginfo->gleis, $gleisarray))
+            {
+                $gleisarray[] = $zuginfo->gleis; 
+            }
+        }            
+        foreach ($zugklassenarray as $zugklasse) 
+        {
+            foreach ($gleisarray as $gleis) 
+            {
+                $stats[$zugklasse][$gleis] = 55;           
+                     
+            }
+        } 
+        return Response::json($stats);
     }
 
     public function somedata($evanr)

@@ -87,9 +87,9 @@ class GraphController extends Controller
             {
                 $zugklassenarray[] = $zuginfo->zugklasse; 
             }
-            if (!in_array($zuginfo->gleis, $gleisarray))
+            if (!in_array($zuginfo->gleisist, $gleisarray))
             {
-                $gleisarray[] = $zuginfo->gleis; 
+                $gleisarray[] = $zuginfo->gleisist; 
             }
         }            
         foreach ($zugklassenarray as $zugklasse) 

@@ -89,7 +89,8 @@ class GraphController extends Controller
                 $savelastgleis = $zuginfo->gleisist;
                 $savelastzugklasse = $zuginfo->zugklasse;
         }
-        for(int $i = 0; $i < 20; $i++) 
+        
+        for ($i = 1; $i <= 20; $i++) 
         {
             $stats[] = array("name"=>$savelastgleis,$savelastzugklasse=>0);
         }

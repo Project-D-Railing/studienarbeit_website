@@ -60,7 +60,7 @@ class GraphController extends Controller
         // SELECT Count(id), gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= 8000191 group by gleisist, zugklasse limit 1000
         // get this data to c3js and show as stacked bar chart for each platform, like ICE green, RB red, ....
         
-        $trains = DB::connection('mysql2')->select("SELECT * FROM k42174_bahnapi.zuege where evanr= :evanr and zugklasse='ICE' and zugnummer=374 LIMIT 250", ['evanr' => $evanr]);
+        $trains = DB::connection('mysql2')->select("SELECT * FROM k42174_bahnapi.zuege where evanr= :evanr and zugklasse='ICE' LIMIT 250", ['evanr' => $evanr]);
         $trainformatted = array();
         foreach ($trains as $train) {
             if($train->zugstatus == 'n') {

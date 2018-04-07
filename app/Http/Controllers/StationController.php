@@ -43,7 +43,7 @@ class StationController extends Controller
     public function show($id)
     {
         $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
-        $zugklassen = DB::connection('mysql2')->select("SELECT DISTINCT(zugklasse) FROM zuege WHERE evanr= :evanr", ['evanr' => $id]);
+        $zugklassen = DB::connection('mysql2')->select("SELECT DISTINCT(zugklasse) as name FROM zuege WHERE evanr= :evanr", ['evanr' => $id]);
         return view('stationdetail', ['station' => $station,'zugklassen' => $zugklassen]);
 
     }

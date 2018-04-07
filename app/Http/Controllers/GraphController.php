@@ -96,13 +96,14 @@ class GraphController extends Controller
         {
             foreach ($gleisarray as $gleis) 
             {
-                $stats[$zugklasse][$gleis] = 0;           
+                $stats[$zugklasse][] = 0;           
                      
             }
         } 
         foreach ($statsraw as $zuginfo)  {
+            $key = array_search($zuginfo->gleisist, $gleisarray);
             
-            $stats[$zuginfo->zugklasse][$zuginfo->gleisist] = $zuginfo->anzahl;  
+            $stats[$zuginfo->zugklasse][$key] = $zuginfo->anzahl;  
         } 
         return Response::json($stats);
     }

@@ -92,7 +92,7 @@ class GraphController extends Controller
         
         for ($i = 1; $i <= 20; $i++) 
         {
-            $stats[] = array("name"=>$savelastgleis,$savelastzugklasse=>0);
+            $stats[] = array("name"=>$savelastgleis,'NONE'=>0);
         }
 
         return Response::json($stats);

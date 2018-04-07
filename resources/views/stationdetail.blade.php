@@ -81,7 +81,7 @@ var chart = c3.generate({
 }
     
 });
-console.log({{ $zugklassen }});
+console.log({!! $zugklassen !!});
 var chart2 = c3.generate({
         bindto: '#chart2',
         data: {

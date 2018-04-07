@@ -91,7 +91,7 @@ var chart2 = c3.generate({
         bindto: '#chart2',
         data: {
             url: '{{ route('graph.trainperplatform', ['id' => $stationdetail->EVA_NR]) }}',
-            mimeType: 'json'
+            mimeType: 'json',
             
             keys: {
                 x: 'name', // it's possible to specify 'x' when category axis

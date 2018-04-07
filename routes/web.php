@@ -28,6 +28,8 @@ Route::get('/map', 'MapController@index')->name('map');
 
 Route::get('/station/graph/{id}', 'GraphController@somedata')->name('graph.somedata');
 
+Route::get('/station/trainperplatform/{id}', 'GraphController@getTrainclassPerPlatformStatistic')->name('graph.trainperplatform');
+
 Route::get('/station/find', 'StationController@find')->name('station.find');
 
 Route::get('/station', 'StationController@index')->name('station.index');

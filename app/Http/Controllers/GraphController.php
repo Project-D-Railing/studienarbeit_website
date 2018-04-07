@@ -76,6 +76,12 @@ class GraphController extends Controller
         return $trainformatted;
     }
         
+    public function getTrainclassPerPlatformStatistic($evanr) 
+    {
+        $statsraw = DB::connection('mysql2')->select("SELECT Count(id), gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by gleisist, zugklasse limit 10000", ['evanr' => $evanr]);
+        return Response::json($statsraw);
+    }
+
     public function somedata($evanr)
     {
         //$trains = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr ORDER by zuege.id desc LIMIT 1000", ['evanr' => $evanr]);

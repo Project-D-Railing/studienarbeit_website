@@ -98,9 +98,7 @@ var chart2 = c3.generate({
                 value: zugklassen,
             },
             type: 'bar',
-            groups: [
-                zugklassen
-        ]
+            groups: [ ]
         },
         axis: {
             x: {

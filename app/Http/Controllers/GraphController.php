@@ -86,6 +86,7 @@ class GraphController extends Controller
                 $stats[] = array("name"=>$zuginfo->gleisist,$zuginfo->zugklasse=>$zuginfo->anzahl);
             
         }
+         $stats[] = array("name"=>1,"müll"=>0);
         return Response::json($stats);
     }
 

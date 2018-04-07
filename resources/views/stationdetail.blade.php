@@ -81,9 +81,9 @@ var chart = c3.generate({
 }
     
 });
-
+var zugklassen = [];
 @forelse($zugklassen as $zugklasse)
-    console.log('{{ $zugklasse->name }}');
+    zugklassen.push('{{ $zugklasse->name }}');
 @empty
     console.log('Keine Zugklassen gefunden');
 @endforelse
@@ -91,18 +91,18 @@ var chart2 = c3.generate({
         bindto: '#chart2',
         data: {
             json: [
-                {name: 'Gleis 1', tgv: 200, ice: 200, kackzug: 400},
-                {name: '2', tgv: 300, ice: 200, kackzug: 0},
-                {name: '3', tgv: 500, ice: 0, kackzug: 100},
-                {name: '', tgv: 0, ice: 400, kackzug: 50},
+                {name: 'Gleis 1', "ICE": 200, "S": 200, "Bus": 400},
+                {name: '2', "ICE": 300, "S": 200, "Bus": 0},
+                {name: '3', "ICE": 500, "S": 0, "Bus": 100},
+                {name: '', "ICE": 0, "S": 400, "Bus": 50},
             ], 
             keys: {
                 x: 'name', // it's possible to specify 'x' when category axis
-                value: ['tgv', 'ice','kackzug'],
+                value: zugklassen,
             },
             type: 'bar',
             groups: [
-            ['tgv', 'ice','kackzug']
+                zugklassen
         ]
         },
         axis: {

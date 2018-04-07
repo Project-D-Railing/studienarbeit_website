@@ -102,7 +102,17 @@ var chart2 = c3.generate({
         },
         axis: {
             x: {
-                type: 'category'
+                type: 'category',
+                label: {
+                    text: 'Gleis',
+                    position: 'outer-center'
+                }
+            },
+            y: {
+                label: {
+                    text: 'Anzahl an Zügen',
+                    position: 'outer-middle'
+                }
             }
         }
     });

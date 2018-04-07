@@ -86,20 +86,19 @@ var chart2 = c3.generate({
         bindto: '#chart2',
         data: {
             json: [
-                {name: 'ICE', "1": 50, "2": 5, "": 4},
-                {name: 'TGV', "1": 70, "2": 10, "": 5},
-                {name: 'AVG', "1": 0, "2": 50, "": 50},
-                {name: 'Bus', "1": 20, "2": 40, "": 2},
-            ],
+                {name: 'Gleis 1', tgv: 200, ice: 200, kackzug: 400},
+                {name: '2', tgv: 300, ice: 200, kackzug: 0},
+                {name: '3', tgv: 500, ice: 0, kackzug: 100},
+                {name: '', tgv: 0, ice: 400, kackzug: 50},
+            ], 
             keys: {
                 x: 'name', // it's possible to specify 'x' when category axis
-                value: ['1', '2', ''],
+                value: ['tgv', 'ice','kackzug'],
             },
             type: 'bar',
             groups: [
-            ['1', '2', '']
+            ['tgv', 'ice','kackzug']
         ]
-            
         },
         axis: {
             x: {

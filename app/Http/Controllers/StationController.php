@@ -43,7 +43,8 @@ class StationController extends Controller
     public function show($id)
     {
         $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
-        return view('stationdetail', ['station' => $station]);
+        $zugklassen = DB::connection('mysql2')->select("SELECT DISTINCT(zugklasse) FROM zuege WHERE evanr= :evanr", ['evanr' => $id]);
+        return view('stationdetail', ['station' => $station,'zugklassen' => $zugklassen]);
 
     }
 
@@ -51,7 +52,7 @@ class StationController extends Controller
     {
         $stationdate = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr", ['evanr' => $id, 'datum' => $date]);
         //return view('stationdetail', ['stationdate' => $stationdate]);
-
+       
         return view("stationdetaildate", ['zuege' => $stationdate])->render();
 
     }

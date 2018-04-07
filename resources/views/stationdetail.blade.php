@@ -44,7 +44,7 @@
                     </div>
 					<div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
                         Hier etwas über die Anzahl Züge pro Stunde als Grafik, Anzahl der Gesamten züge im Mining zeitraum, Schnitt pro tag, gleiswahl statistiken (welche gleise werden wie oft benutzt)
-
+                        <div id="chart2"></div>
                     </div>
 				</div>
 
@@ -82,5 +82,30 @@ var chart = c3.generate({
     
 });
 
+var chart2 = c3.generate({
+        bindto: '#chart2',
+        data: {
+            json: [
+                {name: 'ICE', "1": 50, "2": 5, "": 4},
+                {name: 'TGV', "1": 70, "2": 10, "": 5},
+                {name: 'AVG', "1": 0, "2": 50, "": 50},
+                {name: 'Bus', "1": 20, "2": 40, "": 2},
+            ],
+            keys: {
+                x: 'name', // it's possible to specify 'x' when category axis
+                value: ['1', '2', ''],
+            },
+            type: 'bar',
+            groups: [
+            ['1', '2', '']
+        ]
+            
+        },
+        axis: {
+            x: {
+                type: 'category'
+            }
+        }
+    });
 
 @stop

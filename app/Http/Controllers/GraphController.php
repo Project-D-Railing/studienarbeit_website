@@ -89,7 +89,11 @@ class GraphController extends Controller
                 $savelastgleis = $zuginfo->gleisist;
                 $savelastzugklasse = $zuginfo->zugklasse;
         }
-         $stats[] = array("name"=>$savelastgleis,$savelastzugklasse=>0);
+        for(int $i = 0; $i < 20; $i++) 
+        {
+            $stats[] = array("name"=>$savelastgleis,$savelastzugklasse=>0);
+        }
+
         return Response::json($stats);
     }
 

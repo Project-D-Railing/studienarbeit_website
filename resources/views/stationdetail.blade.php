@@ -90,12 +90,9 @@ var zugklassen = [];
 var chart2 = c3.generate({
         bindto: '#chart2',
         data: {
-            json: [
-                {name: 'Gleis 1', "ICE": 200, "S": 200, "Bus": 400},
-                {name: '2', "ICE": 300, "S": 200, "Bus": 0},
-                {name: '3', "ICE": 500, "S": 0, "Bus": 100},
-                {name: '', "ICE": 0, "S": 400, "Bus": 50},
-            ], 
+            url: '{{ route('graph.trainperplatform', ['id' => $stationdetail->EVA_NR]) }}',
+            mimeType: 'json'
+            
             keys: {
                 x: 'name', // it's possible to specify 'x' when category axis
                 value: zugklassen,

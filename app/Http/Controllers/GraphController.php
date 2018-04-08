@@ -86,7 +86,7 @@ class GraphController extends Controller
             $savelastzugklasse = "";
             foreach ($statsraw as $zuginfo)
             {
-                    if ($zuginfo->gleisist == "") {
+                    if ($zuginfo->gleisist == NULL) {
                          $zuginfo->gleisist = 'keine Abgabe';   
                     }
                     $stats[] = array("name"=>$zuginfo->gleisist,$zuginfo->zugklasse=>$zuginfo->anzahl);

@@ -79,7 +79,7 @@ class GraphController extends Controller
         
     public function getTrainclassPerPlatformStatistic($evanr) 
     {
-        $stats = Cache::remember('getTrainclassPerPlatformStatistic'.$evanr, 60, function($evanr) {
+        $stats = Cache::remember('getTrainclassPerPlatformStatistic'.$evanr, 60, function() use ($evanr){
             $statsraw = DB::connection('mysql2')->select("SELECT Count(id) as anzahl, gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by gleisist, zugklasse limit 10000", ['evanr' => $evanr]);
             $stats = array();
             $savelastgleis = "";

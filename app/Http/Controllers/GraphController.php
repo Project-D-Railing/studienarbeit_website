@@ -78,24 +78,28 @@ class GraphController extends Controller
         
     public function getTrainclassPerPlatformStatistic($evanr) 
     {
-        $statsraw = DB::connection('mysql2')->select("SELECT Count(id) as anzahl, gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by gleisist, zugklasse limit 10000", ['evanr' => $evanr]);
-        $stats = array();
-        $savelastgleis = "";
-        $savelastzugklasse = "";
-        foreach ($statsraw as $zuginfo)
-        {
+        $stats = Cache::remember('getTrainclassPerPlatformStatistic'.$evanr, 60, function() {
+            $statsraw = DB::connection('mysql2')->select("SELECT Count(id) as anzahl, gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by gleisist, zugklasse limit 10000", ['evanr' => $evanr]);
+            $stats = array();
+            $savelastgleis = "";
+            $savelastzugklasse = "";
+            foreach ($statsraw as $zuginfo)
+            {
+                
+                    $stats[] = array("name"=>$zuginfo->gleisist,$zuginfo->zugklasse=>$zuginfo->anzahl);
+                    $savelastgleis = $zuginfo->gleisist;
+                    $savelastzugklasse = $zuginfo->zugklasse;
+            }
             
-                $stats[] = array("name"=>$zuginfo->gleisist,$zuginfo->zugklasse=>$zuginfo->anzahl);
-                $savelastgleis = $zuginfo->gleisist;
-                $savelastzugklasse = $zuginfo->zugklasse;
-        }
-        
-        for ($i = 1; $i <= 20; $i++) 
-        {
-            $stats[] = array("name"=>$savelastgleis,'NONE'=>0);
-        }
+            for ($i = 1; $i <= 20; $i++) 
+            {
+                $stats[] = array("name"=>$savelastgleis,'NONE'=>0);
+            }
 
-        return Response::json($stats);
+            return Response::json($stats);     
+        });
+       
+        return $stats;
     }
 
     public function somedata($evanr)

@@ -106,10 +106,12 @@ class GraphController extends Controller
     public function somedata($evanr)
     {
         //$trains = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr ORDER by zuege.id desc LIMIT 1000", ['evanr' => $evanr]);
+        $stats = Cache::remember('somedata'.$evanr, 60, function() use ($evanr){             
+            $trainformatted = $this->generate_delay_statistic($evanr);
             
-        $trainformatted = $this->generate_delay_statistic($evanr);
-        
-        return Response::json($trainformatted);
+            return Response::json($trainformatted);
+        });
+        return $stats;
     }
 
 

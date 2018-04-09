@@ -21,4 +21,17 @@ class RouteTest extends TestCase
         $this->assertEquals(200, $response->status());
     }
     
+    public function testHomeRouteHTTPCode200()
+    {
+        $this->withoutMiddleware();
+        $response = $this->call('GET', '/home');
+
+        $this->assertEquals(200, $response->status());
+    }
+    public function testHomeRouteHTTPCode302()
+    {
+        $response = $this->call('GET', '/home');
+
+        $this->assertEquals(302, $response->status());
+    }
 }

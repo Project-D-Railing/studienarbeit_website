@@ -12,11 +12,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/leaflet.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/MarkerCluster.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/MarkerCluster.Default.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('css/c3.css') }}" rel="stylesheet">
+    
+    @yield ('customcss')
+    
 
 
 </head>
@@ -77,16 +75,9 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/leaflet.js') }}"></script>
-<script src="{{ asset('js/leaflet.ajax.min.js') }}"></script>
-<script src="{{ asset('js/leaflet.markercluster.js') }}"></script>
-<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-<script src="{{ asset('js/typeahead.bundle.min.js') }}"></script>
-<script src="{{ asset('js/moment.min.js') }}"></script>
-<!-- Load d3.js and c3.js -->
-<script src="{{ asset('js/d3.min.js') }}"></script>
-<script src="{{ asset('js/c3.min.js') }}"></script>
 
+
+@yield ('customjs')
 
 <script type="text/javascript">
         @yield ('scripts')

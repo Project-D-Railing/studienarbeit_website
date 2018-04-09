@@ -11,7 +11,16 @@
     </div>
 
 @endsection
-
+@section('customcss')
+<link href="{{ asset('css/leaflet.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/MarkerCluster.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/MarkerCluster.Default.css') }}" rel="stylesheet">
+@endsection
+@section('customjs')
+<script src="{{ asset('js/leaflet.js') }}"></script>
+<script src="{{ asset('js/leaflet.ajax.min.js') }}"></script>
+<script src="{{ asset('js/leaflet.markercluster.js') }}"></script>
+@endsection
 @section('scripts')
 
 

@@ -1,5 +1,20 @@
 @extends('layouts.app')
 
+@section('customjs')
+<!-- Load d3.js and c3.js -->
+<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('js/typeahead.bundle.min.js') }}"></script>
+<script src="{{ asset('js/moment.min.js') }}"></script>
+
+<script src="{{ asset('js/d3.min.js') }}"></script>
+<script src="{{ asset('js/c3.min.js') }}"></script>
+
+
+@endsection
+@section('customcss')
+<link href="{{ asset('css/c3.css') }}" rel="stylesheet">
+
+@endsection
 @section('content')
     <div class="container">
         <div class="row">

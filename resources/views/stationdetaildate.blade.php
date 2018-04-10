@@ -10,6 +10,7 @@
               <th scope="col">Dpzeitist</th>
               <th scope="col">Gleissoll</th>
               <th scope="col">Gleisist</th>
+              <th scope="col">Show</th>
             </tr>
           </thead>
           <tbody>
@@ -26,6 +27,7 @@
                     <td> {{ $zug->dpzeitsoll }} </td>
                     <td> {{ $zug->gleissoll }} </td>
                     <td> {{ $zug->gleisist }} </td>
+                    <td><a href="{{ route('graph.trainstatistik', ['id' => $zug->evanr,'zugklasse' => $zug->zugklasse,'zugnummer' => $zug->zugnummer]) }}" class="btn btn-primary">Show</a></td>
                 </tr>
             @empty
                 <tr>

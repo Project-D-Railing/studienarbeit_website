@@ -55,13 +55,13 @@ class GraphController extends Controller
         return round($diff / 60);
     }
     
-    private function generate_delay_statistic($evanr) 
+    private function generate_delay_statistic($evanr, $zugklasse, $zugnummer) 
     {
         // this query returns stats on trains and their platform they are departing from.
         // SELECT Count(id), gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= 8000191 group by gleisist, zugklasse limit 1000
         // get this data to c3js and show as stacked bar chart for each platform, like ICE green, RB red, ....
         
-        $trains = DB::connection('mysql2')->select("SELECT * FROM k42174_bahnapi.zuege where evanr= :evanr and zugklasse='ICE' LIMIT 250", ['evanr' => $evanr]);
+        $trains = DB::connection('mysql2')->select("SELECT * FROM k42174_bahnapi.zuege where evanr= :evanr and zugklasse= :zugklasse AND zugnummer= :nummer LIMIT 250", ['evanr' => $evanr, 'zugklasse' => $zugklasse, 'nummer' => $zugnummer]);
         $trainformatted = array();
         foreach ($trains as $train) {
             if($train->zugstatus == 'n') {
@@ -104,12 +104,22 @@ class GraphController extends Controller
        
         return $stats;
     }
-
+    public function getTrainStatisticForStation($id, $type, $number)
+    {
+       
+        $stats = Cache::remember('getTrainStatisticForStation'.$id.'-'. $type.'-' . $number, 60, function() use ($id, $type, $number){             
+            $trainformatted = $this->generate_delay_statistic($id, $type, $number);
+            
+            return Response::json($trainformatted);
+        });
+        return $stats;
+    }
+    
     public function somedata($evanr)
     {
         //$trains = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr ORDER by zuege.id desc LIMIT 1000", ['evanr' => $evanr]);
         $stats = Cache::remember('somedata'.$evanr, 60, function() use ($evanr){             
-            $trainformatted = $this->generate_delay_statistic($evanr);
+            //$trainformatted = $this->generate_delay_statistic($evanr);
             
             return Response::json($trainformatted);
         });

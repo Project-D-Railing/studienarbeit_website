@@ -85,10 +85,11 @@ date_input.onchange = function(){
     }
 }
 
+
 var chart = c3.generate({
     bindto: '#chart',
     data: {   
-            url: '{{ route('graph.somedata', ['id' => $stationdetail->EVA_NR]) }}',
+            url: '{{ route('graph.trainstatistik', ['id' => $stationdetail->EVA_NR,'zugklasse' => $stationdetail->EVA_NR,'zugnummer' => $stationdetail->EVA_NR]) }}',
             mimeType: 'json'
         },
         line: {

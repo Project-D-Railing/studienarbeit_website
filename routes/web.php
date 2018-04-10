@@ -30,6 +30,8 @@ Route::get('/station/graph/{id}', 'GraphController@somedata')->name('graph.somed
 
 Route::get('/station/trainperplatform/{id}', 'GraphController@getTrainclassPerPlatformStatistic')->name('graph.trainperplatform');
 
+Route::get('/station/{id}/train/{type}/{number}', 'GraphController@getTrainStatisticForStation')->name('graph.trainstatistik');
+
 Route::get('/station/find', 'StationController@find')->name('station.find');
 
 Route::get('/station', 'StationController@index')->name('station.index');

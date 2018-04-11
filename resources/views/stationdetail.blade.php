@@ -78,7 +78,7 @@ date_input.valueAsDate = new Date();
 date_input.onchange = function(){
     var d = new Date(this.value);
     if(!isNaN(d.getTime())) {
-	    $.get("{{$stationdetail->EVA_NR}}/"+this.value,
+	    $.get("{{$stationdetail->EVA_NR}}/timetable/"+this.value,
             function (data) {
                 $("#result").html(data);
             });

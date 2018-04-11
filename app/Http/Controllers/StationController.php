@@ -41,7 +41,7 @@ class StationController extends Controller
 
     }
 
-    public function show($id)
+    public function detail($id)
     {
         $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
        
@@ -55,7 +55,7 @@ class StationController extends Controller
 
     }
 
-    public function showdate($id, $date)
+    public function timetable($id, $date)
     {
         $stats = Cache::remember('somedate'.$id.'-'.$date, 30, function() use ($id, $date){             
             $stationdate = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr", ['evanr' => $id, 'datum' => $date]);

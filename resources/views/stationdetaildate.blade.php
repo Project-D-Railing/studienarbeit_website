@@ -27,7 +27,7 @@
                     <td> {{ $zug->dpzeitsoll }} </td>
                     <td> {{ $zug->gleissoll }} </td>
                     <td> {{ $zug->gleisist }} </td>
-                    <td><a href="{{ route('graph.trainstatistik', ['id' => $zug->evanr,'zugklasse' => $zug->zugklasse,'zugnummer' => $zug->zugnummer]) }}" class="btn btn-primary">Show</a></td>
+                    <td><a href="{{ route('train.detail', ['trainclass' => $zug->zugklasse,'trainnumber' => $zug->zugnummer]) }}" class="btn btn-primary">Show</a></td>
                 </tr>
             @empty
                 <tr>

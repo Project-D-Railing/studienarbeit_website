@@ -40,30 +40,61 @@ class TrainController extends Controller
         return Response::json($trains);
 
     }
-
-    public function show($id)
+    
+    public function detail($zugklasse, $zugnummer)
     {
-        $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
-       
-        $zugklassen = Cache::remember('showstation'.$id, 30, function() use ($id){             
-            $zugklassen = DB::connection('mysql2')->select("SELECT DISTINCT(zugklasse) as name FROM zuege WHERE evanr= :evanr", ['evanr' => $id]);
+        $train = Cache::remember('showtrain'.$zugklasse.'-'.$zugnummer, 1, function() use ($zugklasse,$zugnummer){             
+            $train = DB::connection('mysql2')->select("SELECT * from zuege where zugklasse= :zugklasse AND zugnummer= :zugnummer LIMIT 1", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
             
-            return $zugklassen;
-        }); 
-
-        return view('stationdetail', ['station' => $station,'zugklassen' => $zugklassen]);
-
-    }
-
-    public function showdate($id, $date)
-    {
-        $stats = Cache::remember('somedate'.$id.'-'.$date, 30, function() use ($id, $date){             
-            $stationdate = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr", ['evanr' => $id, 'datum' => $date]);
-            
-            return $stationdate;
+            return $train;
         });       
-        return view("stationdetaildate", ['zuege' => $stats])->render();
+       
+        return view('train.detail', ['train' => $train]);
 
     }
+    
+    public function route()
+    {
+        $train = array();
+        
+        return view('train.index', ['train' => $train]);
 
+    }
+    
+    public function platform()
+    {
+        $train = array();
+        
+        return view('train.index', ['train' => $train]);
+
+    }
+    
+    public function cancel()
+    {
+        $train = array();
+        
+        return view('train.index', ['train' => $train]);
+
+    }
+    
+    public function delay()
+    {
+        $train = array();
+        
+        return view('train.index', ['train' => $train]);
+
+    }
+    
+    public function stations($zugklasse, $zugnummer)
+    {
+        $result = Cache::remember('showtrainstations'.$zugklasse.'-'.$zugnummer, 1, function() use ($zugklasse,$zugnummer){             
+            $haltestellen = DB::connection('mysql2')->select("select haltestellen.NAME as name,zuege.* from zuege,haltestellen where dailytripid = (SELECT dailytripid from zuege where zugklasse= :zugklasse AND zugnummer= :zugnummer LIMIT 1) and haltestellen.EVA_NR = zuege.evanr group by evanr order by stopid asc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
+            
+            return $haltestellen;
+        });
+        // EVA NUMMERN wie folgt: select distinct(evanr) from zuege where dailytripid = (SELECT dailytripid from zuege where zugklasse='ICE' AND zugnummer='513' LIMIT 1) 
+        // mit allen infos: select haltestellen.NAME,zuege.* from zuege,haltestellen where dailytripid = (SELECT dailytripid from zuege where zugklasse='ICE' AND zugnummer='513' LIMIT 1) and haltestellen.EVA_NR = zuege.evanr group by evanr        
+        return view('train.stations', ['haltestellen' => $result]);
+
+    }
 }

@@ -43,7 +43,7 @@ Route::get('/train/{trainclass}/{trainnumber}/route', 'TrainController@route')->
 Route::get('/train/find', 'TrainController@find')->name('train.find');
 
 /* base routes*/
-Route::get('/train/{trainclass}/{trainnumber}', 'TrainController@index')->name('train.detail');
+Route::get('/train/{trainclass}/{trainnumber}', 'TrainController@detail')->name('train.detail');
 
 Route::get('/train', 'TrainController@index')->name('train.index');
 
@@ -58,13 +58,11 @@ Route::get('/station/trainperplatform/{id}', 'GraphController@getTrainclassPerPl
 
 Route::get('/station/{id}/train/{type}/{number}', 'GraphController@getTrainStatisticForStation')->name('graph.trainstatistik');
 
-Route::get('/station/{id}/{date}', 'StationController@showdate')->name('station.detaildate');
+Route::get('/station/{id}/timetable/{date}', 'StationController@timetable')->name('station.detaildate');
 
 Route::get('/station/find', 'StationController@find')->name('station.find');
 
-Route::get('/station/{id}', 'StationController@show')->name('station.detail');
-
-
-
 /* base routes*/
+Route::get('/station/{id}', 'StationController@detail')->name('station.detail');
+
 Route::get('/station', 'StationController@index')->name('station.index');

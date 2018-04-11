@@ -36,7 +36,8 @@
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
             <li class="nav-item"><a href="{{ route('toplist') }}" class="nav-link">Toplist</a></li>
             <li class="nav-item"><a href="{{ route('map') }}" class="nav-link">Map</a></li>
-            <li class="nav-item"><a href="{{ route('station.index') }}" class="nav-link">Station</a></li>               
+            <li class="nav-item"><a href="{{ route('station.index') }}" class="nav-link">Station</a></li> 
+            <li class="nav-item"><a href="{{ route('train.index') }}" class="nav-link">Train</a></li> 
             @endif
             <li class="nav-item"><a href="{{ route('impressum') }}" class="nav-link">Impressum</a></li>
         </ul>

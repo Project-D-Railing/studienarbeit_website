@@ -36,7 +36,7 @@ class TrainController extends Controller
     public function find(Request $request)
     {
         $q = $request->get('q');
-        $trains = DB::connection('mysql2')->select("select DISTINCT(zugnummerfull), zugklasse as class, zugnummer as number from zuege where zugnummerfull like :zugnummerfull LIMIT 10", ['zugnummerfull' => '%'.$q.'%']);
+        $trains = DB::connection('mysql2')->select("select DISTINCT(zugnummerfull), zugklasse as class, zugnummer as number from zugsuche where zugnummerfull like :zugnummerfull LIMIT 10", ['zugnummerfull' => '%'.$q.'%']);
         return Response::json($trains);
 
     }

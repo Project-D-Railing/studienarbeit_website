@@ -13,29 +13,58 @@
 
 Route::get('/', 'GuestController@index')->name('welcome');
 
+Route::get('/impressum', function()
+{
+    return Redirect::to('https://9d6.de/impressum.html');
+})->name('impressum');
+
+/* all routes below need an account to show*/
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/toplist', 'ToplistController@index')->name('toplist');
 
-Route::get('/impressum', function()
-{
-    return Redirect::to('https://9d6.de/impressum.html');
-})->name('impressum');
-
 Route::get('/map', 'MapController@index')->name('map');
 
+/* ------------------- */
+/* train routes */
+/* helper routes*/
+Route::get('/train/{trainclass}/{trainnumber}/stations', 'TrainController@stations')->name('train.detailstations');
+
+Route::get('/train/{trainclass}/{trainnumber}/delay', 'TrainController@delay')->name('train.detaildelay');
+
+Route::get('/train/{trainclass}/{trainnumber}/cancel', 'TrainController@cancel')->name('train.detailcancel');
+
+Route::get('/train/{trainclass}/{trainnumber}/platform', 'TrainController@platform')->name('train.detailplatform');
+
+Route::get('/train/{trainclass}/{trainnumber}/route', 'TrainController@route')->name('train.detailroute');
+
+Route::get('/train/find', 'TrainController@find')->name('train.find');
+
+/* base routes*/
+Route::get('/train/{trainclass}/{trainnumber}', 'TrainController@index')->name('train.detail');
+
+Route::get('/train', 'TrainController@index')->name('train.index');
+
+
+
+/* ------------------- */
+/* station routes*/
+/* helper routes*/
 Route::get('/station/graph/{id}', 'GraphController@somedata')->name('graph.somedata');
 
 Route::get('/station/trainperplatform/{id}', 'GraphController@getTrainclassPerPlatformStatistic')->name('graph.trainperplatform');
 
 Route::get('/station/{id}/train/{type}/{number}', 'GraphController@getTrainStatisticForStation')->name('graph.trainstatistik');
 
-Route::get('/station/find', 'StationController@find')->name('station.find');
+Route::get('/station/{id}/{date}', 'StationController@showdate')->name('station.detaildate');
 
-Route::get('/station', 'StationController@index')->name('station.index');
+Route::get('/station/find', 'StationController@find')->name('station.find');
 
 Route::get('/station/{id}', 'StationController@show')->name('station.detail');
 
-Route::get('/station/{id}/{date}', 'StationController@showdate')->name('station.detaildate');
+
+
+/* base routes*/
+Route::get('/station', 'StationController@index')->name('station.index');

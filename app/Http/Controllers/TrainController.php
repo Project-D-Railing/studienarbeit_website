@@ -43,7 +43,7 @@ class TrainController extends Controller
     
     public function detail($zugklasse, $zugnummer)
     {
-        $train = Cache::remember('showtrain'.$zugklasse.'-'.$zugnummer, 1, function() use ($zugklasse,$zugnummer){             
+        $train = Cache::remember('showtrain'.$zugklasse.'-'.$zugnummer, 1440, function() use ($zugklasse,$zugnummer){             
             $train = DB::connection('mysql2')->select("SELECT * from zuege where zugklasse= :zugklasse AND zugnummer= :zugnummer LIMIT 1", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
             
             return $train;
@@ -87,7 +87,7 @@ class TrainController extends Controller
     
     public function stations($zugklasse, $zugnummer)
     {
-        $result = Cache::remember('showtrainstations'.$zugklasse.'-'.$zugnummer, 1, function() use ($zugklasse,$zugnummer){             
+        $result = Cache::remember('showtrainstations'.$zugklasse.'-'.$zugnummer, 720, function() use ($zugklasse,$zugnummer){             
             $haltestellen = DB::connection('mysql2')->select("select haltestellen.NAME as name,zuege.* from zuege,haltestellen where dailytripid = (SELECT dailytripid from zuege where zugklasse= :zugklasse AND zugnummer= :zugnummer LIMIT 1) and haltestellen.EVA_NR = zuege.evanr group by evanr order by stopid asc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
             
             return $haltestellen;

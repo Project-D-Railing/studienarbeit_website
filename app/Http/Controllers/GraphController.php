@@ -77,6 +77,28 @@ class GraphController extends Controller
         return $trainformatted;
     }
         
+    private function generate_delay_statistic_overall($zugklasse, $zugnummer) 
+    {
+        // this query returns stats on trains and their platform they are departing from.
+        // SELECT Count(id), gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= 8000191 group by gleisist, zugklasse limit 1000
+        // get this data to c3js and show as stacked bar chart for each platform, like ICE green, RB red, ....
+        
+        $trains = DB::connection('mysql2')->select("SELECT datum, evanr, stopid, arzeitsoll, arzeitist, dpzeitsoll, dpzeitist, zugstatus FROM zuege where zugklasse= :zugklasse and zugnummer= :zugnummer and datum > (SELECT CURRENT_DATE - INTERVAL 14 DAY) ORDER BY id desc", ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
+        $trainformatted = array();
+        foreach ($trains as $train) {
+            if($train->zugstatus == 'n') {
+                $trainformatted[$train->evanr]['delay1'][$train->datum] = $this->calc_diff($train->arzeitsoll, $train->arzeitist);
+                $trainformatted[$train->evanr]['delay2'][$train->datum] = $this->calc_diff($train->dpzeitsoll, $train->dpzeitist);
+            } else {
+                $trainformatted[$train->evanr]['delay1'][$train->datum] = NULL;
+                $trainformatted[$train->evanr]['delay2'][$train->datum] = NULL;
+            }
+            
+        }
+        
+        return $trainformatted;
+    }
+    
     public function getTrainclassPerPlatformStatistic($evanr) 
     {
         $stats = Cache::remember('getTrainclassPerPlatformStatistic'.$evanr, 60, function() use ($evanr){
@@ -109,6 +131,17 @@ class GraphController extends Controller
        
         $stats = Cache::remember('getTrainStatisticForStation'.$id.'-'. $type.'-' . $number, 60, function() use ($id, $type, $number){             
             $trainformatted = $this->generate_delay_statistic($id, $type, $number);
+            
+            return Response::json($trainformatted);
+        });
+        return $stats;
+    }
+    
+    public function getTrainDelayStatistic($type, $number)
+    {
+       
+        $stats = Cache::remember('getTrainDelayStatistic'. $type.'-' . $number, 1, function() use ($type, $number){             
+            $trainformatted = $this->generate_delay_statistic_overall($type, $number);
             
             return Response::json($trainformatted);
         });

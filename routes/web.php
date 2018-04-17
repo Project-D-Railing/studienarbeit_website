@@ -60,6 +60,9 @@ Route::get('/station/{id}/train/{type}/{number}', 'GraphController@getTrainStati
 
 Route::get('/station/{id}/timetable/{date}', 'StationController@timetable')->name('station.detaildate');
 
+Route::get('/station/{id}/trainperplatform', 'StationController@platform')->name('station.detailgleis');
+
+
 Route::get('/station/find', 'StationController@find')->name('station.find');
 
 /* base routes*/

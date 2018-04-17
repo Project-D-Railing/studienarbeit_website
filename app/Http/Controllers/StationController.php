@@ -66,4 +66,9 @@ class StationController extends Controller
 
     }
 
+    public function platform($id)
+    {
+        return view("station.detailgleis")->render();
+
+    }
 }

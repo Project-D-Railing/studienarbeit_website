@@ -19,7 +19,7 @@ var zugklassen = [];
 var chart2 = c3.generate({
         bindto: '#chartgleis',
         data: {
-            url: '{{ route('graph.trainperplatform', ['id' => $stationdetail->EVA_NR]) }}',
+            url: '{{ route('graph.trainperplatform', ['id' => $id]) }}',
             mimeType: 'json',
             
             keys: {

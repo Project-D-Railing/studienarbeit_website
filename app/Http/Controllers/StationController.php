@@ -68,7 +68,12 @@ class StationController extends Controller
 
     public function platform($id)
     {
-        return view("station.detailgleis")->render();
+        $zugklassen = Cache::remember('showstation'.$id, 30, function() use ($id){             
+            $zugklassen = DB::connection('mysql2')->select("SELECT DISTINCT(zugklasse) as name FROM zuege WHERE evanr= :evanr", ['evanr' => $id]);
+            
+            return $zugklassen;
+        }); 
+        return view("station.detailgleis", ['zugklassen' => $zugklassen])->render();
 
     }
 }

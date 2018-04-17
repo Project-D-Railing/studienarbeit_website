@@ -36,7 +36,7 @@
 						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#" role="tab">Zugstatistiken</a>
 						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#" role="tab">Streckenstatistiken</a>
 						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => 8000191, 'date' => date('Y-m-d')]) }}" href="#">Gleiswechsel</a>
-                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detailgleis', ['id' => 8007858, 'zugklassen' => $zugklassen]) }}" href="#">Haltestellenstatistiken</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detailgleis', ['id' => $stationdetail->EVA_NR]) }}" href="#">Haltestellenstatistiken</a>
 
                       @endif
                     @empty

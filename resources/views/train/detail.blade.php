@@ -17,38 +17,36 @@
 @endsection
 @section('content')
     <div class="container">
+        @forelse($train as $traindetail)
+            <div class="page-header">
+              <h1>{{ $traindetail->zugnummerfull }} <small>{{ $traindetail->zugklasse }}</small></h1>
+            </div>   
+                                  
+        @empty
+
+            <h1>Kein Zug gefunden.</h1>
+        @endforelse
         <div class="row">
             <div class="col">
                 <nav>
-					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-						<a class="nav-item nav-link active" data-toggle="tabajax" data-target="#content-tab" href="/gh/gist/response.html/3843293/" role="tab">Haltestellen</a>
-						<a class="nav-item nav-link" id="nav-delay-tab" data-toggle="tab" href="#nav-delay" role="tab" aria-controls="nav-delay" aria-selected="false">Verspätung</a>
-						<a class="nav-item nav-link" id="nav-cancel-tab" data-toggle="tab" href="#nav-cancel" role="tab" aria-controls="nav-cancel" aria-selected="false">Ausfallstatistik</a>
-						<a class="nav-item nav-link" id="nav-platform-tab" data-toggle="tab" href="#nav-platform" role="tab" aria-controls="nav-platform" aria-selected="false">Gleiswechsel</a>
-                        <a class="nav-item nav-link" id="nav-strecke-tab" data-toggle="tab" href="#nav-strecke" role="tab" aria-controls="nav-strecke" aria-selected="false">Streckenwechsel</a>
-                        <a class="nav-item nav-link" id="nav-history-tab" data-toggle="tab" href="#nav-history" role="tab" aria-controls="nav-history" aria-selected="false">Verlauf</a>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    @forelse($train as $traindetail)
+                      @if ($loop->first) 
+                        <a class="nav-item nav-link active" data-toggle="tabajax" data-target="#content-tab" href="{{ route('train.detailstations', ['trainclass' => '{{$traindetail->zugklasse}}', 'trainnumber' => '{{$traindetail->zugnummer}}']) }}" role="tab">Haltestellen</a>
+						<a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" href="/gh/gist/response.html/3843293/" role="tab">Verspätung</a>
+						<a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" href="/gh/gist/response.html/3843293/" role="tab">Ausfallstatistik</a>
+						<a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" href="/gh/gist/response.html/3843293/" role="tab">Gleiswechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" href="/gh/gist/response.html/3843293/" role="tab">Streckenwechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" href="/gh/gist/response.html/3843293/" role="tab">Verlauf</a>
+                      @endif
+                    @empty
+                                       
+                    @endforelse
 					</div>
 				</nav>
 				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-						    @forelse($train as $traindetail)
-                                <div class="page-header">
-                                  <h1>{{ $traindetail->zugnummerfull }} <small>{{ $traindetail->zugklasse }}</small></h1>
-                                </div>   
-                                                      
-                            @empty
-                    
-                                <h1>Kein Zug gefunden.</h1>
-                            @endforelse
-                            <div id="result">
-        
-                            </div>
-                            
-
+					<div class="tab-pane fade show active" id="content-tab" role="tabpanel" aria-labelledby="nav-home-tab">
 					</div>
-					<div class="tab-pane fade" id="content-tab" role="tabpanel" aria-labelledby="nav-delay-tab">
-                        Hier was über verspätungen
-					</div>					
 				</div>
 
             </div>
@@ -59,18 +57,6 @@
 @endsection
 
 @section('scripts')
-
-@forelse($train as $traindetail)
-    @if ($loop->first) 
-        
-    $.get("{{$traindetail->zugnummer}}/stations",
-            function (data) {
-                $("#result").html(data);
-            });
-    @endif
- @empty
-                   
- @endforelse
 
 $('[data-toggle="tabajax"]').click(function(e) {
     var $this = $(this),

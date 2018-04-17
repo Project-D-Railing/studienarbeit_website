@@ -4,11 +4,7 @@
         </div>
     </div>
 </div>
-
-
-
-
-@section('scripts')
+$( document ).ready(function() {
 
 var zugklassen = [];
 @forelse($zugklassen as $zugklasse)
@@ -56,5 +52,4 @@ var zugklassen = [];
 @endforelse
 
 
-
-@stop
+});

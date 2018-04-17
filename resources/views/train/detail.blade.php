@@ -32,12 +32,12 @@
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     @forelse($train as $traindetail)
                       @if ($loop->first) 
-                        <a class="nav-item nav-link active" data-toggle="tabajax" data-target="#content-tab" ref="{{ route('train.detailstations', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" role="tab">Haltestellen</a>
-						<a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" ref="{{ route('train.index') }}" role="tab">Verspätung</a>
-						<a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Ausfallstatistik</a>
-						<a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Gleiswechsel</a>
-                        <a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Streckenwechsel</a>
-                        <a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Verlauf</a>
+                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailstations', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#content-tab">Haltestellen</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" role="tab">Verspätung</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Ausfallstatistik</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Gleiswechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Streckenwechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Verlauf</a>
                       @endif
                     @empty
                                        
@@ -58,7 +58,7 @@
 
 @section('scripts')
 
-$('[data-toggle="tabajax"]').click(function(e) {
+$('[data-toggle="tab"]').click(function(e) {
     var $this = $(this),
         loadurl = $this.attr('ref'),
         targ = $this.attr('data-target');

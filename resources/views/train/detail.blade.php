@@ -33,11 +33,11 @@
                     @forelse($train as $traindetail)
                       @if ($loop->first) 
                         <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailstations', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#content-tab">Haltestellen</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" role="tab">Verspätung</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Ausfallstatistik</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Gleiswechsel</a>
-                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Streckenwechsel</a>
-                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Verlauf</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Verspätung</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Ausfallstatistik</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Gleiswechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/train/ICE/3" href="#content-tab">Streckenwechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/station/8000191" href="#content-tab">Verlauf</a>
                       @endif
                     @empty
                                        

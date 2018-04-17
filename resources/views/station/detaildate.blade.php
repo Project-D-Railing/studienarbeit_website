@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col">
         <p>Please select a date:</p>
-            <input type="date" id="myDate" value="2018-02-09">
+            <input type="date" id="myDate" value="{{$datum}}">
         <table class="table">
           <thead>
             <tr>
@@ -44,7 +44,6 @@
 
 <script type="text/javascript">
 var date_input = document.getElementById('myDate');
-date_input.valueAsDate = new Date();
 
 @forelse($station as $stationdetail)
   @if ($loop->first) 

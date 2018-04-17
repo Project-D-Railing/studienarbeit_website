@@ -53,7 +53,9 @@
         </div>
         
     </div>
-
+    <script type="text/javascript">
+        @yield ('scripts')
+    </script>
 @endsection
 
 @section('scripts')

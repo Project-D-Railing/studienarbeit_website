@@ -16,10 +16,14 @@ var zugklassen = [];
 @empty
     console.log('Keine Zugklassen gefunden');
 @endforelse
-var chart2 = c3.generate({
+
+
+@forelse($station as $stationdetail)
+  @if ($loop->first) 
+    var chart2 = c3.generate({
         bindto: '#chartgleis',
         data: {
-            url: '{{ route('graph.trainperplatform', ['id' => $id]) }}',
+            url: '{{ route('graph.trainperplatform', ['id' => $stationdetail->EVA_NR]) }}',
             mimeType: 'json',
             
             keys: {
@@ -45,5 +49,12 @@ var chart2 = c3.generate({
             }
         }
     });
+
+  @endif
+@empty
+                   
+@endforelse
+
+
 
 @stop

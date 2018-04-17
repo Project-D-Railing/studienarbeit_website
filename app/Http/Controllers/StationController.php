@@ -45,13 +45,7 @@ class StationController extends Controller
     {
         $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
        
-        $zugklassen = Cache::remember('showstation'.$id, 30, function() use ($id){             
-            $zugklassen = DB::connection('mysql2')->select("SELECT DISTINCT(zugklasse) as name FROM zuege WHERE evanr= :evanr", ['evanr' => $id]);
-            
-            return $zugklassen;
-        }); 
-
-        return view('station.detail', ['station' => $station,'zugklassen' => $zugklassen]);
+        return view('station.detail', ['station' => $station]);
 
     }
 
@@ -68,12 +62,13 @@ class StationController extends Controller
 
     public function platform($id)
     {
+        $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
         $zugklassen = Cache::remember('showstation'.$id, 30, function() use ($id){             
             $zugklassen = DB::connection('mysql2')->select("SELECT DISTINCT(zugklasse) as name FROM zuege WHERE evanr= :evanr", ['evanr' => $id]);
             
             return $zugklassen;
         }); 
-        return view("station.detailgleis", ['zugklassen' => $zugklassen])->render();
+        return view("station.detailgleis", ['station' => $station,'zugklassen' => $zugklassen])->render();
 
     }
 }

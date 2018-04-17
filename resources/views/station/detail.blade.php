@@ -66,7 +66,7 @@ date_input.onchange = function(){
     if(!isNaN(d.getTime())) {
 	    $.get("{{$stationdetail->EVA_NR}}/timetable/"+this.value,
             function (data) {
-                $("#result").html(data);
+                $("#content-tab").html(data);
             });
     }
 }

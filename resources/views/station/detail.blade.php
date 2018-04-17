@@ -32,11 +32,11 @@
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     @forelse($station as $stationdetail)
                       @if ($loop->first) 
-                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => $stationdetail->EVA_NR, 'date' => date('Y-m-d')]) }}" href="#">Fahrplan</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#">Zugstatistiken</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#">Streckenstatistiken</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#">Gleiswechsel</a>
-                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab2" ref="/train/ICE/3" href="#">Haltestellenstatistiken</a>
+                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => $stationdetail->EVA_NR, 'date' => date('Y-m-d')]) }}" href="#" role="tab">Fahrplan</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#" role="tab">Zugstatistiken</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#" role="tab">Streckenstatistiken</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#" role="tab">Gleiswechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab2" ref="/train/ICE/3" href="#content-tab2" role="tab">Haltestellenstatistiken</a>
 
                       @endif
                     @empty

@@ -21,7 +21,7 @@
             <div class="col">
                 <nav>
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Haltestellen</a>
+						<a class="nav-item nav-link active" data-toggle="tabajax" data-target="#content-tab" href="/gh/gist/response.html/3843293/" role="tab">Haltestellen</a>
 						<a class="nav-item nav-link" id="nav-delay-tab" data-toggle="tab" href="#nav-delay" role="tab" aria-controls="nav-delay" aria-selected="false">Verspätung</a>
 						<a class="nav-item nav-link" id="nav-cancel-tab" data-toggle="tab" href="#nav-cancel" role="tab" aria-controls="nav-cancel" aria-selected="false">Ausfallstatistik</a>
 						<a class="nav-item nav-link" id="nav-platform-tab" data-toggle="tab" href="#nav-platform" role="tab" aria-controls="nav-platform" aria-selected="false">Gleiswechsel</a>
@@ -46,21 +46,9 @@
                             
 
 					</div>
-					<div class="tab-pane fade" id="nav-delay" role="tabpanel" aria-labelledby="nav-delay-tab">
+					<div class="tab-pane fade" id="content-tab" role="tabpanel" aria-labelledby="nav-delay-tab">
                         Hier was über verspätungen
-					</div>
-					<div class="tab-pane fade" id="nav-cancel" role="tabpanel" aria-labelledby="nav-cancel-tab">
-                        Hier was zur Ausfall statistik im gesamten verhältnis etc.
-                    </div>
-					<div class="tab-pane fade" id="nav-platform" role="tabpanel" aria-labelledby="nav-platform-tab">
-                        Hier was zur Bahnsteigwahl des zugen in jedem Bahnhof
-                    </div>
-                    <div class="tab-pane fade" id="nav-strecke" role="tabpanel" aria-labelledby="nav-strecke-tab">
-                        Hier Statisiteken zu Strecken und deren Alternativrouten.
-                    </div>
-                    <div class="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
-                        Hier etwas zum zwitlichen verlauf des zuges, alte dinge die geschehen sind
-                    </div>
+					</div>					
 				</div>
 
             </div>
@@ -83,6 +71,20 @@
  @empty
                    
  @endforelse
+
+$('[data-toggle="tabajax"]').click(function(e) {
+    var $this = $(this),
+        loadurl = $this.attr('href'),
+        targ = $this.attr('data-target');
+
+    $.get(loadurl, function(data) {
+        $(targ).html(data);
+    });
+
+    $this.tab('show');
+    return false;
+});
+
 
 
 @stop

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col">
         <p>Please select a date:</p>
-            <input type="date" id="myDate" value="2018-02-09">
+            <input type="date" id="myDate">
         <table class="table">
           <thead>
             <tr>

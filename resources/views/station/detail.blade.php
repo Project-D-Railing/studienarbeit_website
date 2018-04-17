@@ -32,11 +32,11 @@
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     @forelse($station as $stationdetail)
                       @if ($loop->first) 
-                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => $stationdetail->EVA_NR, 'date' => date('Y-m-d')]) }}" href="#" role="tab">Fahrplan</a>
+                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => $stationdetail->EVA_NR, 'date' => date('Y-m-d')]) }}" href="#" >Fahrplan</a>
 						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#" role="tab">Zugstatistiken</a>
 						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#" role="tab">Streckenstatistiken</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => 8000191, 'date' => date('Y-m-d')]) }}" href="#" role="tab">Gleiswechsel</a>
-                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab2" ref="{{ route('station.detaildate', ['id' => 8007858, 'date' => date('Y-m-d')]) }}" href="#content-tab2" role="tab">Haltestellenstatistiken</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => 8000191, 'date' => date('Y-m-d')]) }}" href="#">Gleiswechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => 8007858, 'date' => date('Y-m-d')]) }}" href="#">Haltestellenstatistiken</a>
 
                       @endif
                     @empty
@@ -47,8 +47,6 @@
 				</nav>
 				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">                   
 					<div class="tab-pane fade show active" id="content-tab" role="tabpanel">
-					</div>
-                    <div class="tab-pane fade show active" id="content-tab2" role="tabpanel">
 					</div>
 				</div>
             </div>
@@ -88,7 +86,10 @@ $( document ).ready(function() {
     // Open up first tab by default
     $('[data-toggle="tab"]')[0].click();
 });
-
+$(".nav .nav-link").on("click", function(){
+   $(".nav").find(".active").removeClass("active");
+   $(this).addClass("active");
+});
 
 
 

@@ -32,12 +32,12 @@
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     @forelse($train as $traindetail)
                       @if ($loop->first) 
-                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailstations', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#content-tab">Haltestellen</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Verspätung</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Ausfallstatistik</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Gleiswechsel</a>
-                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/train/ICE/3" href="#content-tab">Streckenwechsel</a>
-                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/station/8000191" href="#content-tab">Verlauf</a>
+                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailstations', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#">Haltestellen</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#">Verspätung</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#">Ausfallstatistik</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#">Gleiswechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/train/ICE/3" href="#">Streckenwechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/station/8000191" href="#">Verlauf</a>
                       @endif
                     @empty
                                        
@@ -73,5 +73,8 @@ $( document ).ready(function() {
     // Open up first tab by default
     $('[data-toggle="tab"]')[0].click();
 });
-
+$(".nav .nav-link").on("click", function(){
+   $(".nav").find(".active").removeClass("active");
+   $(this).addClass("active");
+});
 @stop

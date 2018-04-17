@@ -60,8 +60,8 @@ jQuery(document).ready(function($) {
                     }
                 }
             });
-            $('.typeahead').on('typeahead:selected', function (e, data) {
-                window.location.href = "train/"  + data.class + '/' + data.number
+            $('.typeahead').on('typeahead:selected', function (e, datum) {
+                window.location.href = "train/"  + datum.class + '/' + datum.number
             });
         });
 

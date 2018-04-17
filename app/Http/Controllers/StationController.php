@@ -71,4 +71,11 @@ class StationController extends Controller
         return view("station.detailgleis", ['station' => $station,'zugklassen' => $zugklassen])->render();
 
     }
+
+    public function train($id)
+    {
+
+        return view("station.detailzug")->render();
+
+    }
 }

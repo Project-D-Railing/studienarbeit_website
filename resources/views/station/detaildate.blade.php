@@ -1,5 +1,7 @@
 <div class="row">
     <div class="col">
+        <p>Please select a date:</p>
+            <input type="date" id="myDate" value="2018-02-09">
         <table class="table">
           <thead>
             <tr>
@@ -40,3 +42,18 @@
     </div>
 </div>
 
+<script type="text/javascript">
+var date_input = document.getElementById('myDate');
+date_input.valueAsDate = new Date();
+
+date_input.onchange = function(){
+    var d = new Date(this.value);
+    if(!isNaN(d.getTime())) {
+	    $.get("{{$zug->evanr}}/timetable/"+this.value,
+            function (data) {
+                $("#content-tab").html(data);
+            });
+    }
+}
+
+</script>

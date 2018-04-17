@@ -57,7 +57,7 @@ class TrainController extends Controller
     {
         $train = array();
         
-        return view('train.index', ['train' => $train]);
+        return view('train.route', ['train' => $train]);
 
     }
     
@@ -65,7 +65,7 @@ class TrainController extends Controller
     {
         $train = array();
         
-        return view('train.index', ['train' => $train]);
+        return view('train.platform', ['train' => $train]);
 
     }
     
@@ -73,7 +73,7 @@ class TrainController extends Controller
     {
         $train = array();
         
-        return view('train.index', ['train' => $train]);
+        return view('train.cancel', ['train' => $train]);
 
     }
     
@@ -81,7 +81,7 @@ class TrainController extends Controller
     {
         $train = array();
         
-        return view('train.index', ['train' => $train]);
+        return view('train.delay', ['train' => $train]);
 
     }
     

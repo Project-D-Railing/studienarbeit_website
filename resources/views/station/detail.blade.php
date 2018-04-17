@@ -51,9 +51,7 @@
         </div>
         
     </div>
-    <script type="text/javascript">
-        @yield ('scripts')
-    </script>
+    
 @endsection
 
 @section('scripts')
@@ -77,5 +75,4 @@ $(".nav .nav-link").on("click", function(){
    $(".nav").find(".active").removeClass("active");
    $(this).addClass("active");
 });
-
 @stop

@@ -60,7 +60,7 @@ jQuery(document).ready(function($) {
                     }
                 }
             });
-            $('.typeahead').on('typeahead:selected', function (e, datum) {
+            $('.typeahead').on('typeahead:selected', function (e, data) {
                 window.location.href = "train/"  + data.class + '/' + data.number
             });
         });

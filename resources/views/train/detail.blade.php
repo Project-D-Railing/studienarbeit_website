@@ -66,11 +66,12 @@ $('[data-toggle="tab"]').click(function(e) {
     $.get(loadurl, function(data) {
         $(targ).html(data);
     });
-
-    $this.tab('show');
     return false;
 });
 
-
+$( document ).ready(function() {
+    // Open up first tab by default
+    $('[data-toggle="tab"]')[0].click();
+});
 
 @stop

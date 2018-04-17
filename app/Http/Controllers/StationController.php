@@ -74,8 +74,8 @@ class StationController extends Controller
 
     public function train($id)
     {
-
-        return view("station.detailzug")->render();
+        $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
+        return view("station.detailzug", ['station' => $station])->render();
 
     }
 }

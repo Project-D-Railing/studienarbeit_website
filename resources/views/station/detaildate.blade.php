@@ -46,14 +46,20 @@
 var date_input = document.getElementById('myDate');
 date_input.valueAsDate = new Date();
 
+@forelse($station as $stationdetail)
+  @if ($loop->first) 
 date_input.onchange = function(){
     var d = new Date(this.value);
     if(!isNaN(d.getTime())) {
-	    $.get("timetable/"+this.value,
+	    $.get("{{$stationdetail->EVA_NR}}/timetable/"+this.value,
             function (data) {
                 $("#content-tab").html(data);
             });
     }
 }
 
+  @endif
+@empty
+                   
+@endforelse
 </script>

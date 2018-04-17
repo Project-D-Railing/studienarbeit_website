@@ -7,8 +7,7 @@
 
 
 
-
-@section('scripts')
+<script type="text/javascript">
 
 var zugklassen = [];
 @forelse($zugklassen as $zugklasse)
@@ -58,3 +57,5 @@ var zugklassen = [];
 
 
 @stop
+
+</script>

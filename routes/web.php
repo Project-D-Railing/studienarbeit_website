@@ -54,11 +54,12 @@ Route::get('/train', 'TrainController@index')->name('train.index');
 /* helper routes*/
 Route::get('/station/graph/{id}', 'GraphController@somedata')->name('graph.somedata');
 
-Route::get('/station/trainperplatform/{id}', 'GraphController@getTrainclassPerPlatformStatistic')->name('graph.trainperplatform');
 
 Route::get('/station/{id}/train/{type}/{number}', 'GraphController@getTrainStatisticForStation')->name('graph.trainstatistik');
 
 Route::get('/station/{id}/timetable/{date}', 'StationController@timetable')->name('station.detaildate');
+
+Route::get('/station/{id}/trainperplatform/graph', 'GraphController@getTrainclassPerPlatformStatistic')->name('graph.trainperplatform');
 
 Route::get('/station/{id}/trainperplatform', 'StationController@platform')->name('station.detailgleis');
 

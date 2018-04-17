@@ -54,8 +54,4 @@ var zugklassen = [];
                    
 @endforelse
 
-
-
-@stop
-
 </script>

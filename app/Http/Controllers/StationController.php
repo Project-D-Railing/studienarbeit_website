@@ -51,12 +51,13 @@ class StationController extends Controller
 
     public function timetable($id, $date)
     {
+        $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
         $stats = Cache::remember('somedate'.$id.'-'.$date, 30, function() use ($id, $date){             
             $stationdate = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr", ['evanr' => $id, 'datum' => $date]);
             
             return $stationdate;
         });       
-        return view("station.detaildate", ['zuege' => $stats])->render();
+        return view("station.detaildate", ['zuege' => $stats, 'station' => $station])->render();
 
     }
 
@@ -74,8 +75,8 @@ class StationController extends Controller
 
     public function train($id)
     {
-        $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
-        return view("station.detailzug", ['station' => $station])->render();
+
+        return view("station.detailzug")->render();
 
     }
 }

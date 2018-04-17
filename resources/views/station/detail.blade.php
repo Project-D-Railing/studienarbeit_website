@@ -71,6 +71,24 @@ date_input.onchange = function(){
     }
 }
 
+$('[data-toggle="tab"]').click(function(e) {
+    var $this = $(this),
+        loadurl = $this.attr('ref'),
+        targ = $this.attr('data-target');
+
+    $.get(loadurl, function(data) {
+        $(targ).html(data);
+    });
+    return false;
+});
+
+$( document ).ready(function() {
+    // Open up first tab by default
+    $('[data-toggle="tab"]')[0].click();
+});
+
+
+
 
 var chart = c3.generate({
     bindto: '#chart',

@@ -49,7 +49,7 @@ date_input.valueAsDate = new Date();
 date_input.onchange = function(){
     var d = new Date(this.value);
     if(!isNaN(d.getTime())) {
-	    $.get("{{$zug->evanr}}/timetable/"+this.value,
+	    $.get("/timetable/"+this.value,
             function (data) {
                 $("#content-tab").html(data);
             });

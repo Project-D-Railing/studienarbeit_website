@@ -17,52 +17,38 @@
 @endsection
 @section('content')
     <div class="container">
+        @forelse($station as $stationdetail)
+            <div class="page-header">
+              <h1>{{ $stationdetail->NAME }} <small>{{ $stationdetail->EVA_NR }}</small></h1>
+            </div>   
+            <p>Please select a date:</p>
+            <input type="date" id="myDate" value="2018-02-09">
+        @empty
+            <h1>Keine Station gefunden.</h1>
+        @endforelse
         <div class="row">
             <div class="col">
                 <nav>
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-						<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Fahrplan</a>
-						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Zugstatistiken</a>
-						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Streckenstatistiken</a>
-						<a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab" aria-controls="nav-about" aria-selected="false">Haltestellenstatistiken</a>
+                    @forelse($station as $stationdetail)
+                      @if ($loop->first) 
+                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => $stationdetail->EVA_NR, 'date' => date('Y-m-d)]) }}" href="#content-tab">Fahrplan</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Zugstatistiken</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Streckenstatistiken</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Gleiswechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/train/ICE/3" href="#content-tab">Haltestellenstatistiken</a>
+
+                      @endif
+                    @empty
+                                       
+                    @endforelse
+                    
 					</div>
 				</nav>
-				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-					<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-						    @forelse($station as $stationdetail)
-                                <div class="page-header">
-                                  <h1>{{ $stationdetail->NAME }} <small>{{ $stationdetail->EVA_NR }}</small></h1>
-                                </div>   
-                                <p>Hier Reite einfügen siehe Bootstrap nav-tabs</p>
-                                <div class="radio">
-                                  <label><input type="radio" name="optradio" value="1" checked="checked"> Option 1</label>
-                                </div>
-                                <div class="radio">
-                                  <label><input type="radio" name="optradio" value="2"> Option 2</label>
-                                </div>
-                                <p>Please select a date:</p>
-                                <input type="date" id="myDate" value="2018-02-09">
-                            @empty
-                    
-                                <h1>Keine Station gefunden.</h1>
-                            @endforelse
-                            <div id="result">
-        
-                            </div>
+				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">                   
+					<div class="tab-pane fade show active" id="content-tab" role="tabpanel">
 					</div>
-					<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <div id="chart"></div>
-                        Hier statistiken über den zug in der haltestelle zeigen, welche gleise wv. verspätung /ausfall genau hier.
-					</div>
-					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                        Hier einen Zug aus dem Fahrplan selecten lassen, diese Strecke dann zeigen mit statistiken
-                    </div>
-					<div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                        Hier etwas über die Anzahl Züge pro Stunde als Grafik, Anzahl der Gesamten züge im Mining zeitraum, Schnitt pro tag, gleiswahl statistiken (welche gleise werden wie oft benutzt)
-                        <div id="chart2"></div>
-                    </div>
 				</div>
-
             </div>
         </div>
         

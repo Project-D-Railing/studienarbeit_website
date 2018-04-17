@@ -33,7 +33,7 @@
                     @forelse($train as $traindetail)
                       @if ($loop->first) 
                         <a class="nav-item nav-link active" data-toggle="tabajax" data-target="#content-tab" ref="{{ route('train.detailstations', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" role="tab">Haltestellen</a>
-						<a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" ref="{{train.index}}" role="tab">Verspätung</a>
+						<a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" ref="{{ route('train.index') }}" role="tab">Verspätung</a>
 						<a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Ausfallstatistik</a>
 						<a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Gleiswechsel</a>
                         <a class="nav-item nav-link" data-toggle="tabajax" data-target="#content-tab" ref="/gh/gist/response.html/3843293/" role="tab">Streckenwechsel</a>

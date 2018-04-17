@@ -32,15 +32,12 @@
                       @if ($loop->first) 
                         <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => $stationdetail->EVA_NR, 'date' => date('Y-m-d')]) }}" href="#" >Fahrplan</a>
 						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detailzug', ['id' => $stationdetail->EVA_NR]) }}" href="#" role="tab">Zugstatistiken</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#" role="tab">Streckenstatistiken</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => 8000191, 'date' => date('Y-m-d')]) }}" href="#">Gleiswechsel</a>
                         <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detailgleis', ['id' => $stationdetail->EVA_NR]) }}" href="#">Haltestellenstatistiken</a>
 
                       @endif
                     @empty
                                        
-                    @endforelse
-                    
+                    @endforelse                    
 					</div>
 				</nav>
 				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">                   
@@ -48,8 +45,7 @@
 					</div>
 				</div>
             </div>
-        </div>
-        
+        </div>        
     </div>
     
 @endsection

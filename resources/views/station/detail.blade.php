@@ -32,11 +32,11 @@
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     @forelse($station as $stationdetail)
                       @if ($loop->first) 
-                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => $stationdetail->EVA_NR, 'date' => date('Y-m-d')]) }}" href="#content-tab">Fahrplan</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Zugstatistiken</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Streckenstatistiken</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#content-tab">Gleiswechsel</a>
-                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="/train/ICE/3" href="#content-tab">Haltestellenstatistiken</a>
+                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => $stationdetail->EVA_NR, 'date' => date('Y-m-d')]) }}" href="#">Fahrplan</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#">Zugstatistiken</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#">Streckenstatistiken</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.index') }}" href="#">Gleiswechsel</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab2" ref="/train/ICE/3" href="#">Haltestellenstatistiken</a>
 
                       @endif
                     @empty
@@ -47,6 +47,8 @@
 				</nav>
 				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">                   
 					<div class="tab-pane fade show active" id="content-tab" role="tabpanel">
+					</div>
+                    <div class="tab-pane fade show active" id="content-tab2" role="tabpanel">
 					</div>
 				</div>
             </div>

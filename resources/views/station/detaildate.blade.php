@@ -44,7 +44,6 @@
 
 <script type="text/javascript">
 var date_input = document.getElementById('myDate');
-date_input.valueAsDate = new Date();
 
 date_input.onchange = function(){
     var d = new Date(this.value);

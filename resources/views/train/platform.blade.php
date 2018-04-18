@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col">
-        @forelse($stats as $plot)
+        @forelse($stats[1] as $plot)   
               <div id="chartgleis_{{$loop->iteration}}">
               </div>  
         @empty
@@ -12,7 +12,7 @@
 
 <script type="text/javascript">
 
-@forelse($stats as $plot)
+@forelse($stats[1] as $plot)
 var columns_{{$loop->iteration}} = {!! json_encode($plot) !!};
 
 var chart_{{$loop->iteration}} = c3.generate({

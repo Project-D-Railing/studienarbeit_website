@@ -63,8 +63,8 @@ class TrainController extends Controller
     
     public function platform($zugklasse, $zugnummer)
     {
-        $result = Cache::remember('showtrainstationplatform'.$zugklasse.'-'.$zugnummer, 1, function() use ($zugklasse,$zugnummer){             
-            $result = DB::connection('mysql2')->select("SELECT count(gleisist) as anzahl, evanr, gleisist, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse= :zugklasse and zugnummer= :zugnummer group by gleisist,evanr order by stopid asc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
+        $result = Cache::remember('showtrainstationplatform'.$zugklasse.'-'.$zugnummer, 1440, function() use ($zugklasse,$zugnummer){             
+            $result = DB::connection('mysql2')->select("SELECT count(gleisist) as anzahl, evanr, gleisist, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse= :zugklasse and zugnummer= :zugnummer group by gleisist,evanr order by stopid asc, anzahl desc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
             
             return $result;
         });

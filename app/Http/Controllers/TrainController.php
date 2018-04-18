@@ -93,7 +93,7 @@ class TrainController extends Controller
     public function delay()
     {
         $train = array();
-        
+        // SEE GraphController@getTrainDelayStatistic
         return view('train.delay', ['train' => $train]);
 
     }

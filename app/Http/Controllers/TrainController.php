@@ -83,7 +83,9 @@ class TrainController extends Controller
     public function cancel()
     {
         $train = array();
-        
+        //SEE:  SELECT count(zugstatus) as anzahl, evanr, zugstatus, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse="ICE" and zugnummer="1000" and zuege.id > 5200000 group by zugstatus,evanr order by anzahl desc
+
+
         return view('train.cancel', ['train' => $train]);
 
     }

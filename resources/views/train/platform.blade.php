@@ -25,7 +25,7 @@
                     var chart_{{$loop->iteration}} = c3.generate({
                         bindto: '#chartgleis_{{$loop->iteration}}',
                         data: {
-                            json: columns_{{$loop->iteration}},
+                            columns: columns_{{$loop->iteration}},
                             type : 'donut'
                         },
                         donut: {

@@ -1,30 +1,34 @@
 <div class="row">
     <div class="col">
-        Hier Gleiswechsel
-         <div id="chartgleis">
-        </div>
-        
+        @forelse($stats as $plot)
+              <div id="chartgleis_{{$loop->iteration}}">
+              </div>  
+        @empty
+            Für diesen Zug gibt es keine Statistiken
+        @endforelse                 
     </div>
 </div>
 
 
 <script type="text/javascript">
 
+@forelse($stats as $plot)
+var columns_{{$loop->iteration}} = $plot;
 
-var columns = [
-            ['keine Abgabe', 20, "Steinfeld"],
-            ['5', 30, "Steinfeld"],
-            ['2', 120, "Steinfeld"],
-        ]
-var chart = c3.generate({
-    bindto: '#chartgleis',
+var chart_{{$loop->iteration}} = c3.generate({
+    bindto: '#chartgleis_{{$loop->iteration}}',
     data: {
-        columns: columns,
+        json: columns_{{$loop->iteration}},
         type : 'donut'
     },
     donut: {
         title: columns[0][2]
     }
 });
+
+@empty
+    
+@endforelse
+
 
 </script>

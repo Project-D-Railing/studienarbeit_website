@@ -61,12 +61,23 @@ class TrainController extends Controller
 
     }
     
-    public function platform()
+    public function platform($zugklasse, $zugnummer)
     {
-        $train = array();
-        // (SELECT count(gleisist), evanr, gleisist, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse="ICE" and zugnummer="100" group by gleisist,evanr order by id desc)
-        return view('train.platform', ['train' => $train]);
+        $result = Cache::remember('showtrainstationplatform'.$zugklasse.'-'.$zugnummer, 1, function() use ($zugklasse,$zugnummer){             
+            $result = DB::connection('mysql2')->select("SELECT count(gleisist) as anzahl, evanr, gleisist, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse= :zugklasse and zugnummer= :zugnummer group by gleisist,evanr order by stopid asc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
+            
+            return $result;
+        });
+        $stats = array();
+        
+        foreach($result as $entry) {
+            if ($entry->gleisist == NULL) {
+               $entry->gleisist = 'keine Angabe';   
+            }
+            $stats[$entry->evanr][] = array($entry->gleisist,$entry->anzahl,$entry->name);
+        }
 
+        return view('train.platform', ['stats' => $stats]);
     }
     
     public function cancel()

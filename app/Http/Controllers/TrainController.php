@@ -56,7 +56,7 @@ class TrainController extends Controller
     public function route()
     {
         $train = array();
-        
+        // SEE:   SELECT haltestellen from strecken2 where hashwertneu in (SELECT distinct(streckengeplanthash) from zuege where zugklasse="ICE" and zugnummer="591" order by id desc)
         return view('train.route', ['train' => $train]);
 
     }
@@ -64,7 +64,7 @@ class TrainController extends Controller
     public function platform()
     {
         $train = array();
-        
+        // (SELECT count(gleisist), evanr, gleisist, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse="ICE" and zugnummer="100" group by gleisist,evanr order by id desc)
         return view('train.platform', ['train' => $train]);
 
     }

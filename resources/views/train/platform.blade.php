@@ -13,7 +13,7 @@
 <script type="text/javascript">
 
 @forelse($stats as $plot)
-var columns_{{$loop->iteration}} = $plot;
+var columns_{{$loop->iteration}} ={{ $plot }};
 
 var chart_{{$loop->iteration}} = c3.generate({
     bindto: '#chartgleis_{{$loop->iteration}}',

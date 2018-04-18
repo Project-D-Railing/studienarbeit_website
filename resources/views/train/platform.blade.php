@@ -29,7 +29,7 @@
                             type : 'donut'
                         },
                         donut: {
-                            title: columns[0][2]
+                            title: columns_{{$loop->iteration}}[0][2]
                         }
                     });
 

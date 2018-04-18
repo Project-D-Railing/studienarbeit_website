@@ -76,8 +76,8 @@ class TrainController extends Controller
             }
             $stats[$entry->evanr][] = array($entry->gleisist,$entry->anzahl,$entry->name);
         }
-
-        return view('train.platform', ['stats' => $stats]);
+        
+        return view('train.platform', ['stats' => Response::json($stats)]);
     }
     
     public function cancel()

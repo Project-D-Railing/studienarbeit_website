@@ -3,7 +3,7 @@
         @forelse($stats as $plot)   
            @if ($loop->iteration === 2)
                 @forelse($plot as $graph)   
-                    <h2>Stationsname {!! $graph[1][3] !!}</h2>
+                    <h2>{!! $graph[1][3] !!}</h2>
                     <div id="chartdelay_{{$loop->iteration}}">
                     </div>  
                 @empty
@@ -26,7 +26,7 @@
                         bindto: '#chartdelay_{{$loop->iteration}}',
                         data: {
                             x: 'x',
-                            rows:  {!! json_encode($graph) !!}, 
+                            rows:  {!! $graph !!}, 
                             type: 'bar'
                         },
                         axis: {

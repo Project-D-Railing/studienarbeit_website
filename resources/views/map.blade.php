@@ -50,8 +50,6 @@ var haltestellegroup = L.markerClusterGroup();
 haltestellegroup.addLayer(L.marker([ {{ $haltestelle->BREITEDOT }} , {{ $haltestelle->LAENGEDOT }}]).bindPopup('Name: {{ $haltestelle->NAME }}<br>Verkehr: {{ $haltestelle->VERKEHR }}<br> EVANR.: {{ $haltestelle->EVA_NR }} <br> Link: <a href={{ route('station.detail', ['id' => $haltestelle->EVA_NR]) }}>Details</a>'));
 @endforeach
 
-haltestellegroup.addLayer(L.marker(getRandomLatLng(map)));
-
 map.addLayer(haltestellegroup);
 
 

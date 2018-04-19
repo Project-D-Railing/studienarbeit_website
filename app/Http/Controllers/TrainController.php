@@ -62,7 +62,7 @@ class TrainController extends Controller
         });        
         $routes = array();
         foreach($result as $route) {
-            $routes[] = explode('|',$route);
+            $routes[] = explode('|',$route->haltestellen);
         }
 
         return view('train.route', ['routes' => $routes]);

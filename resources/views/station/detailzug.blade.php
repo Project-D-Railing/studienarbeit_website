@@ -13,7 +13,7 @@
         bindto: '#chartzug',
         data: {
             x : 'x',
-            rows: {!! json_encode($stats) !!},
+            rows: {!! json_encode($stats->original) !!},
             type: 'bar'
         },
         axis: {

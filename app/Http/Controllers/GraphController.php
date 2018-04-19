@@ -102,7 +102,7 @@ class GraphController extends Controller
     
     public function getTrainclassPerPlatformStatistic($evanr) 
     {
-        $stats = Cache::remember('getTrainclassPerPlatformStatistic'.$evanr, 60, function() use ($evanr){
+        $stats = Cache::remember('getTrainclassPerPlatformStatistic'.$evanr, 240, function() use ($evanr){
             $statsraw = DB::connection('mysql2')->select("SELECT Count(id) as anzahl, gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by gleisist, zugklasse limit 10000", ['evanr' => $evanr]);
             $stats = array();
             $savelastgleis = "";
@@ -127,22 +127,12 @@ class GraphController extends Controller
        
         return $stats;
     }
+
     public function getTrainStatisticForStation($id, $type, $number)
     {
        
         $stats = Cache::remember('getTrainStatisticForStation'.$id.'-'. $type.'-' . $number, 60, function() use ($id, $type, $number){             
             $trainformatted = $this->generate_delay_statistic($id, $type, $number);
-            
-            return Response::json($trainformatted);
-        });
-        return $stats;
-    }
-        
-    public function somedata($evanr)
-    {
-        //$trains = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr ORDER by zuege.id desc LIMIT 1000", ['evanr' => $evanr]);
-        $stats = Cache::remember('somedata'.$evanr, 60, function() use ($evanr){             
-            //$trainformatted = $this->generate_delay_statistic($evanr);
             
             return Response::json($trainformatted);
         });

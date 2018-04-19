@@ -64,7 +64,7 @@ class StationController extends Controller
     public function platform($id)
     {
         $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
-        $zugklassen = Cache::remember('showstation'.$id, 120, function() use ($id){             
+        $zugklassen = Cache::remember('showstation'.$id, 240, function() use ($id){             
             $zugklassen = DB::connection('mysql2')->select("SELECT DISTINCT(zugklasse) as name FROM zuege WHERE evanr= :evanr", ['evanr' => $id]);
             
             return $zugklassen;
@@ -77,7 +77,7 @@ class StationController extends Controller
     {
         // SELECT Count(id) as anzahl, zugklasse FROM k42174_bahnapi.zuege where evanr=8000191 group by zugklasse limit 10000
 
-        $zugklassen = Cache::remember('showstationzugklassengesamt'.$id, 300, function() use ($id){             
+        $zugklassen = Cache::remember('showstationzugklassengesamt'.$id, 1440, function() use ($id){             
             $zugklassen = DB::connection('mysql2')->select("SELECT Count(id) as anzahl, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by zugklasse limit 10000", ['evanr' => $id]);
             
             return $zugklassen;

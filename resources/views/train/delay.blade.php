@@ -26,7 +26,7 @@
                         bindto: '#chartdelay_{{$loop->iteration}}',
                         data: {
                             x: 'x',
-                            rows:  {!! $graph !!}, 
+                            rows:  {!! json_encode($graph) !!}, 
                             type: 'bar'
                         },
                         axis: {

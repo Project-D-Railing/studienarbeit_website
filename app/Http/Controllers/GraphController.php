@@ -86,7 +86,7 @@ class GraphController extends Controller
         $trains = DB::connection('mysql2')->select("SELECT datum, evanr, arzeitsoll, arzeitist, dpzeitsoll, dpzeitist, zugstatus, NAME FROM zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR AND zugklasse= :zugklasse and zugnummer= :zugnummer and datum > (SELECT CURRENT_DATE - INTERVAL 14 DAY) ORDER BY id desc", ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
         $trainformatted = array();
         foreach ($trains as $train) {
-            if ($trainformatted[$train->evanr][0] == NULL) {
+            if ($trainformatted[$train->evanr] == NULL) {
                 $trainformatted[$train->evanr][] = array('x','Ankunft','Abfahrt');
             }
             if($train->zugstatus == 'n') {

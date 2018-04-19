@@ -1,5 +1,46 @@
 <div class="row">
     <div class="col">
-        Hier Ausfallstats
+        @forelse($stats as $plot)   
+           @if ($loop->iteration === 2)
+                @forelse($plot as $graph)   
+                    <div id="chartcancel_{{$loop->iteration}}">
+                    </div>  
+                @empty
+                    Für diesen Zug gibt es keine Statistiken
+                @endforelse    
+           @endif
+        @empty
+            Für diesen Zug gibt es keine Statistiken
+        @endforelse                 
     </div>
 </div>
+
+
+<script type="text/javascript">
+
+@forelse($stats as $plot)
+    @if ($loop->iteration === 2)
+                @forelse($plot as $graph)   
+                    var columns_{{$loop->iteration}} = {!! json_encode($graph) !!};
+                    var chart_{{$loop->iteration}} = c3.generate({
+                        bindto: '#chartcancel_{{$loop->iteration}}',
+                        data: {
+                            columns: columns_{{$loop->iteration}},
+                            type : 'donut'
+                        },
+                        donut: {
+                            title: columns_{{$loop->iteration}}[0][2]
+                        }
+                    });
+
+                @empty
+                    
+                @endforelse    
+           @endif
+
+@empty
+    
+@endforelse
+
+
+</script>

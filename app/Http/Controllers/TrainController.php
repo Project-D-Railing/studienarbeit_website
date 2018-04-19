@@ -88,14 +88,20 @@ class TrainController extends Controller
         return view('train.platform', ['stats' => Response::json($stats)]);
     }
     
-    public function cancel()
+    public function cancel($zugklasse, $zugnummer)
     {
-        $train = array();
-        //SEE:  SELECT count(zugstatus) as anzahl, evanr, zugstatus, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse="ICE" and zugnummer="1000" and zuege.id > 5200000 group by zugstatus,evanr order by anzahl desc
-
-
-        return view('train.cancel', ['train' => $train]);
-
+        $result = Cache::remember('showtrainstationcancel'.$zugklasse.'-'.$zugnummer, 1440, function() use ($zugklasse,$zugnummer){             
+            $result = DB::connection('mysql2')->select("SELECT count(zugstatus) as anzahl, evanr, zugstatus, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse= :zugklasse and zugnummer= :zugnummer and zuege.id > 5200000 group by zugstatus,evanr order by anzahl desc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
+            
+            return $result;
+        });
+        $stats = array();
+        
+        foreach($result as $entry) {
+            $stats[$entry->evanr][] = array($entry->zugstatus,$entry->anzahl,$entry->name);
+        }
+        
+        return view('train.cancel', ['stats' => Response::json($stats)]);
     }
     
     public function delay()

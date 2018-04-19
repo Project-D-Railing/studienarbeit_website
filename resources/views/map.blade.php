@@ -44,41 +44,15 @@ let streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
 }).addTo(map);
 
 
+var haltestellegroup = L.markerClusterGroup();
 
-var markers_dbnetz_strecke = L.markerClusterGroup();
-
-$.getJSON("geojson/strecke.geojson", function(data) {
-    var geojson = L.geoJson(data, {
-        onEachFeature: function(feature, layer) {
-
-            var strecke_richtung = "";
-            switch (feature.properties.richtung) {
-                case '0':
-                    strecke_richtung = "Richtungsgl. parallel oder eingleisig";
-                    break;
-                case '1':
-                    strecke_richtung = "Richtungsgleis";
-                    break;
-                case '2':
-                    strecke_richtung = "Gegenrichtungsgleis";
-                    break;
-                default:
-                    strecke_richtung = "null";
-            }
-
-            layer.bindPopup("<b>" + feature.properties.strecke_ku + "</b>(Nr.: " + feature.properties.strecke_nr + ")<br>Richtung: <tab to=t1>" + strecke_richtung + "<br>Bahnart: <tab to=t1>" + feature.properties.bahnart + "<br><br>Elektrifizierung: <tab to=t1>" + feature.properties.elektrifiz + "<br>Geschwindigkeit: <tab to=t1>" + feature.properties.geschwindi + "<br>Bahnnutzung: <tab to=t1>" + feature.properties.bahnnutzun);
-        }
-    });
-    markers_dbnetz_strecke.addLayer(geojson);
-});
-
-
-var haltestellenmarker = [];
 @foreach ($haltestellen as $haltestelle)
-haltestellenmarker.push(L.marker([ {{ $haltestelle->BREITEDOT }} , {{ $haltestelle->LAENGEDOT }}]).addTo(map)
-    .bindPopup('Name: {{ $haltestelle->NAME }}<br>Verkehr: {{ $haltestelle->VERKEHR }}<br> EVANR.: {{ $haltestelle->EVA_NR }} <br> Link: <a href={{ route('station.detail', ['id' => $haltestelle->EVA_NR]) }}>Details</a>'));
+haltestellegroup.addLayer(L.marker([ {{ $haltestelle->BREITEDOT }} , {{ $haltestelle->LAENGEDOT }}]).bindPopup('Name: {{ $haltestelle->NAME }}<br>Verkehr: {{ $haltestelle->VERKEHR }}<br> EVANR.: {{ $haltestelle->EVA_NR }} <br> Link: <a href={{ route('station.detail', ['id' => $haltestelle->EVA_NR]) }}>Details</a>'));
 @endforeach
-var haltestellegroup = L.layerGroup(haltestellenmarker);
+
+haltestellegroup.addLayer(L.marker(getRandomLatLng(map)));
+
+map.addLayer(haltestellegroup);
 
 
 /* 4 */
@@ -88,7 +62,6 @@ let basemapControl = {
 }
 let layerControl = {
   "Haltestellen": haltestellegroup,
-  "NEU": markers_dbnetz_strecke,
 }
 
 /* 5 */

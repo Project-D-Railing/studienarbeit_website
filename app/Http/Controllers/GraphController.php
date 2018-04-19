@@ -88,7 +88,7 @@ class GraphController extends Controller
         $trainformatted[] = array('x','Ankunft','Abfahrt');
         foreach ($trains as $train) {
             if($train->zugstatus == 'n') {
-                $trainformatted[] = array($train->datum, $this->calc_diff($train->arzeitsoll, $train->arzeitist), $this->calc_diff($train->dpzeitsoll, $train->dpzeitist), $train->NAME));
+                $trainformatted[] = array($train->datum, $this->calc_diff($train->arzeitsoll, $train->arzeitist), $this->calc_diff($train->dpzeitsoll, $train->dpzeitist), $train->NAME);
             } else {
                 $trainformatted[] = array($train->datum, NULL, NULL, $train->NAME);
             }

@@ -147,7 +147,7 @@ class TrainController extends Controller
     
     public function delay($zugklasse, $zugnummer)
     {
-        $stats = Cache::remember('showtrainDelayStatistic'. $zugklasse.'-' . $zugnummer, 1, function() use ($zugklasse, $zugnummer){             
+        $stats = Cache::remember('showtrainDelayStatistic'. $zugklasse.'-' . $zugnummer, 240, function() use ($zugklasse, $zugnummer){             
             $trainformatted = $this->generate_delay_statistic_overall($zugklasse, $zugnummer);
             
             return Response::json($trainformatted);

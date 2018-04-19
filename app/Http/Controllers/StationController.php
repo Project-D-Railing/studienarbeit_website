@@ -75,8 +75,22 @@ class StationController extends Controller
 
     public function train($id)
     {
+        // SELECT Count(id) as anzahl, zugklasse FROM k42174_bahnapi.zuege where evanr=8000191 group by zugklasse limit 10000
 
-        return view("station.detailzug")->render();
+        $zugklassen = Cache::remember('showstationzugklassengesamt'.$id, 300, function() use ($id){             
+            $zugklassen = DB::connection('mysql2')->select("SELECT Count(id) as anzahl, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by zugklasse limit 10000", ['evanr' => $id]);
+            
+            return $zugklassen;
+        }); 
+        $stats = array();
+        $stats[] = array("x");
+        $stats[] = array("Zugklassen");
+        foreach ($zugklassen as $klasse) {
+            $stats[0][] = $klasse->zugklasse;
+            $stats[1][] = $klasse->anzahl;
+        }
+        
+        return view('station.detailzug', ['stats' => Response::json($stats)])->render();
 
     }
 }

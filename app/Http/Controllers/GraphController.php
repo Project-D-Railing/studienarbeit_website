@@ -83,15 +83,14 @@ class GraphController extends Controller
         // SELECT Count(id), gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= 8000191 group by gleisist, zugklasse limit 1000
         // get this data to c3js and show as stacked bar chart for each platform, like ICE green, RB red, ....
         
-        $trains = DB::connection('mysql2')->select("SELECT datum, evanr, stopid, arzeitsoll, arzeitist, dpzeitsoll, dpzeitist, zugstatus FROM zuege where zugklasse= :zugklasse and zugnummer= :zugnummer and datum > (SELECT CURRENT_DATE - INTERVAL 14 DAY) ORDER BY id desc", ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
+        $trains = DB::connection('mysql2')->select("SELECT datum, evanr, arzeitsoll, arzeitist, dpzeitsoll, dpzeitist, zugstatus, NAME FROM zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR AND zugklasse= :zugklasse and zugnummer= :zugnummer and datum > (SELECT CURRENT_DATE - INTERVAL 14 DAY) ORDER BY id desc", ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
         $trainformatted = array();
+        $trainformatted[] = array('x','Ankunft','Abfahrt');
         foreach ($trains as $train) {
             if($train->zugstatus == 'n') {
-                $trainformatted[$train->evanr]['delay1'][$train->datum] = $this->calc_diff($train->arzeitsoll, $train->arzeitist);
-                $trainformatted[$train->evanr]['delay2'][$train->datum] = $this->calc_diff($train->dpzeitsoll, $train->dpzeitist);
+                $trainformatted[] = array($train->datum, $this->calc_diff($train->arzeitsoll, $train->arzeitist), $this->calc_diff($train->dpzeitsoll, $train->dpzeitist), $train->NAME));
             } else {
-                $trainformatted[$train->evanr]['delay1'][$train->datum] = NULL;
-                $trainformatted[$train->evanr]['delay2'][$train->datum] = NULL;
+                $trainformatted[] = array($train->datum, NULL, NULL, $train->NAME);
             }
             
         }

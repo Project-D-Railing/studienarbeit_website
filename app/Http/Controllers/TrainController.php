@@ -20,11 +20,52 @@ class TrainController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private function calc_diff($time1, $time2)
+    {
+        $time1 = strtotime($time1);
+        $time2 = strtotime($time2);
+        $midnight = strtotime("00:00");
+        $diff = 0;
+        // lookup if times are on possible different days
+        if($time2 - $midnight < $time1 - $midnight) {
+            // look if diff is negative by over 5 hours. This is an identicator of a dayshift
+            $diff = $time2 - $time1;
+            if($diff < -20000) {
+                // add a day to prevent dayshift event
+                $diff = $diff + 86400;
+            }
+        } else {
+            
+            $diff = $time2 - $time1;
+        }  
+        // return the value rounded so instead of 60 (for seconds) we get 1 (for minutes) because our data is only accurate by minutes
+        // here shouldnt be any data loss by throwing away the seconds which are always zero
+        return round($diff / 60);
+    }
+
+    private function generate_delay_statistic_overall($zugklasse, $zugnummer) 
+    {
+        // this query returns stats on trains and their platform they are departing from.
+        // SELECT Count(id), gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= 8000191 group by gleisist, zugklasse limit 1000
+        // get this data to c3js and show as stacked bar chart for each platform, like ICE green, RB red, ....
+        
+        $trains = DB::connection('mysql2')->select("SELECT datum, evanr, arzeitsoll, arzeitist, dpzeitsoll, dpzeitist, zugstatus, NAME FROM zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR AND zugklasse= :zugklasse and zugnummer= :zugnummer and datum > (SELECT CURRENT_DATE - INTERVAL 14 DAY) ORDER BY id desc", ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
+        $trainformatted = array();
+        foreach ($trains as $train) {
+            if (!array_key_exists($train->evanr, $trainformatted)) {
+                $trainformatted[$train->evanr][] = array('x','Ankunft','Abfahrt');
+            }
+            if($train->zugstatus == 'n') {
+                $trainformatted[$train->evanr][] = array($train->datum, $this->calc_diff($train->arzeitsoll, $train->arzeitist), $this->calc_diff($train->dpzeitsoll, $train->dpzeitist), $train->NAME);
+            } else {
+                $trainformatted[$train->evanr][] = array($train->datum, NULL, NULL, $train->NAME);
+            }
+            
+        }
+        
+        return $trainformatted;
+    }    
+
     public function index()
     {
         $train = array();
@@ -104,11 +145,15 @@ class TrainController extends Controller
         return view('train.cancel', ['stats' => Response::json($stats)]);
     }
     
-    public function delay()
+    public function delay($zugklasse, $zugnummer)
     {
-        $train = array();
-        // SEE GraphController@getTrainDelayStatistic
-        return view('train.delay', ['train' => $train]);
+        $stats = Cache::remember('showtrainDelayStatistic'. $zugklasse.'-' . $zugnummer, 1, function() use ($zugklasse, $zugnummer){             
+            $trainformatted = $this->generate_delay_statistic_overall($zugklasse, $zugnummer);
+            
+            return Response::json($trainformatted);
+        });
+
+        return view('train.delay', ['stats' => $stats]);
 
     }
     

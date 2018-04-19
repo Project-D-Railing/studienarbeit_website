@@ -32,8 +32,6 @@ Route::get('/map', 'MapController@index')->name('map');
 /* helper routes*/
 Route::get('/train/{trainclass}/{trainnumber}/stations', 'TrainController@stations')->name('train.detailstations');
 
-Route::get('/train/{trainclass}/{trainnumber}/delay/graph', 'GraphController@getTrainDelayStatistic')->name('train.detaildelaygraph');
-
 Route::get('/train/{trainclass}/{trainnumber}/delay', 'TrainController@delay')->name('train.detaildelay');
 
 Route::get('/train/{trainclass}/{trainnumber}/cancel', 'TrainController@cancel')->name('train.detailcancel');

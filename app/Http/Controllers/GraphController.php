@@ -137,18 +137,7 @@ class GraphController extends Controller
         });
         return $stats;
     }
-    
-    public function getTrainDelayStatistic($type, $number)
-    {
-       
-        $stats = Cache::remember('getTrainDelayStatistic'. $type.'-' . $number, 1, function() use ($type, $number){             
-            $trainformatted = $this->generate_delay_statistic_overall($type, $number);
-            
-            return Response::json($trainformatted);
-        });
-        return $stats;
-    }
-    
+        
     public function somedata($evanr)
     {
         //$trains = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE zuege.evanr= :evanr ORDER by zuege.id desc LIMIT 1000", ['evanr' => $evanr]);

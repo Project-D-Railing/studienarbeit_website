@@ -53,11 +53,19 @@ class TrainController extends Controller
 
     }
     
-    public function route()
+    public function route($zugklasse, $zugnummer)
     {
-        $train = array();
-        // SEE:   SELECT haltestellen from strecken2 where hashwertneu in (SELECT distinct(streckengeplanthash) from zuege where zugklasse="ICE" and zugnummer="591" order by id desc)
-        return view('train.route', ['train' => $train]);
+        $result = Cache::remember('showtrainstationroute'.$zugklasse.'-'.$zugnummer, 1440, function() use ($zugklasse,$zugnummer){             
+            $result = DB::connection('mysql2')->select("SELECT haltestellen from strecken2 where hashwertneu in (SELECT distinct(streckengeplanthash) from zuege where zugklasse= :zugklasse and zugnummer= :zugnummer order by id desc)", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
+            
+            return $result;
+        });        
+        $routes = array();
+        foreach($result as $route) {
+            $routes[] = explode('|',$route);
+        }
+
+        return view('train.route', ['routes' => $routes]);
 
     }
     

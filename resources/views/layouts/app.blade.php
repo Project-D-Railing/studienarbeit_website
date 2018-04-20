@@ -31,22 +31,22 @@
         </button>
         <ul class="navbar-nav">
             @if (Auth::guest())
-            <li class="nav-item"><a href="{{ route('welcome') }}" class="nav-link">Back to start</a></li>
+            <li class="nav-item"><a href="{{ route('welcome') }}" class="nav-link">@lang('main.navbar_back')</a></li>
             @else
-            <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="{{ route('toplist') }}" class="nav-link">Toplist</a></li>
-            <li class="nav-item"><a href="{{ route('map') }}" class="nav-link">Map</a></li>
-            <li class="nav-item"><a href="{{ route('station.index') }}" class="nav-link">Station</a></li> 
-            <li class="nav-item"><a href="{{ route('train.index') }}" class="nav-link">Train</a></li> 
+            <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">@lang('main.navbar_home')</a></li>
+            <li class="nav-item"><a href="{{ route('toplist') }}" class="nav-link">@lang('main.navbar_toplist')</a></li>
+            <li class="nav-item"><a href="{{ route('map') }}" class="nav-link">@lang('main.navbar_map')</a></li>
+            <li class="nav-item"><a href="{{ route('station.index') }}" class="nav-link">@lang('main.navbar_station')</a></li> 
+            <li class="nav-item"><a href="{{ route('train.index') }}" class="nav-link">@lang('main.navbar_train')</a></li> 
             @endif
-            <li class="nav-item"><a href="{{ route('impressum') }}" class="nav-link">Impressum</a></li>
+            <li class="nav-item"><a href="{{ route('impressum') }}" class="nav-link">@lang('main.imprint')</a></li>
         </ul>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 @if (Auth::guest())
-                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
-                    <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Register</a></li>
+                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">@lang('main.navbar_login')</a></li>
+                    <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">@lang('main.navbar_register')</a></li>
                 @else
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -54,7 +54,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a href="{{ route('logout') }}" class="dropdown-item"
                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                Logout
+                                @lang('main.navbar_logout')
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"

@@ -7,7 +7,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center">Reset Password</h4>
+                        <h4 class="card-title text-center">@lang('main.auth_reset_password')</h4>
                         @if (session('status'))
                             <div class="alert alert-success">
                                 {{ session('status') }}
@@ -18,7 +18,7 @@
                             {!! csrf_field() !!}
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">E-Mail Address</label>
+                                <label class="col-md-4 control-label">@lang('main.auth_mail')</label>
 
                                 <div class="col-md-12">
                                     <input type="email" class="form-control" name="email" value="{{ old('email') }}">
@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-btn fa-envelope"></i>Send Password Reset Link
+                                        <i class="fa fa-btn fa-envelope"></i>@lang('main.auth_send_reset')
                                     </button>
                                 </div>
                             </div>

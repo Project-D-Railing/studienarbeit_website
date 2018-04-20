@@ -19,10 +19,15 @@ return [
     
     // Navbar
     'navbar_home'             => 'Übersicht',
+    'navbar_toplist'             => 'Rangliste',
+    'navbar_map'             => 'Karte',
+    'navbar_station'             => 'Bahnhöfe',
+    'navbar_train'             => 'Züge',
+    
     'navbar_login'             => 'Anmelden',
     'navbar_register'             => 'Registrieren',
     'navbar_logout'             => 'Abmelden',
-    
+    'navbar_back'             => 'Zum Anfang',
     
     // Home    
     'dashboard_title'             => 'Übersicht',
@@ -34,5 +39,17 @@ return [
     
     // Train
     
+    
+    // Auth
+    'auth_register'             => 'Registrieren',
+    'auth_login'             => 'Anmelden',
+    'auth_name'             => 'Name',
+    'auth_mail'             => 'E-Mail Adresse',
+    'auth_password'             => 'Passwort',
+    'auth_password_confirm'             => 'Passwort bestätigen',
+    'auth_password_forgot'             => 'Passwort vergessen?',
+    'auth_remember'             => 'Anmeldung merken',
+    'auth_reset_password'             => 'Password ändern',
+    'auth_send_reset'             => 'Passwort ändern Link zusenden',
     
 ];

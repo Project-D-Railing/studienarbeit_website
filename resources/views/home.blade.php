@@ -4,10 +4,10 @@
 
     <div class="jumbotron">
         <div class="container p-5">
-            <h1 class="display-1">Dashboard</h1>
+            <h1 class="display-1">@lang('main.dashboard_title')</h1>
 
             <p class="lead ml-2 text-success">
-                You are logged in!
+                @lang('main.dashboard_text')
             </p>
         </div>
     </div>

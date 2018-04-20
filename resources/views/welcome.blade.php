@@ -89,10 +89,10 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/home') }}">@lang('main.navbar_home')</a>
                     @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
+                        <a href="{{ url('/login') }}">@lang('main.navbar_login')</a>
+                        <a href="{{ url('/register') }}">@lang('main.navbar_register')</a>
                     @endif
                 </div>
             @endif
@@ -100,13 +100,13 @@
             <div class="content">
                 
                 <div class="title m-b-md">
-                    Welcome to Project-D-Railing
-                    <p class="subinfo">A new way to enjoy the ride</p>
+                    @lang('main.welcome_title')
+                    <p class="subinfo">@lang('main.welcome_subtitle')</p>
                 </div>
 
                 <div class="links">
-                    <a href="https://github.com/Project-D-Railing/">>>> Visit us on GitHub <<< </a><br><br>
-                    <a href="{{ route('impressum') }}" class="nav-link">Impressum</a>
+                    <a href="https://github.com/Project-D-Railing/">@lang('main.welcome_github')</a><br><br>
+                    <a href="{{ route('impressum') }}" class="nav-link">@lang('main.imprint')</a>
                 </div>
 
             </div>

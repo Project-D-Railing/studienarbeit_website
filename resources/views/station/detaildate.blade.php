@@ -26,7 +26,7 @@
                     <td> {{ $zug->arzeitsoll }} </td>
                     <td> {{ $zug->arzeitist }} </td>
                     <td> {{ $zug->dpzeitsoll }} </td>
-                    <td> {{ $zug->dpzeitsoll }} </td>
+                    <td> {{ $zug->dpzeitist }} </td>
                     <td> {{ $zug->gleissoll }} </td>
                     <td> {{ $zug->gleisist }} </td>
                     <td><a href="{{ route('train.detail', ['trainclass' => $zug->zugklasse,'trainnumber' => $zug->zugnummer]) }}" class="btn btn-primary">Show</a></td>

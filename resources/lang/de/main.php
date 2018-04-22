@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return [
 
@@ -36,7 +36,9 @@ return [
     // Map
     
     // Station
-    
+    'station_search'             => 'Stationsuche:',
+    'station_search_help'             => 'Nach Namen suchen',
+    'station_subtext'             => 'In der Zukunft wird es hier eine globale Statistik geben.',
     // Train
     
     

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 return [
 
@@ -38,7 +38,9 @@ return [
     // Map
     
     // Station
-    
+    'station_search'             => 'Search station:',
+    'station_search_help'             => 'Search by name',
+    'station_subtext'             => 'There will be all time stats somewhere later on.',
     // Train
     
     // Auth

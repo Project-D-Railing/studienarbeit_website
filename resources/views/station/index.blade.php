@@ -10,13 +10,13 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Search Station:</h1>
+                <h1>@lang('main.station_search')</h1>
                 <form class="typeahead" role="search">
                   <div class="form-group">
-                    <input type="search" name="q" class="form-control search-input" placeholder="Search stationname" autocomplete="off">
+                    <input type="search" name="q" class="form-control search-input" placeholder="@lang('main.station_search_help')" autocomplete="off">
                   </div>
                 </form>
-                <p>There will be all time stats somewhere later on.</p>
+                <p>@lang('main.station_subtext')</p>
             </div>
         </div>
     </div>

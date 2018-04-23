@@ -35,6 +35,9 @@ return [
     
     // Map
     
+    // Search
+    'search_nothing_found'  => 'Kein Ergebnis gefunden.',
+    
     // Station
     'station_search'             => 'Stationsuche:',
     'station_search_help'             => 'Nach Namen suchen',

@@ -37,6 +37,9 @@ return [
     
     // Map
     
+    // Search
+    'search_nothing_found'  => 'Nothing found.',
+    
     // Station
     'station_search'             => 'Search station:',
     'station_search_help'             => 'Search by name',

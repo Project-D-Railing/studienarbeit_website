@@ -22,7 +22,7 @@
               <h1>{{ $stationdetail->NAME }} <small>{{ $stationdetail->EVA_NR }}</small></h1>
             </div>             
         @empty
-            <h1>Keine Station gefunden.</h1>
+            <h1>@lang('main.search_nothing_found')</h1>
         @endforelse
         <div class="row">
             <div class="col">

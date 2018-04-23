@@ -39,7 +39,7 @@ return [
     'search_nothing_found'  => 'Kein Ergebnis gefunden.',
     
     // Station
-    'station_search'             => 'Stationsuche:',
+    'station_search'             => 'Bahnhofsuche:',
     'station_search_help'             => 'Nach Namen suchen',
     'station_subtext'             => 'In der Zukunft wird es hier eine globale Statistik geben.',
     'station_select_date'             => 'Bitte wählen Sie ein Datum aus:',
@@ -54,8 +54,11 @@ return [
     'station_button_show'             => 'Details',
     'station_no_trains'             => 'Für dieses Datum wurden keine Züge gefunden.',
     // Train
+    'train_search'             => 'Zugsuche:',
+    'train_search_help'             => 'Nach Zugnummer suchen',
+    'train_no_stats'             => 'Für diesen Zug gibt es keine Statistiken.',
     
-    
+
     // Auth
     'auth_register'             => 'Registrieren',
     'auth_login'             => 'Anmelden',

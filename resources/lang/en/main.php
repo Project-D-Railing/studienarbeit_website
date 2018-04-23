@@ -57,7 +57,11 @@ return [
     'station_no_trains'             => 'There are no trains for the selected date.',
     
     // Train
-    
+    'train_search'             => 'Search train:',
+    'train_search_help'             => 'Seary by trainnumber',
+    'train_no_stats'             => 'There are no statistics for this train.',    
+
+
     // Auth
     'auth_register'             => 'Register',
     'auth_login'             => 'Login',

@@ -22,7 +22,7 @@
               <h1>{{ $traindetail->zugnummerfull }} <small>{{ $traindetail->zugklasse }}</small></h1>
             </div>                
         @empty
-            <h1>Kein Zug gefunden.</h1>
+            <h1>@lang('main.search_nothing_found')</h1>
         @endforelse
         <div class="row">
             <div class="col">

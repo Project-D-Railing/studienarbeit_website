@@ -7,11 +7,11 @@
                     <div id="chartdelay_{{$loop->iteration}}">
                     </div>  
                 @empty
-                    Für diesen Zug gibt es keine Statistiken
+                    @lang('main.train_no_stats')
                 @endforelse    
            @endif
         @empty
-            Für diesen Zug gibt es keine Statistiken
+            @lang('main.train_no_stats')
         @endforelse                 
     </div>
 </div>

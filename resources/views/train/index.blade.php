@@ -10,13 +10,13 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h1>Search Train:</h1>
+                <h1>@lang('main.train_search')</h1>
                 <form class="typeahead" role="search">
                   <div class="form-group">
-                    <input type="search" name="q" class="form-control search-input" placeholder="Search Trainclass" autocomplete="off">
+                    <input type="search" name="q" class="form-control search-input" placeholder="@lang('main.train_search_help')" autocomplete="off">
                   </div>
                 </form>
-                <p>There will be all time stats somewhere later on.</p>
+                <p>@lang('main.station_subtext')</p>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@ jQuery(document).ready(function($) {
                 // the key from the array we want to display (name,id,email,etc...)
                 templates: {
                     empty: [
-                        '<div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'
+                        '<div class="list-group search-results-dropdown"><div class="list-group-item">@lang('main.search_nothing_found')</div></div>'
                     ],
                     header: [
                         '<div class="list-group search-results-dropdown">'

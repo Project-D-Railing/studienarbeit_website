@@ -1,18 +1,18 @@
 <div class="row">
     <div class="col">
-        <p>Please select a date:</p>
+        <p>@lang('main.station_select_date')</p>
             <input type="date" id="myDate" value="{{$datum}}">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Zugnummer</th>
-              <th scope="col">Arzeitsoll</th>
-              <th scope="col">Arzeitist</th>
-              <th scope="col">Dpzeitsoll</th>
-              <th scope="col">Dpzeitist</th>
-              <th scope="col">Gleissoll</th>
-              <th scope="col">Gleisist</th>
-              <th scope="col">Show</th>
+              <th scope="col">@lang('main.station_col_zugnummer')</th>
+              <th scope="col">@lang('main.station_col_arzeitsoll')</th>
+              <th scope="col">@lang('main.station_col_arzeitist')</th>
+              <th scope="col">@lang('main.station_col_dpzeitsoll')</th>
+              <th scope="col">@lang('main.station_col_dpzeitist')</th>
+              <th scope="col">@lang('main.station_col_gleissoll')</th>
+              <th scope="col">@lang('main.station_col_gleisist')</th>
+              <th scope="col">@lang('main.station_col_show')</th>
             </tr>
           </thead>
           <tbody>
@@ -29,12 +29,12 @@
                     <td> {{ $zug->dpzeitist }} </td>
                     <td> {{ $zug->gleissoll }} </td>
                     <td> {{ $zug->gleisist }} </td>
-                    <td><a href="{{ route('train.detail', ['trainclass' => $zug->zugklasse,'trainnumber' => $zug->zugnummer]) }}" class="btn btn-primary">Show</a></td>
+                    <td><a href="{{ route('train.detail', ['trainclass' => $zug->zugklasse,'trainnumber' => $zug->zugnummer]) }}" class="btn btn-primary">@lang('main.station_button_show')</a></td>
                 </tr>
             @empty
                 <tr>
                     <th scope="row"> - </th>
-                    <td> Keine Züge gefunden </td>
+                    <td>@lang('main.station_no_trains')</td>
                 </tr>
             @endforelse
           </tbody>

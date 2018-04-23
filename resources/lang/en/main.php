@@ -44,6 +44,18 @@ return [
     'station_search'             => 'Search station:',
     'station_search_help'             => 'Search by name',
     'station_subtext'             => 'There will be all time stats somewhere later on.',
+    'station_select_date'             => 'Please select a date:',
+    'station_col_zugnummer'             => 'Trainnumber',
+    'station_col_arzeitsoll'             => 'arrival time (should)',
+    'station_col_arzeitist'             => 'arrival time (is)',
+    'station_col_dpzeitsoll'             => 'departure time (should)',
+    'station_col_dpzeitist'             => 'departure time (is)',
+    'station_col_gleissoll'             => 'platform (should)',
+    'station_col_gleisist'             => 'platform (is)',
+    'station_col_show'             => 'show detail',
+    'station_button_show'             => 'show',
+    'station_no_trains'             => 'There are no trains for the selected date.',
+    
     // Train
     
     // Auth

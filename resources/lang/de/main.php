@@ -42,6 +42,17 @@ return [
     'station_search'             => 'Stationsuche:',
     'station_search_help'             => 'Nach Namen suchen',
     'station_subtext'             => 'In der Zukunft wird es hier eine globale Statistik geben.',
+    'station_select_date'             => 'Bitte wählen Sie ein Datum aus:',
+    'station_col_zugnummer'             => 'Zugnummer',
+    'station_col_arzeitsoll'             => 'Ankunftszeit (soll)',
+    'station_col_arzeitist'             => 'Ankunftszeit (ist)',
+    'station_col_dpzeitsoll'             => 'Abfahrtszeit (soll)',
+    'station_col_dpzeitist'             => 'Abfahrtszeit (ist)',
+    'station_col_gleissoll'             => 'Gleis (soll)',
+    'station_col_gleisist'             => 'Gleis (ist)',
+    'station_col_show'             => 'Zugdetails',
+    'station_button_show'             => 'Details',
+    'station_no_trains'             => 'Für dieses Datum wurden keine Züge gefunden.',
     // Train
     
     

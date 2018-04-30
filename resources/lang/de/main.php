@@ -57,7 +57,11 @@ return [
     'train_search'             => 'Zugsuche:',
     'train_search_help'             => 'Nach Zugnummer suchen',
     'train_no_stats'             => 'Für diesen Zug gibt es keine Statistiken.',
-    
+    'train_stations'             => 'Haltestellen',    
+    'train_delay'             => 'Verspätung',    
+    'train_cancel'             => 'Ausfallstatistik',    
+    'train_platform'             => 'Gleiswechsel',    
+    'train_routes'             => 'Streckenwechsel',
 
     // Auth
     'auth_register'             => 'Registrieren',

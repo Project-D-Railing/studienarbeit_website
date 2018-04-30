@@ -30,11 +30,11 @@
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     @forelse($train as $traindetail)
                       @if ($loop->first) 
-                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailstations', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#">Haltestellen</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detaildelay', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#">Verspätung</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailcancel', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#">Ausfallstatistik</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailplatform', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#">Gleiswechsel</a>
-                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailroute', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#">Streckenwechsel</a>
+                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailstations', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#">@lang('main.train_stations')</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detaildelay', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#">@lang('main.train_delay')</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailcancel', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#">@lang('main.train_cancel')</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailplatform', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#">@lang('main.train_platform')</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('train.detailroute', ['trainclass' => $traindetail->zugklasse, 'trainnumber' => $traindetail->zugnummer]) }}" href="#">@lang('main.train_routes')</a>
 
                       @endif
                     @empty

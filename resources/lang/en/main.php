@@ -60,8 +60,11 @@ return [
     'train_search'             => 'Search train:',
     'train_search_help'             => 'Seary by trainnumber',
     'train_no_stats'             => 'There are no statistics for this train.',    
-
-
+    'train_stations'             => 'Stations',    
+    'train_delay'             => 'Delaystatistics',    
+    'train_cancel'             => 'Cancelstatistics',    
+    'train_platform'             => 'Platformstatistics',    
+    'train_routes'             => 'Routestatistics',
     // Auth
     'auth_register'             => 'Register',
     'auth_login'             => 'Login',

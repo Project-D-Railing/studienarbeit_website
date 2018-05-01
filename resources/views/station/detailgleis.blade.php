@@ -1,5 +1,12 @@
 <div class="row">
     <div class="col">
+        <h4>@lang('main.stats_header')</h4>
+        <p>
+              @lang('main.stats_detailgleis')
+        </p>
+            @lang('main.stats_alltime')
+        <br>
+        <hr>
         <div id="chartgleis">
         </div>
     </div>

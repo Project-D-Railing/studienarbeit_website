@@ -35,6 +35,17 @@ return [
     
     // Map
     
+
+    // Stats
+    'stats_alltime'             => 'Die angezeigten Grafiken und Tabellen enthalten Daten zwischen 03.12.2017 und heute.',
+    'stats_twoweeks'             => 'DIe angezeigten Grafiken enthalten Daten aus den letzten zwei Wochen.',
+
+    'stats_header'             => 'Information',
+
+    'stats_detaildate'             => 'Die folgende Tabelle zeigt den Fahrplan der ausgewählten Haltestelle zum ausgewählten Datum an. EIn rot hinterlegter EIntrag bedeutet, dass dieser Zug ausgefallen ist.',
+    'stats_detailgleis'             => 'Diese Grafik zeigt die Belegung der Gleise mit den verschiedenen Zugtypen an.',
+    'stats_detailzug'             => 'Diese Grafik zeigt die Anzahl der Zugtypen in diesem Bahnhof an.',
+
     // Search
     'search_nothing_found'  => 'Kein Ergebnis gefunden.',
     

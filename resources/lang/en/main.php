@@ -43,7 +43,7 @@ return [
     'stats_twoweeks'             => 'The shown data was gathered in the last two weeks',
 
     'stats_header'             => 'Information',
-    'stats_detaildate'             => 'The show information shows the timetable of the selected station for the selected date. Entries with a red background are showing the cancellation of this train.',
+    'stats_detaildate'             => 'The shown table shows the timetable of the selected station for the selected date. Entries with a red background are showing the cancellation of this train.',
 
     // Search
     'search_nothing_found'  => 'Nothing found.',

@@ -55,6 +55,9 @@ return [
     'station_col_show'             => 'show detail',
     'station_button_show'             => 'show',
     'station_no_trains'             => 'There are no trains for the selected date.',
+    'station_timetable'             => 'Timetable',
+    'station_trainstats'             => 'Traintypestatistic',
+    'station_platformstats'             => 'Platformstatistics',
     
     // Train
     'train_search'             => 'Search train:',

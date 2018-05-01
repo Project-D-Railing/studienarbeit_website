@@ -30,9 +30,9 @@
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                     @forelse($station as $stationdetail)
                       @if ($loop->first) 
-                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => $stationdetail->EVA_NR, 'date' => date('Y-m-d')]) }}" href="#" >Fahrplan</a>
-						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detailzug', ['id' => $stationdetail->EVA_NR]) }}" href="#" role="tab">Zugstatistiken</a>
-                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detailgleis', ['id' => $stationdetail->EVA_NR]) }}" href="#">Haltestellenstatistiken</a>
+                        <a class="nav-item nav-link active" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detaildate', ['id' => $stationdetail->EVA_NR, 'date' => date('Y-m-d')]) }}" href="#" >@lang('main.station_timetable')</a>
+						<a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detailzug', ['id' => $stationdetail->EVA_NR]) }}" href="#" role="tab">@lang('main.station_trainstats')</a>
+                        <a class="nav-item nav-link" data-toggle="tab" data-target="#content-tab" ref="{{ route('station.detailgleis', ['id' => $stationdetail->EVA_NR]) }}" href="#">@lang('main.station_platformstats')</a>
 
                       @endif
                     @empty

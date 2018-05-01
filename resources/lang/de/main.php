@@ -53,6 +53,11 @@ return [
     'station_col_show'             => 'Zugdetails',
     'station_button_show'             => 'Details',
     'station_no_trains'             => 'Für dieses Datum wurden keine Züge gefunden.',
+    'station_timetable'             => 'Fahrplan',
+    'station_trainstats'             => 'Zugtypen',
+    'station_platformstats'             => 'Gleisbelegung',
+    
+
     // Train
     'train_search'             => 'Zugsuche:',
     'train_search_help'             => 'Nach Zugnummer suchen',

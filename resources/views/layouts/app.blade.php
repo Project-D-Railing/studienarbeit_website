@@ -34,7 +34,7 @@
             <li class="nav-item"><a href="{{ route('welcome') }}" class="nav-link">@lang('main.navbar_back')</a></li>
             @else
             <li class="nav-item"><a href="{{ route('home') }}" class="nav-link">@lang('main.navbar_home')</a></li>
-            <li class="nav-item"><a href="{{ route('toplist') }}" class="nav-link">@lang('main.navbar_toplist')</a></li>
+            {{-- <li class="nav-item"><a href="{{ route('toplist') }}" class="nav-link">@lang('main.navbar_toplist')</a></li> --}}
             <li class="nav-item"><a href="{{ route('map') }}" class="nav-link">@lang('main.navbar_map')</a></li>
             <li class="nav-item"><a href="{{ route('station.index') }}" class="nav-link">@lang('main.navbar_station')</a></li> 
             <li class="nav-item"><a href="{{ route('train.index') }}" class="nav-link">@lang('main.navbar_train')</a></li> 

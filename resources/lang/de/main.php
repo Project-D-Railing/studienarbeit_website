@@ -46,6 +46,12 @@ return [
     'stats_detailgleis'             => 'Diese Grafik zeigt die Belegung der Gleise mit den verschiedenen Zugtypen an.',
     'stats_detailzug'             => 'Diese Grafik zeigt die Anzahl der Zugtypen in diesem Bahnhof an.',
 
+    'stats_cancel'             => 'Die Grafiken zeigen die Auffallquote eines Zuges an dessen Haltestellen an. Die Bezeichnung c steht für Ausfall, die Bezeichnung n für normal.',
+    'stats_delay'             => 'Die Grafiken zeigen die Verspätung des Zuges in den verschiedenen Haltestellen an.',
+    'stats_platform'             => 'Diese Grafiken zeigen die Gleiswahl in der verschiedenen Haltestellen des Zuges.',
+    'stats_route'             => 'Die folgenden Abschnitte zeigen die vom Zug genommenen Strecken.',
+    'stats_stations'             => 'Die folgende Tabelle zeigt die angefahrenen Haltestelle auf der üblichen Strecke des Zuges mit deren Soll-Werten.',
+
     // Search
     'search_nothing_found'  => 'Kein Ergebnis gefunden.',
     

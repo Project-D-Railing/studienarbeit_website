@@ -48,6 +48,12 @@ return [
     'stats_detailgleis'             => 'The graph shows the usage of platforms per trainclass.',
     'stats_detailzug'             => 'The graph shows the count of trainclasses in the station.',
 
+    'stats_cancel'             => 'The graph shows the percentage of cancelled trains. The "n" Label stands for normal, the "c" label for cancel',
+    'stats_delay'             => 'The graph shows the delay of the train for each station.',
+    'stats_platform'             => 'The graph shows the used platform percentage on each station',
+    'stats_route'             => 'The following text blocks are showing the different routes of the selected train.',
+    'stats_stations'             => 'The following table shows the stations on the route of the train.',
+
     // Search
     'search_nothing_found'  => 'Nothing found.',
     

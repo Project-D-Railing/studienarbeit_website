@@ -1,6 +1,12 @@
 <div class="row">
     <div class="col">
+        <h4>@lang('main.stats_header')</h4>
+        <p>
+              @lang('main.stats_route')
+        </p>
+            @lang('main.stats_alltime')
         <br>
+        <hr>
         @forelse($routes as $route)   
             @forelse($route as $station)
                 @if($loop->last)

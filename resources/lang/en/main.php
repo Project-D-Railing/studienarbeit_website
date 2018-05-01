@@ -37,6 +37,14 @@ return [
     
     // Map
     
+
+    // Stats
+    'stats_alltime'             => 'The shown data was gathered between 03.12.2017 and today.',
+    'stats_twoweeks'             => 'The shown data was gathered in the last two weeks',
+
+    'stats_header'             => 'Information',
+    'stats_detaildate'             => 'The show information shows the timetable of the selected station for the selected date. Entries with a red background are showing the cancellation of this train.',
+
     // Search
     'search_nothing_found'  => 'Nothing found.',
     

@@ -12,10 +12,10 @@
             <tr>
               <th scope="col">StopID</th>
               <th scope="col">Name</th>
-              <th scope="col">Arzeitsoll</th>
-              <th scope="col">Dpzeitsoll</th>
-              <th scope="col">Gleissoll</th>
-              <th scope="col">Show</th>
+              <th scope="col">@lang('main.station_col_arzeitsoll')</th>
+              <th scope="col">@lang('main.station_col_dpzeitsoll')</th>
+              <th scope="col">@lang('main.station_col_gleissoll')</th>
+              <th scope="col">@lang('main.station_col_show')</th>
             </tr>
           </thead>
           <tbody>

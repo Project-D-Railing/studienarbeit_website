@@ -58,15 +58,15 @@ class StationController extends Controller
             $stationarray = array();
             foreach($stationdate as $train) {
                 if ($train->stopid !== 1 && $train->dpzeitsoll == $train->dpzeitist && $train->dpzeitsoll == "00:00:00" && ($train->arzeitsoll !== "00:00:00" || $train->arzeitsoll !== "23:59:00")) {
-                    $train->dpzeitsoll = "Zug";
-                    $train->dpzeitist = "endet";
+                    $train->dpzeitsoll = "Zug endet";
+                    $train->dpzeitist = NULL;
                 }
                 $stationarray[] = $train; 
             }         
             foreach($stationdatedepart as $train2) {
                 $einfug = FALSE;
-                $train2->arzeitsoll = "Zug";
-                $train2->arzeitist = "beginnt";
+                $train2->arzeitsoll = "Zug beginnt";
+                $train2->arzeitist = NULL;
         
                 for ($i = 0; $i < count($stationarray); $i++) {
                     if(!is_object($stationarray[$i])) {

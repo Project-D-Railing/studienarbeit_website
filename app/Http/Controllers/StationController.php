@@ -62,14 +62,13 @@ class StationController extends Controller
             foreach($stationdatedepart as $train2) {
                 $einfug = FALSE;
                 for ($i = 0; $i < count($stationarray); $i++) {
-                    
-                    try {
-                    $timea = $stationarray[$i]->arzeitsoll;
-                    $timeb = $train2->dpzeitsoll;
-                    } catch (ErrorException $e) {
+                    if(!is_object($stationarray[$i])) {
                         var_dump($stationarray[$i]);
                         exit();
                     }
+                    $timea = $stationarray[$i]->arzeitsoll;
+                    $timeb = $train2->dpzeitsoll;
+                    
                     if($stationarray[$i]->arzeitsoll > $train2->dpzeitsoll) {
                         array_splice($stationarray, $i, 0, $train2); 
                         $einfug = TRUE;

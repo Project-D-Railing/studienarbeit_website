@@ -64,9 +64,7 @@ class StationController extends Controller
                 for ($i = 0; $i < count($stationarray); $i++) {
                     //var_dump($train2);
                     //exit();
-                    $timea = $stationarray[$i]->arzeitsoll;
-                    $timeb = $train2->dpzeitsoll;
-                    if(1 > 2) {
+                    if($stationarray[$i]->arzeitsoll > $train2->dpzeitsoll) {
                         array_splice($stationarray, $i, 0, $train2); 
                         $einfug = TRUE;
                         break;
@@ -74,7 +72,7 @@ class StationController extends Controller
                     continue;                    
                 }
                 if($einfug === FALSE)  {
-                    array_push($stationarray, $train2);
+                    $stationarray[] = $train2;
                 }
             }
             return $stationarray;

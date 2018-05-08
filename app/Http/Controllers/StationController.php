@@ -61,8 +61,9 @@ class StationController extends Controller
             }         
             foreach($stationdatedepart as $train2) {
                 $einfug = FALSE;
-                for ($i = 0; $i < count($stationarray)-1; $i++) {
-                    
+                for ($i = 0; $i < count($stationarray); $i++) {
+                    var_dump($stationarray[$i]);
+                    exit();
                     try {
                     $timea = $stationarray[$i]->arzeitsoll;
                     $timeb = $train2->dpzeitsoll;

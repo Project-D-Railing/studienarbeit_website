@@ -69,7 +69,7 @@ class StationController extends Controller
                     $timeb = $train2->dpzeitsoll;
                     
                     if($stationarray[$i]->arzeitsoll > $train2->dpzeitsoll) {
-                        array_splice($stationarray, $i, 0, $train2); 
+                        //array_splice($stationarray, $i, 0, $train2); 
                         $einfug = TRUE;
                         break;
                     }
@@ -81,8 +81,8 @@ class StationController extends Controller
             }
             return $stationarray;
         });       
-        print_r($stats);
-        die();
+        //print_r($stats);
+        //die();
         return view("station.detaildate", ['zuege' => $stats, 'station' => $station, 'datum' => $date])->render();
 
     }

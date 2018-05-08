@@ -85,8 +85,8 @@ class StationController extends Controller
             }
             return $stationarray;
         });       
-        print_r($stats);
-        die();
+        //print_r($stats);
+        //die();
         return view("station.detaildate", ['zuege' => $stats, 'station' => $station, 'datum' => $date])->render();
 
     }

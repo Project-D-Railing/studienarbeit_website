@@ -23,7 +23,7 @@
             </tr>
           </thead>
           <tbody>
-            @forelse($zuege as $zug)
+            @forelse($zuege as $key => $zug)
                 @if ($zug->zugstatus === 'c')
                     <tr class="table-danger"> 
                 @else

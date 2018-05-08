@@ -80,9 +80,7 @@ class StationController extends Controller
                     continue;                    
                 }
                 if($einfug === FALSE)  {
-                    if(!is_object($stationarray[$i])) {
-                        continue;
-                    }
+                    
                     $stationarray[] = $train2;
                     break;
                 }

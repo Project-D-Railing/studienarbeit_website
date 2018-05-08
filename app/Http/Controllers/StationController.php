@@ -80,6 +80,7 @@ class StationController extends Controller
                         continue;
                     }
                     $stationarray[] = $train2;
+                    break;
                 }
             }
             return $stationarray;

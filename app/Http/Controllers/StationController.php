@@ -61,7 +61,7 @@ class StationController extends Controller
             }         
             foreach($stationdatedepart as $train2) {
                 $einfug = FALSE;
-                for ($i = 0; $i < count($stationarray); $i++) {
+                for ($i = 0; $i < count($stationarray)-1; $i++) {
                     //var_dump($train2);
                     //exit();
                     

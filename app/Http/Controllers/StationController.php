@@ -53,9 +53,27 @@ class StationController extends Controller
     {
         $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
         $stats = Cache::remember('timetable'.$id.'-'.$date, 60, function() use ($id, $date){             
-            $stationdate = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr", ['evanr' => $id, 'datum' => $date]);
-            
-            return $stationdate;
+            $stationdate = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr and stopid != 1 order by arzeitsoll asc", ['evanr' => $id, 'datum' => $date]);
+            $stationdatedepart = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr and stopid = 1 order by dpzeitsoll asc", ['evanr' => $id, 'datum' => $date]);
+            $stationarray = array();
+            foreach($stationdate as $train) {
+                $stationarray[] = $train; 
+            }         
+            foreach($stationdatedepart as $train2) {
+                $einfug = FALSE;
+                for ($i = 0; $i <= count($stationarray); $i++) {
+                    if($stationarray[$i]->arzeitsoll > $train2->dpzeitsoll) {
+                        array_splice($stationarray, $i, 0, $train2); 
+                        $einfug = TRUE;
+                        break;
+                    }
+                    continue;                    
+                }
+                if($einfug === FALSE)  {
+                    array_push($stationarray, $train2);
+                }
+            }
+            return $stationarray;
         });       
         return view("station.detaildate", ['zuege' => $stats, 'station' => $station, 'datum' => $date])->render();
 

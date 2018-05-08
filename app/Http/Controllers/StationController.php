@@ -57,7 +57,7 @@ class StationController extends Controller
             $stationdatedepart = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr and stopid = 1 order by dpzeitsoll asc", ['evanr' => $id, 'datum' => $date]);
             $stationarray = array();
             foreach($stationdate as $train) {
-                if ($train->stopid !== 1 && $train->dpzeitsoll == $train->dpzeitist && $train->dpzeitsoll == "00:00:00" ) {
+                if ($train->stopid !== 1 && $train->dpzeitsoll == $train->dpzeitist && $train->dpzeitsoll == "00:00:00" && ($train->arzeitsoll == "00:00:00" || $train->arzeitsoll == "23:59:00" ) {
                     $train->dpzeitsoll = NULL;
                     $train->dpzeitist = NULL;
                 }

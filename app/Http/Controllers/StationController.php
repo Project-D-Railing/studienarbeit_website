@@ -63,8 +63,7 @@ class StationController extends Controller
                 $einfug = FALSE;
                 for ($i = 0; $i < count($stationarray); $i++) {
                     if(!is_object($stationarray[$i])) {
-                        var_dump($stationarray[$i]);
-                        exit();
+                        continue;
                     }
                     $timea = $stationarray[$i]->arzeitsoll;
                     $timeb = $train2->dpzeitsoll;

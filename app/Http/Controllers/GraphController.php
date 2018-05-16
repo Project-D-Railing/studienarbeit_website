@@ -102,30 +102,23 @@ class GraphController extends Controller
     
     public function getTrainclassPerPlatformStatistic($evanr) 
     {
-        $stats = Cache::remember('getTrainclassPerPlatformStatistic'.$evanr, 240, function() use ($evanr){
-            $statsraw = DB::connection('mysql2')->select("SELECT Count(id) as anzahl, gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by gleisist, zugklasse limit 10000", ['evanr' => $evanr]);
-            $stats = array();
-            $savelastgleis = "";
-            $savelastzugklasse = "";
-            foreach ($statsraw as $zuginfo)
-            {
-                    if ($zuginfo->gleisist == NULL) {
-                         $zuginfo->gleisist = 'keine Angabe';   
-                    }
-                    $stats[] = array("name"=>$zuginfo->gleisist,$zuginfo->zugklasse=>$zuginfo->anzahl);
-                    $savelastgleis = $zuginfo->gleisist;
-                    $savelastzugklasse = $zuginfo->zugklasse;
-            }
-            
-            for ($i = 1; $i <= 20; $i++) 
-            {
-                $stats[] = array("name"=>$savelastgleis,'NONE'=>0);
-            }
-
-            return Response::json($stats);     
-        });
-       
-        return $stats;
+     $stats = Cache::remember('getTrainclassPerPlatformStatistic'.$evanr, 240, function() use ($evanr){
+       $statsraw = DB::connection('mysql2')->select("SELECT Count(id) as anzahl, gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by gleisist, zugklasse limit 10000", ['evanr' => $evanr]);
+       $stats = array();
+       $savelastgleis = "";
+       $savelastzugklasse = "";
+       foreach ($statsraw as $zuginfo)
+       {
+         if ($zuginfo->gleisist == NULL) {
+          $zuginfo->gleisist = 'keine Angabe';   
+         }
+         $stats[] = array("name"=>$zuginfo->gleisist,$zuginfo->zugklasse=>$zuginfo->anzahl);
+         $savelastgleis = $zuginfo->gleisist;
+         $savelastzugklasse = $zuginfo->zugklasse;
+       }            
+       return Response::json($stats);     
+     });
+     return $stats;
     }
 
     public function getTrainStatisticForStation($id, $type, $number)

@@ -31,7 +31,7 @@ return [
     
     // Home    
     'dashboard_title'             => 'Übersicht',
-    'dashboard_text'             => 'Sie haben sich erfolgreich angemeldet.',
+    'dashboard_text'             => 'Sie haben sich erfolgreich angemeldet. Willkommen bei Project-d-Railing.',
     
     // Map
     

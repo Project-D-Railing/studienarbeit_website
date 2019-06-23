@@ -25,7 +25,7 @@ class MapController extends Controller
      */
     public function index()
     {
-        $haltestellen = DB::connection('mysql2')->select("select *,REPLACE(BREITE, ',', '.') AS BREITEDOT,REPLACE(LAENGE, ',', '.') AS LAENGEDOT from haltestellen2");
+        $haltestellen = DB::connection('mysql2')->select("select *,REPLACE(BREITE, ',', '.') AS BREITEDOT,REPLACE(LAENGE, ',', '.') AS LAENGEDOT from haltestellen2 where BREITE IS NOT NULL and LAENGE IS NOT NULL");
 
         return view('map', ['haltestellen' => $haltestellen]);
 

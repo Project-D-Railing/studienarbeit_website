@@ -36,14 +36,14 @@ class StationController extends Controller
     public function find(Request $request)
     {
         $q = $request->get('q');
-        $stationen = DB::select("select EVA_NR, NAME from haltestellen2 where NAME like :name", ['name' => '%'.$q.'%']);
+        $stationen = DB::connection('mysql2')->select("select EVA_NR, NAME from haltestellen2 where NAME like :name", ['name' => '%'.$q.'%']);
         return Response::json($stationen);
 
     }
 
     public function detail($id)
     {
-        $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
+        $station = DB::connection('mysql2')->select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
        
         return view('station.detail', ['station' => $station]);
 
@@ -51,7 +51,7 @@ class StationController extends Controller
 
     public function timetable($id, $date)
     {
-        $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
+        $station = DB::connection('mysql2')->select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
         $stats = Cache::remember('timetable'.$id.'-'.$date, 60, function() use ($id, $date){             
             $stationdate = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr and stopid != 1 order by arzeitsoll asc", ['evanr' => $id, 'datum' => $date]);
             $stationdatedepart = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr and stopid = 1 order by dpzeitsoll asc", ['evanr' => $id, 'datum' => $date]);
@@ -95,7 +95,7 @@ class StationController extends Controller
 
     public function platform($id)
     {
-        $station = DB::select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
+        $station = DB::connection('mysql2')->select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
         $zugklassen = Cache::remember('showstation'.$id, 240, function() use ($id){             
             $zugklassen = DB::connection('mysql2')->select("SELECT DISTINCT(zugklasse) as name FROM zuege WHERE evanr= :evanr", ['evanr' => $id]);
             

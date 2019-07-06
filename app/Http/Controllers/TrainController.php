@@ -49,7 +49,7 @@ class TrainController extends Controller
         // SELECT Count(id), gleisist, zugklasse FROM k42174_bahnapi.zuege where evanr= 8000191 group by gleisist, zugklasse limit 1000
         // get this data to c3js and show as stacked bar chart for each platform, like ICE green, RB red, ....
         
-        $trains = DB::connection('mysql2')->select("SELECT datum, evanr, arzeitsoll, arzeitist, dpzeitsoll, dpzeitist, zugstatus, NAME FROM zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR AND zugklasse= :zugklasse and zugnummer= :zugnummer and datum > (SELECT CURRENT_DATE - INTERVAL 14 DAY) ORDER BY zuege.stopid desc", ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
+        $trains = DB::connection('mysql2')->select("SELECT datum, evanr, arzeitsoll, arzeitist, dpzeitsoll, dpzeitist, zugstatus, NAME FROM zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR AND zugklasse= :zugklasse and zugnummer= :zugnummer and datum > (SELECT CURRENT_DATE - INTERVAL 14 DAY) ORDER BY zuege.stopid ASC", ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
         $trainformatted = array();
         foreach ($trains as $train) {
             if (!array_key_exists($train->evanr, $trainformatted)) {
@@ -113,7 +113,7 @@ class TrainController extends Controller
     public function platform($zugklasse, $zugnummer)
     {
         $result = Cache::remember('showtrainstationplatform'.$zugklasse.'-'.$zugnummer, 1440, function() use ($zugklasse,$zugnummer){             
-            $result = DB::connection('mysql2')->select("SELECT count(gleisist) as anzahl, evanr, gleisist, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse= :zugklasse and zugnummer= :zugnummer group by gleisist,evanr order by stopid asc, anzahl desc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
+            $result = DB::connection('mysql2')->select("SELECT count(gleisist) as anzahl, evanr, gleisist, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse= :zugklasse and zugnummer= :zugnummer group by gleisist,evanr order by zuege.stopid asc, anzahl desc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
             
             return $result;
         });
@@ -132,7 +132,7 @@ class TrainController extends Controller
     public function cancel($zugklasse, $zugnummer)
     {
         $result = Cache::remember('showtrainstationcancel'.$zugklasse.'-'.$zugnummer, 1440, function() use ($zugklasse,$zugnummer){             
-            $result = DB::connection('mysql2')->select("SELECT count(zugstatus) as anzahl, evanr, zugstatus, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse= :zugklasse and zugnummer= :zugnummer and zuege.id > 5200000 group by zugstatus,evanr order by anzahl desc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
+            $result = DB::connection('mysql2')->select("SELECT count(zugstatus) as anzahl, evanr, zugstatus, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse= :zugklasse and zugnummer= :zugnummer and zuege.id > 5200000 group by zugstatus,evanr order by zuege.stopid asc, anzahl desc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
             
             return $result;
         });

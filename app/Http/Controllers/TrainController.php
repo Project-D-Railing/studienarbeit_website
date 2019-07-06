@@ -160,7 +160,7 @@ class TrainController extends Controller
     public function stations($zugklasse, $zugnummer)
     {
         $result = Cache::remember('showtrainstations'.$zugklasse.'-'.$zugnummer, 720, function() use ($zugklasse,$zugnummer){             
-            $haltestellen = DB::connection('mysql2')->select("select haltestellen.NAME as name,zuege.* from zuege,haltestellen where dailytripid = (SELECT dailytripid from zuege where zugklasse= :zugklasse AND zugnummer= :zugnummer LIMIT 1) and haltestellen.EVA_NR = zuege.evanr group by evanr order by stopid asc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
+            $haltestellen = DB::connection('mysql2')->select("select haltestellen2.NAME as name,zuege.* from zuege,haltestellen2 where dailytripid = (SELECT dailytripid from zuege where zugklasse= :zugklasse AND zugnummer= :zugnummer LIMIT 1) and haltestellen2.EVA_NR = zuege.evanr group by evanr order by stopid asc", ['zugklasse' => $zugklasse,'zugnummer' => $zugnummer]);
             
             return $haltestellen;
         });

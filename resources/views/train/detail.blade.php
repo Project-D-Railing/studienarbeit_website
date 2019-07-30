@@ -2,7 +2,6 @@
 
 @section('customjs')
 <!-- Load d3.js and c3.js -->
-<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('js/typeahead.bundle.min.js') }}"></script>
 <script src="{{ asset('js/moment.min.js') }}"></script>
 

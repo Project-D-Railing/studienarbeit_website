@@ -76,7 +76,7 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.min.js') }}"></script>
-
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 
 @yield ('customjs')
 

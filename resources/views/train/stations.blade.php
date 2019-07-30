@@ -4,7 +4,7 @@
         <p>
               @lang('main.stats_stations')
         </p>
-            @lang('main.stats_alltime')
+            @lang('main.stats_alltime', ['date' => $stats_start])
         <br>
         <hr>
         <table class="table">

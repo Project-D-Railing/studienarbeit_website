@@ -39,7 +39,7 @@ return [
     
 
     // Stats
-    'stats_alltime'             => 'The shown data was gathered between 03.12.2017 and today.',
+    'stats_alltime'             => 'The shown data was gathered between :date and today.',
     'stats_twoweeks'             => 'The shown data was gathered in the last two weeks',
 
     'stats_header'             => 'Information',

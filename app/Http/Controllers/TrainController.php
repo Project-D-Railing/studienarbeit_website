@@ -106,7 +106,13 @@ class TrainController extends Controller
             $routes[] = explode('|',$route->haltestellen);
         }
 
-        return view('train.route', ['routes' => $routes]);
+        $stats_start = Cache::remember('statsstart', 720, function() {
+            $result = DB::connection('mysql2')->select("SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1");
+
+            return date("d.m.Y", strtotime($result[0]->datum));
+        });
+
+        return view('train.route', ['routes' => $routes, 'stats_start' => $stats_start]);
 
     }
     
@@ -125,8 +131,14 @@ class TrainController extends Controller
             }
             $stats[$entry->evanr][] = array($entry->gleisist,$entry->anzahl,$entry->name);
         }
+
+        $stats_start = Cache::remember('statsstart', 720, function() {
+            $result = DB::connection('mysql2')->select("SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1");
+
+            return date("d.m.Y", strtotime($result[0]->datum));
+        });
         
-        return view('train.platform', ['stats' => Response::json($stats)]);
+        return view('train.platform', ['stats' => Response::json($stats), 'stats_start' => $stats_start]);
     }
     
     public function cancel($zugklasse, $zugnummer)
@@ -141,8 +153,14 @@ class TrainController extends Controller
         foreach($result as $entry) {
             $stats[$entry->evanr][] = array($entry->zugstatus,$entry->anzahl,$entry->name);
         }
+
+        $stats_start = Cache::remember('statsstart', 720, function() {
+            $result = DB::connection('mysql2')->select("SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1");
+
+            return date("d.m.Y", strtotime($result[0]->datum));
+        });
         
-        return view('train.cancel', ['stats' => Response::json($stats)]);
+        return view('train.cancel', ['stats' => Response::json($stats), 'stats_start' => $stats_start]);
     }
     
     public function delay($zugklasse, $zugnummer)
@@ -166,7 +184,13 @@ class TrainController extends Controller
         });
         // EVA NUMMERN wie folgt: select distinct(evanr) from zuege where dailytripid = (SELECT dailytripid from zuege where zugklasse='ICE' AND zugnummer='513' LIMIT 1) 
         // mit allen infos: select haltestellen.NAME,zuege.* from zuege,haltestellen where dailytripid = (SELECT dailytripid from zuege where zugklasse='ICE' AND zugnummer='513' LIMIT 1) and haltestellen.EVA_NR = zuege.evanr group by evanr        
-        return view('train.stations', ['haltestellen' => $result]);
 
+        $stats_start = Cache::remember('statsstart', 720, function() {
+            $result = DB::connection('mysql2')->select("SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1");
+
+            return date("d.m.Y", strtotime($result[0]->datum));
+        });
+
+        return view('train.stations', ['haltestellen' => $result, 'stats_start' => $stats_start]);
     }
 }

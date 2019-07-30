@@ -37,7 +37,7 @@ return [
     
 
     // Stats
-    'stats_alltime'             => 'Die angezeigten Grafiken und Tabellen enthalten Daten zwischen 03.12.2017 und heute.',
+    'stats_alltime'             => 'Die angezeigten Grafiken und Tabellen enthalten Daten zwischen :date und heute.',
     'stats_twoweeks'             => 'DIe angezeigten Grafiken enthalten Daten aus den letzten zwei Wochen.',
 
     'stats_header'             => 'Information',

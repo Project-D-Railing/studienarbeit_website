@@ -4,7 +4,7 @@
         <p>
               @lang('main.stats_detailgleis')
         </p>
-            @lang('main.stats_alltime')
+            @lang('main.stats_alltime', ['date' => $stats_start])
         <br>
         <hr>
         <div id="chartgleis">

@@ -86,11 +86,15 @@ class StationController extends Controller
                 }
             }
             return $stationarray;
-        });       
-        //print_r($stats);
-        //die();
-        return view("station.detaildate", ['zuege' => $stats, 'station' => $station, 'datum' => $date])->render();
+        });
 
+        $stats_start = Cache::remember('statsstart', 720, function() {
+            $result = DB::connection('mysql2')->select("SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1");
+
+            return date("d.m.Y", strtotime($result[0]->datum));
+        });
+
+        return view("station.detaildate", ['zuege' => $stats, 'station' => $station, 'datum' => $date, 'stats_start' => $stats_start])->render();
     }
 
     public function platform($id)
@@ -100,9 +104,15 @@ class StationController extends Controller
             $zugklassen = DB::connection('mysql2')->select("SELECT DISTINCT(zugklasse) as name FROM zuege WHERE evanr= :evanr", ['evanr' => $id]);
             
             return $zugklassen;
-        }); 
-        return view("station.detailgleis", ['station' => $station,'zugklassen' => $zugklassen])->render();
+        });
 
+        $stats_start = Cache::remember('statsstart', 720, function() {
+            $result = DB::connection('mysql2')->select("SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1");
+
+            return date("d.m.Y", strtotime($result[0]->datum));
+        });
+
+        return view("station.detailgleis", ['station' => $station,'zugklassen' => $zugklassen, 'stats_start' => $stats_start])->render();
     }
 
     public function train($id)
@@ -121,8 +131,13 @@ class StationController extends Controller
             $stats[0][] = $klasse->zugklasse;
             $stats[1][] = $klasse->anzahl;
         }
-        
-        return view('station.detailzug', ['stats' => Response::json($stats)])->render();
 
+        $stats_start = Cache::remember('statsstart', 720, function() {
+            $result = DB::connection('mysql2')->select("SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1");
+
+            return date("d.m.Y", strtotime($result[0]->datum));
+        });
+        
+        return view('station.detailzug', ['stats' => Response::json($stats), 'stats_start' => $stats_start])->render();
     }
 }

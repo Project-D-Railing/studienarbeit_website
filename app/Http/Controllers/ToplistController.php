@@ -25,7 +25,7 @@ class ToplistController extends Controller
     public function index()
     {
         $users = User::all();
-
+        // useless comment in old controller to test autodeploy.
         return view('toplist', compact('users'));
     }
 }

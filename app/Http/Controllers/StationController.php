@@ -94,7 +94,9 @@ class StationController extends Controller
             return date("d.m.Y", strtotime($result[0]->datum));
         });
 
-        return view("station.detaildate", ['zuege' => $stats, 'station' => $station, 'datum' => $date, 'stats_start' => $stats_start])->render();
+
+
+        return view("station.detaildate", ['zuege' => $stats, 'id' => $id, 'datum' => $date, 'stats_start' => $stats_start])->render();
     }
 
     public function platform($id)

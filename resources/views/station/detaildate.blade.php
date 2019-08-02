@@ -8,7 +8,7 @@
         <br>
         <hr>
         <p>@lang('main.station_select_date')</p>
-            <input type="date" id="myDate" value="{{$datum}}">
+            <input type="text" class="form-control col-3 datapicker" id="myDate" value="{{date("d.m.Y", strtotime($datum))}}" onchange="getDetailDate();">
         <table class="table">
           <thead>
             <tr>
@@ -50,22 +50,29 @@
 </div>
 
 <script type="text/javascript">
-var date_input = document.getElementById('myDate');
+$(document).ready(function () {
+    $('.datapicker').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: false,
+        format: 'dd.mm.yyyy',
+        weekStart: 1,
+        autoclose: true,
+        zIndexOffset: 9999
+    });
+});
 
-@forelse($station as $stationdetail)
-  @if ($loop->first) 
-date_input.onchange = function(){
-    var d = new Date(this.value);
-    if(!isNaN(d.getTime())) {
-	    $.get("{{$stationdetail->EVA_NR}}/timetable/"+this.value,
-            function (data) {
-                $("#content-tab").html(data);
-            });
+function getDetailDate() {
+    var date_input = $('#myDate').val();
+    date_input = date_input.split(".");
+
+    var d = new Date(date_input[2], date_input[1], date_input[0]);
+    if (!isNaN(d.getTime())) {
+        $.get("{{$id}}/timetable/" + date_input[2] + date_input[1] + date_input[0],
+        function (data) {
+            $("#content-tab").html(data);
+        });
     }
 }
-
-  @endif
-@empty
-                   
-@endforelse
 </script>

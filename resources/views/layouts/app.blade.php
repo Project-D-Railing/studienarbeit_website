@@ -12,7 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    
+    <link href="{{ asset('css/datepicker.min.css') }}" rel="stylesheet">
+
     @yield ('customcss')
     
 
@@ -77,6 +78,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.min.js') }}"></script>
 <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('js/datepicker.min.js') }}"></script>
 
 @yield ('customjs')
 

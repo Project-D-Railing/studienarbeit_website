@@ -3,8 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class RouteTest extends TestCase
 {
@@ -13,29 +11,29 @@ class RouteTest extends TestCase
      *
      * @return void
      */
-    
-    public function testWelcomeRouteHTTPCode()
+    public function test_welcome_route_http_code()
     {
         $response = $this->call('GET', '/');
 
         $this->assertEquals(200, $response->status());
     }
-    
-    public function testHomeRouteHTTPCode200()
+
+    public function test_home_route_http_code200()
     {
         $this->withoutMiddleware();
         $response = $this->call('GET', '/home');
 
         $this->assertEquals(200, $response->status());
     }
-    public function testHomeRouteHTTPCode302()
+
+    public function test_home_route_http_code302()
     {
         $response = $this->call('GET', '/home');
 
         $this->assertEquals(302, $response->status());
     }
-    
-    public function testTrainRouteHTTPCode200()
+
+    public function test_train_route_http_code200()
     {
         $this->withoutMiddleware();
         $response = $this->call('GET', '/train');
@@ -43,47 +41,47 @@ class RouteTest extends TestCase
         $this->assertEquals(200, $response->status());
     }
 
-    public function testTrainFindRouteHTTPCode200()
+    public function test_train_find_route_http_code200()
     {
         $this->withoutMiddleware();
         $response = $this->call('GET', '/train/find');
 
         $this->assertEquals(200, $response->status());
     }
-    
-    public function testTrainDelayRouteHTTPCode200()
+
+    public function test_train_delay_route_http_code200()
     {
         $this->withoutMiddleware();
         $response = $this->call('GET', '/train/ICE/3/delay');
 
         $this->assertEquals(200, $response->status());
     }
-    
-    public function testStationDetailRouteHTTPCode200()
+
+    public function test_station_detail_route_http_code200()
     {
         $this->withoutMiddleware();
         $response = $this->call('GET', '/station/8000191');
 
         $this->assertEquals(200, $response->status());
     }
-    
-    public function testStationFindRouteHTTPCode200()
+
+    public function test_station_find_route_http_code200()
     {
         $this->withoutMiddleware();
         $response = $this->call('GET', '/station/find');
 
         $this->assertEquals(200, $response->status());
     }
-    
-    public function testStationTrainPerPlatformRouteHTTPCode200()
+
+    public function test_station_train_per_platform_route_http_code200()
     {
         $this->withoutMiddleware();
         $response = $this->call('GET', '/station/trainperplatform/8000191');
 
         $this->assertEquals(200, $response->status());
     }
-    
-    public function testStationShowdateRouteHTTPCode200()
+
+    public function test_station_showdate_route_http_code200()
     {
         $this->withoutMiddleware();
         $response = $this->call('GET', '/station/8000191/2018-03-02');

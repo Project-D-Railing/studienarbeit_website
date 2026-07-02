@@ -9,7 +9,6 @@ import Popper from 'popper.js/dist/umd/popper.js';
 
 try {
     window.$ = window.jQuery = require('jquery');
-    window.Tether = require('tether');
     window.Popper = Popper;
     require('bootstrap');
 } catch (e) {}

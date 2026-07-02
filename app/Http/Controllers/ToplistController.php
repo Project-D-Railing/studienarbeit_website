@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
+use Illuminate\Http\Response;
 
 class ToplistController extends Controller
 {
@@ -20,11 +20,12 @@ class ToplistController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
         $users = User::all();
+
         // useless comment in old controller to test autodeploy.
         return view('toplist', compact('users'));
     }

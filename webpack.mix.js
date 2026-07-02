@@ -13,8 +13,6 @@ let mix = require('laravel-mix');
 
 mix.autoload({
     jquery: ['$', 'window.jQuery', 'jQuery'],
-    tether: ['window.Tether', 'Tether'],
-    'tether-shepherd': ['Shepherd'],
     'popper.js/dist/popper.js': ['Popper']
 })
     .js('resources/assets/js/app.js', 'public/js')

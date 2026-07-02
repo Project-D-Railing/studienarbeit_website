@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
-use App\Http\Controllers\Controller;
-use Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 
 class StationController extends Controller
 {
@@ -32,114 +31,115 @@ class StationController extends Controller
         return view('station.index', ['route' => $query]);
 
     }
-    
+
     public function find(Request $request)
     {
         $q = $request->get('q');
-        $stationen = DB::connection('mysql2')->select("select EVA_NR, NAME from haltestellen2 where NAME like :name", ['name' => '%'.$q.'%']);
+        $stationen = DB::connection('mysql2')->select('select EVA_NR, NAME from haltestellen2 where NAME like :name', ['name' => '%'.$q.'%']);
+
         return Response::json($stationen);
 
     }
 
     public function detail($id)
     {
-        $station = DB::connection('mysql2')->select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
-       
+        $station = DB::connection('mysql2')->select('select * from haltestellen2 where EVA_NR = :evanr', ['evanr' => $id]);
+
         return view('station.detail', ['station' => $station]);
 
     }
 
     public function timetable($id, $date)
     {
-        $station = DB::connection('mysql2')->select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
-        $stats = Cache::remember('timetable'.$id.'-'.$date, 60, function() use ($id, $date){             
-            $stationdate = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr and stopid != 1 order by arzeitsoll asc", ['evanr' => $id, 'datum' => $date]);
-            $stationdatedepart = DB::connection('mysql2')->select("SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr and stopid = 1 order by dpzeitsoll asc", ['evanr' => $id, 'datum' => $date]);
-            $stationarray = array();
-            foreach($stationdate as $train) {
-                if ($train->stopid !== 1 && $train->dpzeitsoll == $train->dpzeitist && $train->dpzeitsoll == "00:00:00" && ($train->arzeitsoll !== "00:00:00" || $train->arzeitsoll !== "23:59:00")) {
-                    $train->dpzeitsoll = NULL;
-                    $train->dpzeitist = "Zug endet";
+        $station = DB::connection('mysql2')->select('select * from haltestellen2 where EVA_NR = :evanr', ['evanr' => $id]);
+        $stats = Cache::remember('timetable'.$id.'-'.$date, 60, function () use ($id, $date) {
+            $stationdate = DB::connection('mysql2')->select('SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr and stopid != 1 order by arzeitsoll asc', ['evanr' => $id, 'datum' => $date]);
+            $stationdatedepart = DB::connection('mysql2')->select('SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr and stopid = 1 order by dpzeitsoll asc', ['evanr' => $id, 'datum' => $date]);
+            $stationarray = [];
+            foreach ($stationdate as $train) {
+                if ($train->stopid !== 1 && $train->dpzeitsoll == $train->dpzeitist && $train->dpzeitsoll == '00:00:00' && ($train->arzeitsoll !== '00:00:00' || $train->arzeitsoll !== '23:59:00')) {
+                    $train->dpzeitsoll = null;
+                    $train->dpzeitist = 'Zug endet';
                 }
-                $stationarray[] = $train; 
-            }         
-            foreach($stationdatedepart as $train2) {
-                $einfug = FALSE;
-                $train2->arzeitsoll = NULL;
-                $train2->arzeitist = "Zug beginnt";
-        
+                $stationarray[] = $train;
+            }
+            foreach ($stationdatedepart as $train2) {
+                $einfug = false;
+                $train2->arzeitsoll = null;
+                $train2->arzeitist = 'Zug beginnt';
+
                 for ($i = 0; $i < count($stationarray); $i++) {
-                    if(!is_object($stationarray[$i])) {
+                    if (! is_object($stationarray[$i])) {
                         continue;
-                    }                    
-                    if($stationarray[$i]->arzeitsoll > $train2->dpzeitsoll) {
-                        array_splice($stationarray, $i, 0, array($train2)); 
-                        $einfug = TRUE;
+                    }
+                    if ($stationarray[$i]->arzeitsoll > $train2->dpzeitsoll) {
+                        array_splice($stationarray, $i, 0, [$train2]);
+                        $einfug = true;
                         break;
                     }
-                    continue;                    
+
+                    continue;
                 }
-                if($einfug === FALSE)  {
-                    
+                if ($einfug === false) {
+
                     $stationarray[] = $train2;
                     break;
                 }
             }
+
             return $stationarray;
         });
 
-        $stats_start = Cache::remember('statsstart', 720, function() {
-            $result = DB::connection('mysql2')->select("SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1");
+        $stats_start = Cache::remember('statsstart', 720, function () {
+            $result = DB::connection('mysql2')->select('SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1');
 
-            return date("d.m.Y", strtotime($result[0]->datum));
+            return date('d.m.Y', strtotime($result[0]->datum));
         });
 
-
-
-        return view("station.detaildate", ['zuege' => $stats, 'id' => $id, 'datum' => $date, 'stats_start' => $stats_start])->render();
+        return view('station.detaildate', ['zuege' => $stats, 'id' => $id, 'datum' => $date, 'stats_start' => $stats_start])->render();
     }
 
     public function platform($id)
     {
-        $station = DB::connection('mysql2')->select("select * from haltestellen2 where EVA_NR = :evanr", ['evanr' => $id]);
-        $zugklassen = Cache::remember('showstation'.$id, 240, function() use ($id){             
-            $zugklassen = DB::connection('mysql2')->select("SELECT DISTINCT(zugklasse) as name FROM zuege WHERE evanr= :evanr", ['evanr' => $id]);
-            
+        $station = DB::connection('mysql2')->select('select * from haltestellen2 where EVA_NR = :evanr', ['evanr' => $id]);
+        $zugklassen = Cache::remember('showstation'.$id, 240, function () use ($id) {
+            $zugklassen = DB::connection('mysql2')->select('SELECT DISTINCT(zugklasse) as name FROM zuege WHERE evanr= :evanr', ['evanr' => $id]);
+
             return $zugklassen;
         });
 
-        $stats_start = Cache::remember('statsstart', 720, function() {
-            $result = DB::connection('mysql2')->select("SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1");
+        $stats_start = Cache::remember('statsstart', 720, function () {
+            $result = DB::connection('mysql2')->select('SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1');
 
-            return date("d.m.Y", strtotime($result[0]->datum));
+            return date('d.m.Y', strtotime($result[0]->datum));
         });
 
-        return view("station.detailgleis", ['station' => $station,'zugklassen' => $zugklassen, 'stats_start' => $stats_start])->render();
+        return view('station.detailgleis', ['station' => $station, 'zugklassen' => $zugklassen, 'stats_start' => $stats_start])->render();
     }
 
     public function train($id)
     {
         // SELECT Count(id) as anzahl, zugklasse FROM k42174_bahnapi.zuege where evanr=8000191 group by zugklasse limit 10000
 
-        $zugklassen = Cache::remember('showstationzugklassengesamt'.$id, 1440, function() use ($id){             
-            $zugklassen = DB::connection('mysql2')->select("SELECT Count(id) as anzahl, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by zugklasse limit 10000", ['evanr' => $id]);
-            
+        $zugklassen = Cache::remember('showstationzugklassengesamt'.$id, 1440, function () use ($id) {
+            $zugklassen = DB::connection('mysql2')->select('SELECT Count(id) as anzahl, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by zugklasse limit 10000', ['evanr' => $id]);
+
             return $zugklassen;
-        }); 
-        $stats = array();
-        $stats[] = array("x");
-        $stats[] = array("Zugklassen");
+        });
+        $stats = [];
+        $stats[] = ['x'];
+        $stats[] = ['Zugklassen'];
         foreach ($zugklassen as $klasse) {
             $stats[0][] = $klasse->zugklasse;
             $stats[1][] = $klasse->anzahl;
         }
 
-        $stats_start = Cache::remember('statsstart', 720, function() {
-            $result = DB::connection('mysql2')->select("SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1");
+        $stats_start = Cache::remember('statsstart', 720, function () {
+            $result = DB::connection('mysql2')->select('SELECT datum FROM `zuege` ORDER BY id ASC LIMIT 1');
 
-            return date("d.m.Y", strtotime($result[0]->datum));
+            return date('d.m.Y', strtotime($result[0]->datum));
         });
-        
+
         return view('station.detailzug', ['stats' => Response::json($stats), 'stats_start' => $stats_start])->render();
     }
 }

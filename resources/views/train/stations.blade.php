@@ -21,21 +21,21 @@
           <tbody>
             @forelse($haltestellen as $halt)
                 <tr>
-                    <th scope="row">{{ $halt->stopid }} </th>
-                    <td> {{ $halt->name }} </td>
-                    @if ($halt->stopid === 1)
+                    <th scope="row">{{ $halt['stopid'] }} </th>
+                    <td> {{ $halt['name'] }} </td>
+                    @if ($halt['stopid'] === 1)
                         <td> Zug beginnt </td>
                     @else
-                        <td> {{ $halt->arzeitsoll }}</td>
+                        <td> {{ $halt['arzeitsoll'] }}</td>
                     @endif
                     @if ($loop->last)
                         <td> Zug endet </td>
                     @else
-                        <td> {{ $halt->dpzeitsoll }} </td>
+                        <td> {{ $halt['dpzeitsoll'] }} </td>
                     @endif
-                    
-                    <td> {{ $halt->gleissoll }} </td>
-                    <td><a href="{{ route('station.detail', ['id' => $halt->evanr]) }}" class="btn btn-primary">Show</a></td>
+
+                    <td> {{ $halt['gleissoll'] }} </td>
+                    <td><a href="{{ route('station.detail', ['id' => $halt['evanr']]) }}" class="btn btn-primary">Show</a></td>
                 </tr>
             @empty
                 <tr>

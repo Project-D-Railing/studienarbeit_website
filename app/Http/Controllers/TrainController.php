@@ -88,7 +88,7 @@ class TrainController extends Controller
         $train = Cache::remember('showtrain'.$zugklasse.'-'.$zugnummer, 1440, function () use ($zugklasse, $zugnummer) {
             $train = DB::connection('mysql2')->select('SELECT * from zuege where zugklasse= :zugklasse AND zugnummer= :zugnummer LIMIT 1', ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
 
-            return $train;
+            return array_map(fn ($row) => (array) $row, $train);
         });
 
         return view('train.detail', ['train' => $train]);
@@ -100,11 +100,11 @@ class TrainController extends Controller
         $result = Cache::remember('showtrainstationroute'.$zugklasse.'-'.$zugnummer, 1440, function () use ($zugklasse, $zugnummer) {
             $result = DB::connection('mysql2')->select('SELECT haltestellen from strecken2 where hashwertneu in (SELECT distinct(streckengeplanthash) from zuege where zugklasse= :zugklasse and zugnummer= :zugnummer order by id desc)', ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
 
-            return $result;
+            return array_map(fn ($row) => (array) $row, $result);
         });
         $routes = [];
         foreach ($result as $route) {
-            $routes[] = explode('|', $route->haltestellen);
+            $routes[] = explode('|', $route['haltestellen']);
         }
 
         $stats_start = Cache::remember('statsstart', 720, function () {
@@ -122,15 +122,13 @@ class TrainController extends Controller
         $result = Cache::remember('showtrainstationplatform'.$zugklasse.'-'.$zugnummer, 1440, function () use ($zugklasse, $zugnummer) {
             $result = DB::connection('mysql2')->select('SELECT count(gleisist) as anzahl, evanr, gleisist, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse= :zugklasse and zugnummer= :zugnummer group by gleisist,evanr order by zuege.stopid asc, anzahl desc', ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
 
-            return $result;
+            return array_map(fn ($row) => (array) $row, $result);
         });
         $stats = [];
 
         foreach ($result as $entry) {
-            if ($entry->gleisist == null) {
-                $entry->gleisist = 'keine Angabe';
-            }
-            $stats[$entry->evanr][] = [$entry->gleisist, $entry->anzahl, $entry->name];
+            $gleisist = $entry['gleisist'] ?? 'keine Angabe';
+            $stats[$entry['evanr']][] = [$gleisist, $entry['anzahl'], $entry['name']];
         }
 
         $stats_start = Cache::remember('statsstart', 720, function () {
@@ -147,12 +145,12 @@ class TrainController extends Controller
         $result = Cache::remember('showtrainstationcancel'.$zugklasse.'-'.$zugnummer, 1440, function () use ($zugklasse, $zugnummer) {
             $result = DB::connection('mysql2')->select('SELECT count(zugstatus) as anzahl, evanr, zugstatus, name from zuege,haltestellen2 where zuege.evanr=haltestellen2.EVA_NR and zugklasse= :zugklasse and zugnummer= :zugnummer and zuege.id > 5200000 group by zugstatus,evanr order by zuege.stopid asc, anzahl desc', ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
 
-            return $result;
+            return array_map(fn ($row) => (array) $row, $result);
         });
         $stats = [];
 
         foreach ($result as $entry) {
-            $stats[$entry->evanr][] = [$entry->zugstatus, $entry->anzahl, $entry->name];
+            $stats[$entry['evanr']][] = [$entry['zugstatus'], $entry['anzahl'], $entry['name']];
         }
 
         $stats_start = Cache::remember('statsstart', 720, function () {
@@ -166,13 +164,11 @@ class TrainController extends Controller
 
     public function delay($zugklasse, $zugnummer)
     {
-        $stats = Cache::remember('showtrainDelayStatistic'.$zugklasse.'-'.$zugnummer, 240, function () use ($zugklasse, $zugnummer) {
-            $trainformatted = $this->generate_delay_statistic_overall($zugklasse, $zugnummer);
-
-            return Response::json($trainformatted);
+        $trainformatted = Cache::remember('showtrainDelayStatistic'.$zugklasse.'-'.$zugnummer, 240, function () use ($zugklasse, $zugnummer) {
+            return $this->generate_delay_statistic_overall($zugklasse, $zugnummer);
         });
 
-        return view('train.delay', ['stats' => $stats]);
+        return view('train.delay', ['stats' => Response::json($trainformatted)]);
 
     }
 
@@ -181,7 +177,7 @@ class TrainController extends Controller
         $result = Cache::remember('showtrainstations'.$zugklasse.'-'.$zugnummer, 720, function () use ($zugklasse, $zugnummer) {
             $haltestellen = DB::connection('mysql2')->select('select haltestellen2.NAME as name,zuege.* from zuege,haltestellen2 where dailytripid = (SELECT dailytripid from zuege where zugklasse= :zugklasse AND zugnummer= :zugnummer LIMIT 1) and haltestellen2.EVA_NR = zuege.evanr group by evanr order by stopid asc', ['zugklasse' => $zugklasse, 'zugnummer' => $zugnummer]);
 
-            return $haltestellen;
+            return array_map(fn ($row) => (array) $row, $haltestellen);
         });
         // EVA NUMMERN wie folgt: select distinct(evanr) from zuege where dailytripid = (SELECT dailytripid from zuege where zugklasse='ICE' AND zugnummer='513' LIMIT 1)
         // mit allen infos: select haltestellen.NAME,zuege.* from zuege,haltestellen where dailytripid = (SELECT dailytripid from zuege where zugklasse='ICE' AND zugnummer='513' LIMIT 1) and haltestellen.EVA_NR = zuege.evanr group by evanr

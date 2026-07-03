@@ -24,19 +24,19 @@
           </thead>
           <tbody>
             @forelse($zuege as $key => $zug)
-                @if ($zug->zugstatus === 'c')
-                    <tr class="table-danger"> 
+                @if ($zug['zugstatus'] === 'c')
+                    <tr class="table-danger">
                 @else
                     <tr>
                 @endif
-                    <th scope="row">{{ $zug->zugnummerfull }} </th>
-                    <td> {{ $zug->arzeitsoll }} </td>
-                    <td> {{ $zug->arzeitist }} </td>
-                    <td> {{ $zug->dpzeitsoll }} </td>
-                    <td> {{ $zug->dpzeitist }} </td>
-                    <td> {{ $zug->gleissoll }} </td>
-                    <td> {{ $zug->gleisist }} </td>
-                    <td><a href="{{ route('train.detail', ['trainclass' => $zug->zugklasse,'trainnumber' => $zug->zugnummer]) }}" class="btn btn-primary">@lang('main.station_button_show')</a></td>
+                    <th scope="row">{{ $zug['zugnummerfull'] }} </th>
+                    <td> {{ $zug['arzeitsoll'] }} </td>
+                    <td> {{ $zug['arzeitist'] }} </td>
+                    <td> {{ $zug['dpzeitsoll'] }} </td>
+                    <td> {{ $zug['dpzeitist'] }} </td>
+                    <td> {{ $zug['gleissoll'] }} </td>
+                    <td> {{ $zug['gleisist'] }} </td>
+                    <td><a href="{{ route('train.detail', ['trainclass' => $zug['zugklasse'],'trainnumber' => $zug['zugnummer']]) }}" class="btn btn-primary">@lang('main.station_button_show')</a></td>
                 </tr>
             @empty
                 <tr>

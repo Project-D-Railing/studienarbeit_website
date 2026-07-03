@@ -18,7 +18,7 @@
 
 var zugklassen = [];
 @forelse($zugklassen as $zugklasse)
-    zugklassen.push('{{ $zugklasse->name }}');
+    zugklassen.push('{{ $zugklasse['name'] }}');
 @empty
     console.log('Keine Zugklassen gefunden');
 @endforelse

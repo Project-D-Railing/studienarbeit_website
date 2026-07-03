@@ -57,22 +57,24 @@ class StationController extends Controller
             $stationdatedepart = DB::connection('mysql2')->select('SELECT zuege.* FROM zuege WHERE datum= :datum and zuege.evanr= :evanr and stopid = 1 order by dpzeitsoll asc', ['evanr' => $id, 'datum' => $date]);
             $stationarray = [];
             foreach ($stationdate as $train) {
-                if ($train->stopid !== 1 && $train->dpzeitsoll == $train->dpzeitist && $train->dpzeitsoll == '00:00:00' && ($train->arzeitsoll !== '00:00:00' || $train->arzeitsoll !== '23:59:00')) {
-                    $train->dpzeitsoll = null;
-                    $train->dpzeitist = 'Zug endet';
+                $train = (array) $train;
+                if ($train['stopid'] !== 1 && $train['dpzeitsoll'] == $train['dpzeitist'] && $train['dpzeitsoll'] == '00:00:00' && ($train['arzeitsoll'] !== '00:00:00' || $train['arzeitsoll'] !== '23:59:00')) {
+                    $train['dpzeitsoll'] = null;
+                    $train['dpzeitist'] = 'Zug endet';
                 }
                 $stationarray[] = $train;
             }
             foreach ($stationdatedepart as $train2) {
+                $train2 = (array) $train2;
                 $einfug = false;
-                $train2->arzeitsoll = null;
-                $train2->arzeitist = 'Zug beginnt';
+                $train2['arzeitsoll'] = null;
+                $train2['arzeitist'] = 'Zug beginnt';
 
                 for ($i = 0; $i < count($stationarray); $i++) {
-                    if (! is_object($stationarray[$i])) {
+                    if (! is_array($stationarray[$i])) {
                         continue;
                     }
-                    if ($stationarray[$i]->arzeitsoll > $train2->dpzeitsoll) {
+                    if ($stationarray[$i]['arzeitsoll'] > $train2['dpzeitsoll']) {
                         array_splice($stationarray, $i, 0, [$train2]);
                         $einfug = true;
                         break;
@@ -105,7 +107,7 @@ class StationController extends Controller
         $zugklassen = Cache::remember('showstation'.$id, 240, function () use ($id) {
             $zugklassen = DB::connection('mysql2')->select('SELECT DISTINCT(zugklasse) as name FROM zuege WHERE evanr= :evanr', ['evanr' => $id]);
 
-            return $zugklassen;
+            return array_map(fn ($row) => (array) $row, $zugklassen);
         });
 
         $stats_start = Cache::remember('statsstart', 720, function () {
@@ -124,14 +126,14 @@ class StationController extends Controller
         $zugklassen = Cache::remember('showstationzugklassengesamt'.$id, 1440, function () use ($id) {
             $zugklassen = DB::connection('mysql2')->select('SELECT Count(id) as anzahl, zugklasse FROM k42174_bahnapi.zuege where evanr= :evanr group by zugklasse limit 10000', ['evanr' => $id]);
 
-            return $zugklassen;
+            return array_map(fn ($row) => (array) $row, $zugklassen);
         });
         $stats = [];
         $stats[] = ['x'];
         $stats[] = ['Zugklassen'];
         foreach ($zugklassen as $klasse) {
-            $stats[0][] = $klasse->zugklasse;
-            $stats[1][] = $klasse->anzahl;
+            $stats[0][] = $klasse['zugklasse'];
+            $stats[1][] = $klasse['anzahl'];
         }
 
         $stats_start = Cache::remember('statsstart', 720, function () {

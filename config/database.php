@@ -68,6 +68,12 @@ return [
         |----------------------------------------------------------------------
         | Second (read-only) connection: external train / station tracking DB.
         |----------------------------------------------------------------------
+        | No 'strict' key on purpose: some of the legacy queries against this
+        | database (e.g. GROUP BY queries that select non-aggregated columns)
+        | are not ONLY_FULL_GROUP_BY-compliant. Leaving 'strict' unset means
+        | Laravel won't override the server's own sql_mode for this
+        | connection, matching how it always ran before this app was
+        | upgraded to Laravel 13.
         */
         'mysql2' => [
             'driver' => env('DB_CONNECTION_SECOND', 'mysql'),
@@ -80,7 +86,6 @@ return [
             'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
             'prefix' => '',
             'prefix_indexes' => true,
-            'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 Mysql::ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),

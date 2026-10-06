@@ -3,7 +3,7 @@
 This covers taking an **already-running** Laravel 5.5 deployment (the old
 setup, where `vendor/` was committed directly to git and deployed via
 FTP/"auto deploy") and updating it in place to this PR's Laravel 13 / PHP
-8.3+ codebase. For setting up a **brand new** environment from scratch, see
+8.5+ codebase. For setting up a **brand new** environment from scratch, see
 the setup guide provided separately (PHP version, fresh `.env`, database
 creation).
 
@@ -19,15 +19,16 @@ creation).
 
 ## Step 1 — Switch the PHP version
 
-Laravel 13 requires **PHP 8.3+**. Do this *before* deploying the new code,
+This codebase requires **PHP 8.5+** (the locked dependencies, e.g.
+Symfony 8, need at least 8.4). Do this *before* deploying the new code,
 but deploy the new code right after — old Laravel 5.5 code is not
-guaranteed to run correctly on PHP 8.3, so don't leave old-code +
+guaranteed to run correctly on PHP 8.5, so don't leave old-code +
 new-PHP running for long.
 
-- **cPanel**: "MultiPHP Manager" → select the domain → choose **PHP 8.3**
-  (or 8.4) → Apply.
-- **Plesk**: Domain → PHP Settings → select 8.3/8.4.
-- **Own server**: install `php8.3` (or 8.4) alongside the old version, then
+- **cPanel**: "MultiPHP Manager" → select the domain → choose **PHP 8.5**
+  → Apply.
+- **Plesk**: Domain → PHP Settings → select 8.5.
+- **Own server**: install `php8.5` alongside the old version, then
   point the vhost/php-fpm pool at it and restart the web server.
 - Check required extensions are enabled: `pdo_mysql`, `mbstring`, `xml`,
   `curl`, `bcmath`, `gd` (or `fileinfo`), `openssl`, `tokenizer`.
